@@ -14,7 +14,7 @@
 <meta property="og:description" content="For my birthday, my wife bought me a magnificent wooden Backgammon set. It’s a particularly fascinating game. Unlike chess, which is perfectly deterministic, Backgammon distinguishes itself by its use">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-26T13:30:00.000Z">
-<meta property="article:modified_time" content="2025-03-30T12:14:14.251Z">
+<meta property="article:modified_time" content="2025-05-03T20:47:27.786Z">
 <meta property="article:author" content="jan Pitaki">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@ p.spoiler {
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post " href="/2025/04/23/Beyond_Supervision/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="/2025/05/04/SkillQuest_test/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post " href="/2025/03/22/Backgammon_Mid_Game_Strategies/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -139,7 +139,7 @@ p.spoiler {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Makes-Backgammon-Challenging-for-AI"><span class="toc-number">1.</span> <span class="toc-text">What Makes Backgammon Challenging for AI?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Creating-a-Minimalist-Model"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Creating a Minimalist Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Designing-the-Advanced-Training-Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Designing the Advanced Training Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><span class="toc-number">4.</span> <span class="toc-text">Deeper Dive: PPO and GAE (How the RL Magic Happens)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Teaching-a-Computer-to-Play"><span class="toc-number">5.</span> <span class="toc-text">Teaching a Computer to Play</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Makes-Backgammon-Challenging-for-AI"><span class="toc-number">1.</span> <span class="toc-text">What Makes Backgammon Challenging for AI?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Creating-a-Minimalist-Model"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Creating a Minimalist Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Designing-the-Advanced-Training-Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Designing the Advanced Training Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><span class="toc-number">4.</span> <span class="toc-text">Deeper Dive: PPO and GAE (How the RL Magic Happens)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Teaching-a-Computer-to-Play"><span class="toc-number">5.</span> <span class="toc-text">Teaching a Computer to Play</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oh-well%E2%80%A6"><span class="toc-number">6.</span> <span class="toc-text">Oh well…</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -291,6 +291,7 @@ p.spoiler {
 <p>I launched my first “victorious” training run early in the evening, expecting to find a fully baked model in the morning. To my surprise, it finished cooking in just 3 hours! I immediately integrated it into my ASCII interface and started testing, fully expecting to get crushed. Ultimately, while it was a bit more adept than the previous version and sometimes even delightfully aggressive, it proved incapable of adapting its play to the different phases of a Backgammon game. I logged several games I played against it and discussed its inability to weave any real strategy with the AIs. While they were more nuanced in their diagnosis than I was, they agreed that variable adjustments were necessary.</p>
 <p>It was at that moment I remembered something stupid: during the testing phases, I had temporarily reduced its database usage to just 0.1%… What an idiot!</p>
 <p>I’ve now rectified that oversight and relaunched the calculation. This time, it’s definitely not going to finish overnight… but hopefully, in a few days, I’ll have an opponent capable of putting me in my place. Wish me luck!</p>
+<h2 id="Oh-well…"><a href="#Oh-well…" class="headerlink" title="Oh well…"></a>Oh well…</h2><p>I’m writing these lines a month later. That brilliant plan? Turns out it was even more complicated than it already looked on paper. Supervised training went surprisingly well (over 80% prediction accuracy — not bad!), but reinforcement learning… let’s just say it was a lot less straightforward and far less forgiving of my total lack of experience. Between the endless bugs and the hyperparameter drama, I got absolutely nowhere. Each attempt would lock up my poor personal computer for an entire day (yes, I’m talking about a first-gen M1 Mac with 16GB of RAM — clearly not built for this kind of abuse). So I gave up on that quest and pivoted to something a bit more manageable: a heuristic blended with minimax, itself backed by an AI model that helps prune what, from my perspective, is a monstrously large decision tree. And that, dear reader, is what this new post is all about.</p>
 
   </div>
 </article>
@@ -322,7 +323,7 @@ p.spoiler {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Makes-Backgammon-Challenging-for-AI"><span class="toc-number">1.</span> <span class="toc-text">What Makes Backgammon Challenging for AI?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Creating-a-Minimalist-Model"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Creating a Minimalist Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Designing-the-Advanced-Training-Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Designing the Advanced Training Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><span class="toc-number">4.</span> <span class="toc-text">Deeper Dive: PPO and GAE (How the RL Magic Happens)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Teaching-a-Computer-to-Play"><span class="toc-number">5.</span> <span class="toc-text">Teaching a Computer to Play</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Makes-Backgammon-Challenging-for-AI"><span class="toc-number">1.</span> <span class="toc-text">What Makes Backgammon Challenging for AI?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Creating-a-Minimalist-Model"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Creating a Minimalist Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Designing-the-Advanced-Training-Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Designing the Advanced Training Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><span class="toc-number">4.</span> <span class="toc-text">Deeper Dive: PPO and GAE (How the RL Magic Happens)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Teaching-a-Computer-to-Play"><span class="toc-number">5.</span> <span class="toc-text">Teaching a Computer to Play</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oh-well%E2%80%A6"><span class="toc-number">6.</span> <span class="toc-text">Oh well…</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
