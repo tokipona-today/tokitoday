@@ -14,7 +14,7 @@
 <meta property="og:description" content="A month ago, I boldly set out to master reinforcement learning. Fast-forward: my M1 Mac is still emotionally recovering. After a series of brutal overfits, buggy loops, and countless frozen sessions,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-10T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-03T21:34:40.365Z">
+<meta property="article:modified_time" content="2025-05-04T04:30:25.440Z">
 <meta property="article:author" content="jan Pitaki">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -206,7 +206,8 @@ p.spoiler {
 <h5 id="3-Sampling-Dice-Rolls"><a href="#3-Sampling-Dice-Rolls" class="headerlink" title="3. Sampling Dice Rolls"></a>3. Sampling Dice Rolls</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sampled_dice_rolls = _get_random_dice_samples()</span><br></pre></td></tr></table></figure>
 
 <p>Instead of evaluating all 21 possible dice combinations, the algorithm samples a subset. This greatly reduces computational cost while preserving statistical relevance.</p>
-<h5 id="4-Expectation-over-Outcomes"><a href="#4-Expectation-over-Outcomes" class="headerlink" title="4. Expectation over Outcomes"></a>4. Expectation over Outcomes</h5><p>For each dice roll:</p>
+<h5 id="4-Expectation-over-Outcomes"><a href="#4-Expectation-over-Outcomes" class="headerlink" title="4. Expectation over Outcomes"></a>4. Expectation over Outcomes</h5><p>Only 12 of the 21 different possible dice outcomes are thrown (to save some computing time).</p>
+<p>Then :</p>
 <ul>
 <li>All resulting states are generated.</li>
 <li>The algorithm recursively evaluates these states.</li>
