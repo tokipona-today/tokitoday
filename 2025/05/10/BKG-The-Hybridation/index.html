@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="A month ago, I boldly set out to master reinforcement learning. Fast-forward: my M1 Mac is still emotionally recovering. After a series of brutal overfits, buggy loops, and countless frozen sessions,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backgammon - The Hybridation">
+<meta property="og:url" content="http://tokipona.today/2025/05/10/BKG-The-Hybridation/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="A month ago, I boldly set out to master reinforcement learning. Fast-forward: my M1 Mac is still emotionally recovering. After a series of brutal overfits, buggy loops, and countless frozen sessions,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-10T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-04T04:30:25.440Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Backgammon - The Hybridation</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Backgammon - The Hybridation
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>A month ago, I boldly set out to master reinforcement learning. Fast-forward: my M1 Mac is still emotionally recovering. After a series of brutal overfits, buggy loops, and countless frozen sessions, I pivoted. Today, I present something more manageable, but still ambitious — a hybrid AI built in Python, blending good old heuristics with Expectiminimax and a neural network sidekick.</p>
+<span id="more"></span>
+
+<h2 id="The-Goal-Crafting-a-Worthy-Opponent"><a href="#The-Goal-Crafting-a-Worthy-Opponent" class="headerlink" title="The Goal: Crafting a Worthy Opponent"></a>The Goal: Crafting a Worthy Opponent</h2><p>The mission: build an AI that can actually play — not just legally, but smartly. That means:</p>
+<ul>
+<li>Understanding the game state.</li>
+<li>Making strong decisions under uncertainty.</li>
+<li>Reacting to both position and probability.</li>
+</ul>
+<p>No pressure.</p>
+<h2 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components"></a>Core Components</h2><p>The project is built around several key modules:</p>
+<h3 id="1-The-Game-Engine-BackgammonGame-Class"><a href="#1-The-Game-Engine-BackgammonGame-Class" class="headerlink" title="1. The Game Engine (BackgammonGame Class)"></a>1. The Game Engine (<code>BackgammonGame</code> Class)</h3><p>This is the heart of the project, responsible for:</p>
+<ul>
+<li><strong>State Representation:</strong> Using a NumPy array (<code>BoardArr = NDArray[np.int8]</code>) for the 24 points, alongside variables for the bar counts (<code>white_bar</code>, <code>black_bar</code>) and off counts (<code>white_off</code>, <code>black_off</code>) for each player. The board uses positive numbers for White (O) and negative for Black (X).</li>
+<li><strong>Rules Implementation:</strong> Methods to validate and execute moves (<code>make_move</code>, <code>make_move_base_logic</code>), handle dice rolls (<code>roll_dice</code>), check for legal moves (<code>get_legal_actions</code>, <code>_get_single_moves_for_die</code>), manage bearing off (<code>_can_bear_off</code>), and determine game state (<code>is_game_over</code>, <code>determine_game_phase</code>).</li>
+<li><strong>Utilities:</strong> Calculating pip counts (<code>calculate_pip</code>), providing a text-based board representation (<code>draw_board</code>), and generating hashable state representations (<code>board_tuple</code>, <code>compute_zobrist</code>).</li>
+</ul>
+<h3 id="2-The-AI-Decision-Engine-Expectiminimax"><a href="#2-The-AI-Decision-Engine-Expectiminimax" class="headerlink" title="2. The AI Decision Engine: Expectiminimax"></a>2. The AI Decision Engine: Expectiminimax</h3><p>Unlike deterministic games such as chess or go, backgammon introduces significant randomness through dice rolls. This poses a unique challenge for AI: it’s no longer sufficient to search for the best sequence of moves — the agent must also account for the probabilities of future outcomes at every step.</p>
+<p>This is where the <strong>Expectiminimax</strong> algorithm comes into play.</p>
+<h4 id="What-Is-Expectiminimax"><a href="#What-Is-Expectiminimax" class="headerlink" title="What Is Expectiminimax?"></a>What Is Expectiminimax?</h4><p>Expectiminimax is an extension of the classical Minimax algorithm, designed specifically for games involving stochastic elements. It introduces a three-tiered decision structure:</p>
+<ul>
+<li><strong>Max nodes</strong>: The AI’s turn — it selects the action that maximizes its expected utility.</li>
+<li><strong>Min nodes</strong>: The opponent’s turn — the AI assumes the opponent plays optimally to minimize the AI’s outcome.</li>
+<li><strong>Chance nodes</strong>: A dice roll occurs. The AI has no control over this and must compute the <strong>expected value</strong> over all possible outcomes.</li>
+</ul>
+<p>This allows the decision-making process to integrate both strategic adversarial reasoning and probabilistic reasoning.</p>
+<h4 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h4><p>The algorithm is implemented recursively, with several optimizations to make it viable in practice.</p>
+<h5 id="1-Base-Case"><a href="#1-Base-Case" class="headerlink" title="1. Base Case"></a>1. Base Case</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> depth == <span class="number">0</span> <span class="keyword">or</span> game.is_game_over():</span><br><span class="line">    <span class="keyword">return</span> evaluate_position_hybrid(game, maximizing_player)</span><br></pre></td></tr></table></figure>
+
+<p>When the maximum search depth is reached, or the game ends, the current position is evaluated using a hybrid heuristic and neural model.</p>
+<h5 id="2-Transposition-Table"><a href="#2-Transposition-Table" class="headerlink" title="2. Transposition Table"></a>2. Transposition Table</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key = (zobrist(game), depth, player_to_move)</span><br><span class="line"><span class="keyword">if</span> key <span class="keyword">in</span> TT:</span><br><span class="line">    <span class="keyword">return</span> TT[key]</span><br></pre></td></tr></table></figure>
+
+<p>To avoid redundant computation, previously evaluated positions are cached using a <strong>Zobrist hash</strong>, which efficiently generates a unique identifier for each game state.</p>
+<h5 id="3-Sampling-Dice-Rolls"><a href="#3-Sampling-Dice-Rolls" class="headerlink" title="3. Sampling Dice Rolls"></a>3. Sampling Dice Rolls</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sampled_dice_rolls = _get_random_dice_samples()</span><br></pre></td></tr></table></figure>
+
+<p>Instead of evaluating all 21 possible dice combinations, the algorithm samples a subset. This greatly reduces computational cost while preserving statistical relevance.</p>
+<h5 id="4-Expectation-over-Outcomes"><a href="#4-Expectation-over-Outcomes" class="headerlink" title="4. Expectation over Outcomes"></a>4. Expectation over Outcomes</h5><p>Only 12 of the 21 different possible dice outcomes are thrown (to save some computing time).</p>
+<p>Then :</p>
+<ul>
+<li>All resulting states are generated.</li>
+<li>The algorithm recursively evaluates these states.</li>
+<li>The best (or worst) evaluation for that roll is selected depending on the player’s turn.</li>
+<li>These scores are averaged to compute the <strong>expected value</strong> of the dice roll.</li>
+</ul>
+<p>This average becomes the value returned by the chance node.</p>
+<h5 id="5-Selective-Pruning"><a href="#5-Selective-Pruning" class="headerlink" title="5. Selective Pruning"></a>5. Selective Pruning</h5><p>Although traditional alpha-beta pruning doesn’t directly apply to chance nodes, it is possible to prune <strong>within</strong> the set of outcomes of a single dice roll, avoiding evaluation of branches that can no longer influence the result.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> beta &lt;= alpha:</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>This pruning helps maintain tractability even in probabilistic branches.</p>
+<h4 id="Strategic-Value"><a href="#Strategic-Value" class="headerlink" title="Strategic Value"></a>Strategic Value</h4><p>Expectiminimax allows the AI to make decisions that account for real-world probability distributions, rather than assuming best- or worst-case scenarios. It enables the AI to:</p>
+<ul>
+<li>Prefer robust positions that perform well in most dice outcomes.</li>
+<li>Assess tactical risks involving opponent re-entries or hits.</li>
+<li>Balance risk and reward based on actual statistical likelihood.</li>
+</ul>
+<p>This results in more realistic and nuanced play.</p>
+<h3 id="3-Heuristic-Evaluation-evaluate-position-heuristic"><a href="#3-Heuristic-Evaluation-evaluate-position-heuristic" class="headerlink" title="3. Heuristic Evaluation (evaluate_position_heuristic)"></a>3. Heuristic Evaluation (evaluate_position_heuristic)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeuristicWeights</span>:</span></span><br><span class="line">    PIP_SCORE_FACTOR: <span class="built_in">float</span> = <span class="number">1.0</span></span><br><span class="line">    OFF_SCORE_FACTOR: <span class="built_in">float</span> = <span class="number">10.0</span></span><br><span class="line">    HIT_BONUS: <span class="built_in">float</span> = <span class="number">30.0</span></span><br><span class="line">    BAR_PENALTY: <span class="built_in">float</span> = -<span class="number">20.0</span></span><br><span class="line">    POINT_BONUS: <span class="built_in">float</span> = <span class="number">2.0</span></span><br><span class="line">    HOME_BOARD_POINT_BONUS: <span class="built_in">float</span> = <span class="number">3.0</span></span><br><span class="line">    INNER_HOME_POINT_BONUS: <span class="built_in">float</span> = <span class="number">2.0</span></span><br><span class="line">    ANCHOR_BONUS: <span class="built_in">float</span> = <span class="number">5.0</span></span><br><span class="line">    FIVE_POINT_BONUS: <span class="built_in">float</span> = <span class="number">5.0</span></span><br><span class="line">    PRIME_BASE_BONUS: <span class="built_in">float</span> = <span class="number">4.0</span></span><br><span class="line">    SIX_PRIME_BONUS: <span class="built_in">float</span> = <span class="number">10.0</span></span><br><span class="line">    TRAPPED_CHECKER_BONUS: <span class="built_in">float</span> = <span class="number">8.0</span></span><br><span class="line">    DIRECT_SHOT_PENALTY_FACTOR: <span class="built_in">float</span> = -<span class="number">1.5</span></span><br><span class="line">    BLOT_PENALTY_REDUCTION_IF_OPP_ON_BAR: <span class="built_in">float</span> = <span class="number">0.5</span></span><br><span class="line">    HIT_FAR_BLOT_PENALTY_MULTIPLIER: <span class="built_in">float</span> = <span class="number">1.5</span></span><br><span class="line">    STRATEGIC_BLOT_PENALTY_REDUCTION: <span class="built_in">float</span> = <span class="number">0.4</span></span><br><span class="line">    STACKING_PENALTY_FACTOR: <span class="built_in">float</span> = -<span class="number">0.5</span></span><br><span class="line">    BUILDER_BONUS: <span class="built_in">float</span> = <span class="number">1.0</span></span><br><span class="line">    MIDGAME_HOME_PRISON_BONUS: <span class="built_in">float</span> = <span class="number">20.0</span></span><br><span class="line">    CLOSEOUT_BONUS: <span class="built_in">float</span> = <span class="number">15.0</span></span><br><span class="line">    FAR_BEHIND_BACK_CHECKER_PENALTY_FACTOR: <span class="built_in">float</span> = -<span class="number">0.7</span></span><br><span class="line">    ENDGAME_BACK_CHECKER_PENALTY_FACTOR: <span class="built_in">float</span> = -<span class="number">1.5</span></span><br><span class="line">    RACE_MODE_FACTOR: <span class="built_in">float</span> = <span class="number">2.0</span></span><br><span class="line">    RACE_MODE_OTHER_FACTOR_REDUCTION: <span class="built_in">float</span> = <span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Pruning-the-Search-Tree-Neural-Network-Guidance"><a href="#4-Pruning-the-Search-Tree-Neural-Network-Guidance" class="headerlink" title="4. Pruning the Search Tree : Neural Network Guidance"></a>4. Pruning the Search Tree : Neural Network Guidance</h3><p>In the context of a complex game like backgammon, exhaustive search using algorithms such as Expectiminimax can quickly become computationally infeasible, especially as the search depth increases and chance nodes multiply. To mitigate this, a lightweight neural network is used to assist the evaluation process — not to play directly, but to guide the search more effectively.</p>
+<h4 id="Purpose-of-the-Neural-Network"><a href="#Purpose-of-the-Neural-Network" class="headerlink" title="Purpose of the Neural Network"></a>Purpose of the Neural Network</h4><p>Unlike conventional approaches where the network tries to predict the best move directly, this model serves a more specific and supportive role: <strong>it evaluates the quality of a given board position</strong>.</p>
+<p>Its primary function is to <strong>score terminal nodes</strong> in the Expectiminimax tree, helping the algorithm to:</p>
+<ul>
+<li>Prioritize promising branches early,</li>
+<li>Prune unpromising lines of play more aggressively,</li>
+<li>Reduce the overall computational load without compromising decision quality.</li>
+</ul>
+<h4 id="Training-Data"><a href="#Training-Data" class="headerlink" title="Training Data"></a>Training Data</h4><p>The network was trained via supervised learning on <strong>200,000 games</strong> automatically generated using <strong>GNU Backgammon (gnubg)</strong>.</p>
+<ul>
+<li>The training script and dataset generation process are available on the GitHub repository.</li>
+<li>For each position, the target value corresponds to a win probability or position score extracted from gnubg analysis.</li>
+<li>This provides the network with a dense and high-quality representation of typical and atypical game states.</li>
+</ul>
+<h4 id="Model-Architecture"><a href="#Model-Architecture" class="headerlink" title="Model Architecture"></a>Model Architecture</h4><p>The model is a relatively simple <strong>Multi-Layer Perceptron (MLP)</strong> implemented with PyTorch:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniMaxHelperNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_dim=<span class="number">54</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.net = nn.Sequential(</span><br><span class="line">            nn.Linear(input_dim, <span class="number">128</span>), nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">128</span>, <span class="number">128</span>), nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">128</span>, <span class="number">1</span>)</span><br><span class="line">        )</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>The input is a 54-dimensional vector encoding the state of the board and game metadata.</li>
+<li>The output is a single scalar value: the estimated utility of the position from the perspective of the current player.</li>
+</ul>
+<h4 id="Integration-into-Minimax"><a href="#Integration-into-Minimax" class="headerlink" title="Integration into Minimax"></a>Integration into Minimax</h4><p>During search, the AI evaluates a position using a hybrid approach:</p>
+<ol>
+<li>A <strong>heuristic evaluation</strong> based on hand-crafted rules.</li>
+<li>A <strong>neural score</strong> predicted by the trained model.</li>
+<li>A weighted average of the two, controlled by a parameter <code>NN_WEIGHT</code>.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_position_hybrid</span>(<span class="params">game_state, player_to_evaluate</span>):</span></span><br><span class="line">    phase = game_state.determine_game_phase()</span><br><span class="line">    weights = PHASE_WEIGHTS.get(phase, MIDGAME_WEIGHTS)</span><br><span class="line">    h_val = game_state.evaluate_position_heuristic(player_to_evaluate, weights)</span><br><span class="line"></span><br><span class="line">    nn_val = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">if</span> NET <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> NN_WEIGHT &gt; <span class="number">0.0</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">                t = _tensor_for_player(game_state, player_to_evaluate)</span><br><span class="line">                nn_pred = NET(t.unsqueeze(<span class="number">0</span>))</span><br><span class="line">                nn_val = nn_pred.item()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;NN evaluation error: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> h_val</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1.0</span> - NN_WEIGHT) * h_val + NN_WEIGHT * nn_val</span><br></pre></td></tr></table></figure>
+
+<p>This allows the search to benefit from both structured knowledge (heuristics) and pattern recognition (NN) without relying entirely on either.</p>
+<h4 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h4><ul>
+<li><strong>Faster pruning:</strong> The network helps eliminate weak lines of play earlier in the search.</li>
+<li><strong>Better positional awareness:</strong> Especially in mid-game, the NN captures patterns the heuristic may miss.</li>
+<li><strong>Flexible weighting:</strong> By adjusting <code>NN_WEIGHT</code>, the system can shift between a rule-based or data-driven evaluation depending on the phase of the game.</li>
+</ul>
+<h4 id="Limitations-and-Future-Work"><a href="#Limitations-and-Future-Work" class="headerlink" title="Limitations and Future Work"></a>Limitations and Future Work</h4><ul>
+<li>The network is small by design; future iterations could experiment with larger models or different architectures (e.g., convolutional or attention-based).</li>
+<li>The training data is limited to the static analysis of gnubg. Self-play or reinforcement fine-tuning could improve generalization.</li>
+<li>Better integration of temporal factors (e.g., cube decisions, match score) is an open area of exploration.</li>
+</ul>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>This neural model is not the brain of the AI — it’s the intuition. It doesn’t choose the move, but it helps the AI know which parts of the tree are worth exploring. In that sense, it acts like a positional compass: simple, fast, and trained on a massive base of strong play.</p>
+<h2 id="Try-It-Yourself"><a href="#Try-It-Yourself" class="headerlink" title="Try It Yourself!"></a>Try It Yourself!</h2><p>The complete code, including the Cython extensions and the pre-trained neural network model, is available on GitHub.</p>
+<p>👉 GitHub Repository: <a target="_blank" rel="noopener" href="https://github.com/Nikos-Prinios/bkg-NN">https://github.com/Nikos-Prinios/bkg-NN</a></p>
+<p><strong>Happy backgammoning!</strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Goal-Crafting-a-Worthy-Opponent"><span class="toc-number">1.</span> <span class="toc-text">The Goal: Crafting a Worthy Opponent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Components"><span class="toc-number">2.</span> <span class="toc-text">Core Components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-The-Game-Engine-BackgammonGame-Class"><span class="toc-number">2.1.</span> <span class="toc-text">1. The Game Engine (BackgammonGame Class)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-The-AI-Decision-Engine-Expectiminimax"><span class="toc-number">2.2.</span> <span class="toc-text">2. The AI Decision Engine: Expectiminimax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Heuristic-Evaluation-evaluate-position-heuristic"><span class="toc-number">2.3.</span> <span class="toc-text">3. Heuristic Evaluation (evaluate_position_heuristic)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Pruning-the-Search-Tree-Neural-Network-Guidance"><span class="toc-number">2.4.</span> <span class="toc-text">4. Pruning the Search Tree : Neural Network Guidance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Try-It-Yourself"><span class="toc-number">3.</span> <span class="toc-text">Try It Yourself!</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/05/10/BKG-The-Hybridation/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/05/10/BKG-The-Hybridation/&text=Backgammon - The Hybridation"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/05/10/BKG-The-Hybridation/&title=Backgammon - The Hybridation"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/05/10/BKG-The-Hybridation/&is_video=false&description=Backgammon - The Hybridation"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Backgammon - The Hybridation&body=Check out this article: http://tokipona.today/2025/05/10/BKG-The-Hybridation/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/05/10/BKG-The-Hybridation/&title=Backgammon - The Hybridation"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

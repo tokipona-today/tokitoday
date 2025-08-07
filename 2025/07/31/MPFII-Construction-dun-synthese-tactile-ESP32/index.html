@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="IntroductionWelcome to this complete tutorial for building the MPFII (Micro Polyphonic Flexible Instrument II), a modern homage to Taiwanese Apple II clones. This touch-sensitive synthesizer combine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPFII: a Touch-Sensitive Synthesizer">
+<meta property="og:url" content="http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="IntroductionWelcome to this complete tutorial for building the MPFII (Micro Polyphonic Flexible Instrument II), a modern homage to Taiwanese Apple II clones. This touch-sensitive synthesizer combine">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/mpfii.jpg">
+<meta property="og:image" content="http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/mpfii2.jpg">
+<meta property="article:published_time" content="2025-07-31T12:30:00.000Z">
+<meta property="article:modified_time" content="2025-08-07T19:07:48.525Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/mpfii.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>MPFII: a Touch-Sensitive Synthesizer</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MPFII: a Touch-Sensitive Synthesizer
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/lessons/">lessons</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <img src="/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/mpfii.jpg" class="" title="You future new toy">
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Welcome to this complete tutorial for building the <strong>MPFII</strong> (Micro Polyphonic Flexible Instrument II), a modern homage to Taiwanese Apple II clones. This touch-sensitive synthesizer combines the power of the ESP32 with an intuitive interface based on a resistive wire to create a unique and expressive musical instrument.</p>
+<p>The MPFII allows you to play notes by simply moving your finger along a resistive wire, while offering advanced features like multiple waveforms, delay effects, arpeggios, and different musical scales.</p>
+<h2 id="Required-Materials"><a href="#Required-Materials" class="headerlink" title="Required Materials"></a>Required Materials</h2><h3 id="Main-Components"><a href="#Main-Components" class="headerlink" title="Main Components"></a>Main Components</h3><ul>
+<li><strong>ESP32-WROVER</strong> (with built-in DAC) - ~$10</li>
+<li><strong>128x64 OLED Display</strong> (I2C, SSD1306) - ~$5</li>
+<li><strong>Nichrome Resistive Wire</strong> (100Ω, 1m) - ~$3</li>
+<li><strong>LM386 Audio Amplifier</strong> - ~$2</li>
+<li><strong>8Ω 0.5W Speaker</strong> - ~$3</li>
+<li><strong>4 Push Buttons</strong> - ~$2</li>
+<li><strong>Resistors</strong>: 10kΩ (x4), 1kΩ (x1) - ~$1</li>
+<li><strong>Breadboard</strong> or custom PCB - ~$5</li>
+<li><strong>Enclosure</strong> (3D printed or existing box) - ~$10</li>
+</ul>
+<p><strong>Estimated total cost: ~$40</strong></p>
+<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><ul>
+<li>Soldering iron</li>
+<li>Wiring wire</li>
+<li>Multimeter</li>
+<li>Computer with Arduino IDE</li>
+</ul>
+<h2 id="Wiring-Diagram"><a href="#Wiring-Diagram" class="headerlink" title="Wiring Diagram"></a>Wiring Diagram</h2><h3 id="Circuit-Overview"><a href="#Circuit-Overview" class="headerlink" title="Circuit Overview"></a>Circuit Overview</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ESP32               Components</span><br><span class="line">-----               ----------</span><br><span class="line">GPIO25 (DAC1) -----&gt; R1 (1kΩ) -----&gt; LM386 Audio Input</span><br><span class="line">GND ----------------- GND</span><br><span class="line">GPIO34 &lt;------------ Resistive Wire (100Ω)</span><br><span class="line">3.3V ---- R2 (10kΩ) -----&gt; Resistive Wire</span><br><span class="line">GND ----------------- Other end of resistive wire</span><br><span class="line"></span><br><span class="line">GPIO21 -----&gt; SDA (OLED)</span><br><span class="line">GPIO22 -----&gt; SCL (OLED)</span><br><span class="line">3.3V -----&gt; VCC (OLED)</span><br><span class="line">GND -----&gt; GND (OLED)</span><br><span class="line"></span><br><span class="line">GPIO13 -----&gt; Waveform Button</span><br><span class="line">GPIO12 -----&gt; Delay Button</span><br><span class="line">GPIO14 -----&gt; Arpeggio Button</span><br><span class="line">GPIO27 -----&gt; Scale Button</span><br></pre></td></tr></table></figure>
+
+<h3 id="LM386-Amplifier-Detailed-Wiring"><a href="#LM386-Amplifier-Detailed-Wiring" class="headerlink" title="LM386 Amplifier Detailed Wiring"></a>LM386 Amplifier Detailed Wiring</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LM386:</span><br><span class="line">Pin 1 (Gain) -----&gt; 10µF Capacitor -----&gt; Pin 8</span><br><span class="line">Pin 2 (In-) -----&gt; GND</span><br><span class="line">Pin 3 (In+) -----&gt; from R1 (1kΩ)</span><br><span class="line">Pin 4 (GND) -----&gt; GND</span><br><span class="line">Pin 5 (Vout) -----&gt; 220µF Capacitor -----&gt; Speaker</span><br><span class="line">Pin 6 (VCC) -----&gt; 5V</span><br><span class="line">Pin 7 (Bypass) -----&gt; 100µF Capacitor -----&gt; GND</span><br></pre></td></tr></table></figure>
+
+<h2 id="Physical-Assembly"><a href="#Physical-Assembly" class="headerlink" title="Physical Assembly"></a>Physical Assembly</h2><h3 id="Step-1-Preparing-the-Resistive-Wire"><a href="#Step-1-Preparing-the-Resistive-Wire" class="headerlink" title="Step 1: Preparing the Resistive Wire"></a>Step 1: Preparing the Resistive Wire</h3><p>The resistive wire is the central element of our touch interface. For optimal response:</p>
+<ol>
+<li><strong>Cut 30cm of 100Ω nichrome wire</strong></li>
+<li><strong>Stretch it slightly</strong> to make it perfectly straight</li>
+<li><strong>Solder the ends</strong> to terminal blocks or directly to the board</li>
+<li><strong>Calibrate the voltage</strong>: one end to 3.3V, the other to GND</li>
+</ol>
+<p><strong>Pro tip:</strong> For better durability, you can wrap the resistive wire with enameled copper wire at the solder points.</p>
+<h3 id="Step-2-Button-Mounting"><a href="#Step-2-Button-Mounting" class="headerlink" title="Step 2: Button Mounting"></a>Step 2: Button Mounting</h3><p>The 4 push buttons control different functions:</p>
+<ol>
+<li><strong>Waveform</strong> (GPIO13): Cycle through 5 waveforms</li>
+<li><strong>Delay</strong> (GPIO12): Enable/disable delay with 5 different times</li>
+<li><strong>Arpeggio</strong> (GPIO14): Enable/disable arpeggio mode</li>
+<li><strong>Scale</strong> (GPIO27): Change the musical scale</li>
+</ol>
+<p>Each button should be wired with a 10kΩ pull-down resistor.</p>
+<h3 id="Step-3-OLED-Display-Installation"><a href="#Step-3-OLED-Display-Installation" class="headerlink" title="Step 3: OLED Display Installation"></a>Step 3: OLED Display Installation</h3><p>The OLED display shows all parameters in real-time:</p>
+<ol>
+<li><strong>Connect SDA to GPIO21</strong></li>
+<li><strong>Connect SCL to GPIO22</strong></li>
+<li><strong>Power with 3.3V and GND</strong></li>
+<li><strong>Mount it in a visible location</strong> on your enclosure</li>
+</ol>
+<h3 id="Step-4-Audio-Wiring"><a href="#Step-4-Audio-Wiring" class="headerlink" title="Step 4: Audio Wiring"></a>Step 4: Audio Wiring</h3><p>The audio chain is crucial for sound quality:</p>
+<ol>
+<li><strong>GPIO25 (DAC1) → 1kΩ Resistor → LM386 Input</strong></li>
+<li><strong>LM386 Output → 220µF Capacitor → Speaker</strong></li>
+<li><strong>Add a 10kΩ potentiometer</strong> at input for volume control (optional)</li>
+</ol>
+<h2 id="ESP32-Programming"><a href="#ESP32-Programming" class="headerlink" title="ESP32 Programming"></a>ESP32 Programming</h2><h3 id="Arduino-IDE-Configuration"><a href="#Arduino-IDE-Configuration" class="headerlink" title="Arduino IDE Configuration"></a>Arduino IDE Configuration</h3><ol>
+<li><p><strong>Install ESP32 support</strong>:</p>
+<ul>
+<li>File &gt; Preferences</li>
+<li>Additional Boards Manager URLs: <code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></li>
+<li>Tools &gt; Board Manager &gt; Search for “ESP32” and install</li>
+</ul>
+</li>
+<li><p><strong>Install required libraries</strong>:</p>
+<ul>
+<li><code>Adafruit GFX Library</code></li>
+<li><code>Adafruit SSD1306</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="The-Complete-Code"><a href="#The-Complete-Code" class="headerlink" title="The Complete Code"></a>The Complete Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;driver/dac.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Adafruit_GFX.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Adafruit_SSD1306.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// OLED Display Configuration</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCREEN_WIDTH 128</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCREEN_HEIGHT 64</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_RESET -1</span></span><br><span class="line"><span class="function">Adafruit_SSD1306 <span class="title">display</span><span class="params">(SCREEN_WIDTH, SCREEN_HEIGHT, &amp;Wire, OLED_RESET)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Pin Configuration</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TOUCH_PIN 34      <span class="comment">// GPIO for reading resistive wire</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DAC_PIN DAC1      <span class="comment">// GPIO25 for audio output</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WAVEFORM_BTN 13   <span class="comment">// Waveform button</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DELAY_BTN 12      <span class="comment">// Delay button</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ARPEGGIO_BTN 14   <span class="comment">// Arpeggio button</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCALE_BTN 27      <span class="comment">// Scale button</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMPLE_RATE 44100 <span class="comment">// Sampling rate</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Different musical scales</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> majorScale[] = &#123;<span class="number">261.63</span>, <span class="number">293.66</span>, <span class="number">329.63</span>, <span class="number">349.23</span>, <span class="number">392.00</span>, <span class="number">440.00</span>, <span class="number">493.88</span>, <span class="number">523.25</span>&#125;; <span class="comment">// C major</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> minorScale[] = &#123;<span class="number">261.63</span>, <span class="number">293.66</span>, <span class="number">311.13</span>, <span class="number">349.23</span>, <span class="number">392.00</span>, <span class="number">415.30</span>, <span class="number">466.16</span>, <span class="number">523.25</span>&#125;; <span class="comment">// C minor</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> orientalScale[] = &#123;<span class="number">261.63</span>, <span class="number">277.18</span>, <span class="number">311.13</span>, <span class="number">349.23</span>, <span class="number">392.00</span>, <span class="number">415.30</span>, <span class="number">466.16</span>, <span class="number">523.25</span>&#125;; <span class="comment">// Oriental</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> chineseScale[] = &#123;<span class="number">261.63</span>, <span class="number">293.66</span>, <span class="number">329.63</span>, <span class="number">392.00</span>, <span class="number">440.00</span>, <span class="number">523.25</span>, <span class="number">587.33</span>, <span class="number">659.25</span>&#125;; <span class="comment">// Chinese pentatonic</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Pointers to scales</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span>* scales[] = &#123;majorScale, minorScale, orientalScale, chineseScale&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* scaleNames[] = &#123;<span class="string">&quot;Major&quot;</span>, <span class="string">&quot;Minor&quot;</span>, <span class="string">&quot;Oriental&quot;</span>, <span class="string">&quot;Chinese&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> scaleSizes[] = &#123;<span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Global variables</span></span><br><span class="line"><span class="keyword">int</span> currentScale = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> currentNote = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">float</span> frequency = <span class="number">261.63</span>;</span><br><span class="line"><span class="keyword">float</span> phase = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> lastTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Waveforms</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Waveform</span> &#123;</span> SINE, SQUARE, SAW, TRIANGLE, NOISE &#125;;</span><br><span class="line">Waveform currentWaveform = SINE;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* waveformNames[] = &#123;<span class="string">&quot;Sine&quot;</span>, <span class="string">&quot;Square&quot;</span>, <span class="string">&quot;Saw&quot;</span>, <span class="string">&quot;Triangle&quot;</span>, <span class="string">&quot;Noise&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Delay</span></span><br><span class="line"><span class="keyword">bool</span> delayEnabled = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> currentDelay = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> delayTimes[] = &#123;<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>, <span class="number">500</span>, <span class="number">800</span>&#125;; <span class="comment">// in ms</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* delayNames[] = &#123;<span class="string">&quot;100ms&quot;</span>, <span class="string">&quot;200ms&quot;</span>, <span class="string">&quot;300ms&quot;</span>, <span class="string">&quot;500ms&quot;</span>, <span class="string">&quot;800ms&quot;</span>&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DELAY_BUFFER_SIZE 44100 <span class="comment">// 1 second at 44.1kHz</span></span></span><br><span class="line"><span class="keyword">int</span> delayBuffer[DELAY_BUFFER_SIZE];</span><br><span class="line"><span class="keyword">int</span> delayIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Arpeggio</span></span><br><span class="line"><span class="keyword">bool</span> arpeggioEnabled = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> currentArpeggio = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> arpeggioTime = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arpeggioNote = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> arpeggioSpeeds[] = &#123;<span class="number">100</span>, <span class="number">150</span>, <span class="number">200</span>, <span class="number">300</span>, <span class="number">400</span>&#125;; <span class="comment">// in ms</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* arpeggioNames[] = &#123;<span class="string">&quot;Fast&quot;</span>, <span class="string">&quot;Normal&quot;</span>, <span class="string">&quot;Slow&quot;</span>, <span class="string">&quot;V Slow&quot;</span>, <span class="string">&quot;Ultra Slow&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Button management</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> lastDebounceTime = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> debounceDelay = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize OLED display</span></span><br><span class="line">  <span class="keyword">if</span>(!display.<span class="built_in">begin</span>(SSD1306_SWITCHCAPVCC, <span class="number">0x3C</span>)) &#123;</span><br><span class="line">    Serial.<span class="built_in">println</span>(<span class="built_in">F</span>(<span class="string">&quot;SSD1306 allocation failed&quot;</span>));</span><br><span class="line">    <span class="keyword">for</span>(;;);</span><br><span class="line">  &#125;</span><br><span class="line">  display.<span class="built_in">clearDisplay</span>();</span><br><span class="line">  display.<span class="built_in">setTextSize</span>(<span class="number">1</span>);</span><br><span class="line">  display.<span class="built_in">setTextColor</span>(SSD1306_WHITE);</span><br><span class="line">  display.<span class="built_in">setCursor</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">  display.<span class="built_in">println</span>(<span class="string">&quot;MPFII Ready!&quot;</span>);</span><br><span class="line">  display.<span class="built_in">display</span>();</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize DAC</span></span><br><span class="line">  <span class="built_in">dac_output_enable</span>(DAC_CHANNEL_1);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Configure pins</span></span><br><span class="line">  <span class="built_in">pinMode</span>(TOUCH_PIN, INPUT);</span><br><span class="line">  <span class="built_in">pinMode</span>(WAVEFORM_BTN, INPUT_PULLDOWN);</span><br><span class="line">  <span class="built_in">pinMode</span>(DELAY_BTN, INPUT_PULLDOWN);</span><br><span class="line">  <span class="built_in">pinMode</span>(ARPEGGIO_BTN, INPUT_PULLDOWN);</span><br><span class="line">  <span class="built_in">pinMode</span>(SCALE_BTN, INPUT_PULLDOWN);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize delay buffer</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;DELAY_BUFFER_SIZE; i++) &#123;</span><br><span class="line">    delayBuffer[i] = <span class="number">128</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">updateDisplay</span>();</span><br><span class="line">  Serial.<span class="built_in">println</span>(<span class="string">&quot;MPFII Synthesizer ready!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Handle buttons</span></span><br><span class="line">  <span class="built_in">handleButtons</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Read position on resistive wire</span></span><br><span class="line">  <span class="keyword">int</span> touchValue = <span class="built_in">analogRead</span>(TOUCH_PIN);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Map value to note</span></span><br><span class="line">  <span class="keyword">int</span> newNote = <span class="built_in">map</span>(touchValue, <span class="number">0</span>, <span class="number">4095</span>, <span class="number">0</span>, scaleSizes[currentScale]<span class="number">-1</span>);</span><br><span class="line">  newNote = <span class="built_in">constrain</span>(newNote, <span class="number">0</span>, scaleSizes[currentScale]<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (newNote != currentNote &amp;&amp; !arpeggioEnabled) &#123;</span><br><span class="line">    currentNote = newNote;</span><br><span class="line">    frequency = scales[currentScale][currentNote];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Generate audio</span></span><br><span class="line">  <span class="built_in">generateAudio</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">handleButtons</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Waveform button</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">digitalRead</span>(WAVEFORM_BTN) == HIGH) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">millis</span>() - lastDebounceTime &gt; debounceDelay) &#123;</span><br><span class="line">      currentWaveform = (Waveform)((currentWaveform + <span class="number">1</span>) % <span class="number">5</span>);</span><br><span class="line">      <span class="built_in">updateDisplay</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    lastDebounceTime = <span class="built_in">millis</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Delay button</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">digitalRead</span>(DELAY_BTN) == HIGH) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">millis</span>() - lastDebounceTime &gt; debounceDelay) &#123;</span><br><span class="line">      delayEnabled = !delayEnabled;</span><br><span class="line">      <span class="keyword">if</span>(delayEnabled) &#123;</span><br><span class="line">        currentDelay = (currentDelay + <span class="number">1</span>) % <span class="number">5</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">updateDisplay</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    lastDebounceTime = <span class="built_in">millis</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Arpeggio button</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">digitalRead</span>(ARPEGGIO_BTN) == HIGH) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">millis</span>() - lastDebounceTime &gt; debounceDelay) &#123;</span><br><span class="line">      arpeggioEnabled = !arpeggioEnabled;</span><br><span class="line">      <span class="keyword">if</span>(arpeggioEnabled) &#123;</span><br><span class="line">        currentArpeggio = (currentArpeggio + <span class="number">1</span>) % <span class="number">5</span>;</span><br><span class="line">        arpeggioTime = <span class="built_in">millis</span>();</span><br><span class="line">        arpeggioNote = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">updateDisplay</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    lastDebounceTime = <span class="built_in">millis</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Scale button</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">digitalRead</span>(SCALE_BTN) == HIGH) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">millis</span>() - lastDebounceTime &gt; debounceDelay) &#123;</span><br><span class="line">      currentScale = (currentScale + <span class="number">1</span>) % <span class="number">4</span>;</span><br><span class="line">      currentNote = <span class="number">0</span>;</span><br><span class="line">      frequency = scales[currentScale][currentNote];</span><br><span class="line">      <span class="built_in">updateDisplay</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    lastDebounceTime = <span class="built_in">millis</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">generateAudio</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> currentTime = <span class="built_in">micros</span>();</span><br><span class="line">  <span class="keyword">float</span> deltaTime = (currentTime - lastTime) / <span class="number">1000000.0</span>;</span><br><span class="line">  lastTime = currentTime;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Handle arpeggio</span></span><br><span class="line">  <span class="keyword">if</span>(arpeggioEnabled) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">millis</span>() - arpeggioTime &gt; arpeggioSpeeds[currentArpeggio]) &#123;</span><br><span class="line">      arpeggioNote = (arpeggioNote + <span class="number">1</span>) % scaleSizes[currentScale];</span><br><span class="line">      frequency = scales[currentScale][arpeggioNote];</span><br><span class="line">      arpeggioTime = <span class="built_in">millis</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Calculate phase</span></span><br><span class="line">  phase += <span class="number">2.0</span> * PI * frequency * deltaTime;</span><br><span class="line">  <span class="keyword">if</span> (phase &gt; <span class="number">2.0</span> * PI) &#123;</span><br><span class="line">    phase -= <span class="number">2.0</span> * PI;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Generate value based on waveform</span></span><br><span class="line">  <span class="keyword">int</span> audioValue = <span class="number">128</span>; <span class="comment">// Default value (middle)</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in"><span class="keyword">switch</span></span>(currentWaveform) &#123;</span><br><span class="line">    <span class="keyword">case</span> SINE:</span><br><span class="line">      audioValue = (<span class="keyword">int</span>)((<span class="built_in">sin</span>(phase) + <span class="number">1.0</span>) * <span class="number">127.5</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SQUARE:</span><br><span class="line">      audioValue = (<span class="built_in">sin</span>(phase) &gt; <span class="number">0</span>) ? <span class="number">255</span> : <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> SAW:</span><br><span class="line">      audioValue = (<span class="keyword">int</span>)((phase / (<span class="number">2.0</span> * PI)) * <span class="number">255</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> TRIANGLE:</span><br><span class="line">      audioValue = (<span class="keyword">int</span>)((<span class="built_in">fabs</span>(<span class="built_in">fmod</span>(phase, <span class="number">2.0</span>*PI) - PI) / PI) * <span class="number">255</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> NOISE:</span><br><span class="line">      audioValue = <span class="built_in">random</span>(<span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  audioValue = <span class="built_in">constrain</span>(audioValue, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Apply delay</span></span><br><span class="line">  <span class="keyword">if</span>(delayEnabled) &#123;</span><br><span class="line">    <span class="keyword">int</span> delaySamples = (delayTimes[currentDelay] * SAMPLE_RATE) / <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">int</span> delayedValue = delayBuffer[(delayIndex - delaySamples + DELAY_BUFFER_SIZE) % DELAY_BUFFER_SIZE];</span><br><span class="line">    audioValue = (audioValue + delayedValue) / <span class="number">2</span>; <span class="comment">// Mix wet/dry</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Store in delay buffer</span></span><br><span class="line">  delayBuffer[delayIndex] = audioValue;</span><br><span class="line">  delayIndex = (delayIndex + <span class="number">1</span>) % DELAY_BUFFER_SIZE;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Send to DAC</span></span><br><span class="line">  <span class="built_in">dac_output_voltage</span>(DAC_CHANNEL_1, audioValue);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">delayMicroseconds</span>(<span class="number">22</span>); <span class="comment">// ~44.1kHz</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">updateDisplay</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  display.<span class="built_in">clearDisplay</span>();</span><br><span class="line">  display.<span class="built_in">setTextSize</span>(<span class="number">1</span>);</span><br><span class="line">  display.<span class="built_in">setCursor</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">println</span>(<span class="string">&quot;MPFII Synth&quot;</span>);</span><br><span class="line">  display.<span class="built_in">println</span>(<span class="string">&quot;-----------&quot;</span>);</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot;Scale: &quot;</span>);</span><br><span class="line">  display.<span class="built_in">println</span>(scaleNames[currentScale]);</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot;Wave: &quot;</span>);</span><br><span class="line">  display.<span class="built_in">println</span>(waveformNames[currentWaveform]);</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot;Delay: &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(delayEnabled) &#123;</span><br><span class="line">    display.<span class="built_in">println</span>(delayNames[currentDelay]);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    display.<span class="built_in">println</span>(<span class="string">&quot;OFF&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot;Arp: &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(arpeggioEnabled) &#123;</span><br><span class="line">    display.<span class="built_in">println</span>(arpeggioNames[currentArpeggio]);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    display.<span class="built_in">println</span>(<span class="string">&quot;OFF&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot;Note: &quot;</span>);</span><br><span class="line">  display.<span class="built_in">print</span>(currentNote);</span><br><span class="line">  display.<span class="built_in">print</span>(<span class="string">&quot; (&quot;</span>);</span><br><span class="line">  display.<span class="built_in">print</span>(frequency, <span class="number">1</span>);</span><br><span class="line">  display.<span class="built_in">println</span>(<span class="string">&quot;Hz)&quot;</span>);</span><br><span class="line"></span><br><span class="line">  display.<span class="built_in">display</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Detailed-Features"><a href="#Detailed-Features" class="headerlink" title="Detailed Features"></a>Detailed Features</h2><h3 id="1-Touch-Interface"><a href="#1-Touch-Interface" class="headerlink" title="1. Touch Interface"></a>1. Touch Interface</h3><p>The heart of the MPFII is its touch interface based on a resistive wire:</p>
+<ul>
+<li><strong>Principle</strong>: The resistive wire acts as a linear potentiometer</li>
+<li><strong>Reading</strong>: The ESP32 measures voltage via its ADC (GPIO34)</li>
+<li><strong>Mapping</strong>: The 0-4095 value is mapped to notes of the selected scale</li>
+<li><strong>Precision</strong>: 8 notes per scale, evenly distributed along the wire length</li>
+</ul>
+<h3 id="2-Waveforms"><a href="#2-Waveforms" class="headerlink" title="2. Waveforms"></a>2. Waveforms</h3><p>The MPFII offers 5 distinct waveforms:</p>
+<ol>
+<li><strong>Sine</strong>: Pure, soft wave, ideal for pads</li>
+<li><strong>Square</strong>: Typical 8-bit sound, rich in harmonics</li>
+<li><strong>Saw</strong>: Bright sound, perfect for leads</li>
+<li><strong>Triangle</strong>: Soft, synthetic sound, between sine and square</li>
+<li><strong>Noise</strong>: White noise, useful for percussion and effects</li>
+</ol>
+<h3 id="3-Musical-Scales"><a href="#3-Musical-Scales" class="headerlink" title="3. Musical Scales"></a>3. Musical Scales</h3><p>Four scales are available to explore different musical styles:</p>
+<ul>
+<li><strong>Major</strong>: Standard Western scale, happy</li>
+<li><strong>Minor</strong>: Melancholic, dramatic scale</li>
+<li><strong>Oriental</strong>: Characteristic Middle Eastern intervals</li>
+<li><strong>Chinese</strong>: Pentatonic, traditional Asian sound</li>
+</ul>
+<h3 id="4-Delay-Effect"><a href="#4-Delay-Effect" class="headerlink" title="4. Delay Effect"></a>4. Delay Effect</h3><p>The delay adds depth to the sound:</p>
+<ul>
+<li><strong>5 different times</strong>: 100ms, 200ms, 300ms, 500ms, 800ms</li>
+<li><strong>Circular buffer</strong>: 44100 samples (1 second at 44.1kHz)</li>
+<li><strong>Wet/dry mix</strong>: 50% original signal, 50% delayed signal</li>
+</ul>
+<h3 id="5-Arpeggiator"><a href="#5-Arpeggiator" class="headerlink" title="5. Arpeggiator"></a>5. Arpeggiator</h3><p>The arpeggiator automates note playing:</p>
+<ul>
+<li><strong>5 speeds</strong>: From fast to ultra slow</li>
+<li><strong>Automatic cycling</strong>: Plays through all scale notes</li>
+<li><strong>Timing</strong>: Based on millis() for temporal accuracy</li>
+</ul>
+<h2 id="Calibration-and-Settings"><a href="#Calibration-and-Settings" class="headerlink" title="Calibration and Settings"></a>Calibration and Settings</h2><h3 id="Resistive-Wire-Calibration"><a href="#Resistive-Wire-Calibration" class="headerlink" title="Resistive Wire Calibration"></a>Resistive Wire Calibration</h3><p>For optimal response, calibrate your wire:</p>
+<ol>
+<li><strong>Open the serial monitor</strong> (115200 baud)</li>
+<li><strong>Touch the wire ends</strong> and note the min/max values</li>
+<li><strong>Adjust the mapping</strong> in the code if necessary:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> newNote = <span class="built_in">map</span>(touchValue, minVal, maxVal, <span class="number">0</span>, scaleSizes[currentScale]<span class="number">-1</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Volume-Control"><a href="#Volume-Control" class="headerlink" title="Volume Control"></a>Volume Control</h3><p>To add volume control:</p>
+<ol>
+<li><strong>Add a 10kΩ potentiometer</strong> on GPIO35</li>
+<li><strong>Modify the code</strong>:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VOLUME_PIN 35</span></span><br><span class="line"><span class="keyword">int</span> volume = <span class="built_in">analogRead</span>(VOLUME_PIN) / <span class="number">16</span>; <span class="comment">// 0-255</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// In generateAudio():</span></span><br><span class="line">audioValue = (audioValue * volume) / <span class="number">255</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Latency-Optimization"><a href="#Latency-Optimization" class="headerlink" title="Latency Optimization"></a>Latency Optimization</h3><p>For faster response:</p>
+<ol>
+<li><strong>Reduce SAMPLE_RATE</strong> to 22050 for less latency</li>
+<li><strong>Optimize delayMicroseconds()</strong> according to your setup</li>
+<li><strong>Disable Serial.begin()</strong> after debugging</li>
+</ol>
+<h2 id="Enclosure-and-Design"><a href="#Enclosure-and-Design" class="headerlink" title="Enclosure and Design"></a>Enclosure and Design</h2><h3 id="Option-1-3D-Printed-Enclosure"><a href="#Option-1-3D-Printed-Enclosure" class="headerlink" title="Option 1: 3D Printed Enclosure"></a>Option 1: 3D Printed Enclosure</h3><p>Create a custom enclosure with these dimensions:</p>
+<ul>
+<li><strong>External dimensions</strong>: 200mm x 100mm x 50mm</li>
+<li><strong>Display location</strong>: 128x64mm with 2mm margin</li>
+<li><strong>Button locations</strong>: 4 holes of 12mm diameter</li>
+<li><strong>Touch wire area</strong>: 250mm x 20mm</li>
+</ul>
+<h3 id="Option-2-Reuse"><a href="#Option-2-Reuse" class="headerlink" title="Option 2: Reuse"></a>Option 2: Reuse</h3><p>Transform an old keyboard or existing box:</p>
+<ul>
+<li><strong>Vintage keyboard</strong>: Remove keys, keep the case</li>
+<li><strong>Cigar box</strong>: Perfect for a retro look</li>
+<li><strong>Effect pedal case</strong>: Sturdy and professional</li>
+</ul>
+<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><h3 id="Common-Issues"><a href="#Common-Issues" class="headerlink" title="Common Issues"></a>Common Issues</h3><ol>
+<li><p><strong>No sound</strong>:</p>
+<ul>
+<li>Check amplifier wiring</li>
+<li>Test speaker with a battery</li>
+<li>Verify DAC is properly initialized</li>
+</ul>
+</li>
+<li><p><strong>Noise in sound</strong>:</p>
+<ul>
+<li>Add decoupling capacitors (100nF) on power supply</li>
+<li>Keep audio wires away from power wires</li>
+<li>Use short, twisted wiring</li>
+</ul>
+</li>
+<li><p><strong>Display not showing</strong>:</p>
+<ul>
+<li>Check I2C address (usually 0x3C)</li>
+<li>Test with I2C scanner</li>
+<li>Check SDA/SCL connections</li>
+</ul>
+</li>
+<li><p><strong>Inaccurate touch response</strong>:</p>
+<ul>
+<li>Calibrate resistive wire</li>
+<li>Check pull-up/pull-down resistors</li>
+<li>Clean the resistive wire</li>
+</ul>
+</li>
+</ol>
+<h3 id="Possible-Improvements"><a href="#Possible-Improvements" class="headerlink" title="Possible Improvements"></a>Possible Improvements</h3><ol>
+<li><p><strong>Add an LFO</strong>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> lfoPhase = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">float</span> lfoFrequency = <span class="number">5.0</span>; <span class="comment">// 5Hz</span></span><br><span class="line"><span class="keyword">float</span> lfoValue = <span class="built_in">sin</span>(lfoPhase);</span><br><span class="line">frequency = baseFrequency * (<span class="number">1.0</span> + <span class="number">0.1</span> * lfoValue); <span class="comment">// Vibrato</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Low-pass filter</strong>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> filteredValue = <span class="number">0.9</span> * filteredValue + <span class="number">0.1</span> * audioValue;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Preset saving</strong>:<br>Use EEPROM to save settings</p>
+</li>
+<li><p><strong>MIDI Bluetooth</strong>:<br>Add Bluetooth module to control external synthesizers</p>
+</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><img src="/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/mpfii2.jpg" class="" title="You future new toy">
+
+<p>The MPFII is much more than a simple electronics project: it’s a truly innovative musical interface that combines the simplicity of a traditional instrument with the power of digital synthesis. With its modest cost and rich features, it represents an excellent introduction to both electronics and sound synthesis.</p>
+<p>I hope I’ve provided you with all the necessary steps to build your own MPFII. Feel free to experiment, modify the code, and customize the design to create an instrument that reflects your personality.</p>
+<p>Happy musical creations with your MPFII!</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Required-Materials"><span class="toc-number">2.</span> <span class="toc-text">Required Materials</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Components"><span class="toc-number">2.1.</span> <span class="toc-text">Main Components</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tools"><span class="toc-number">2.2.</span> <span class="toc-text">Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wiring-Diagram"><span class="toc-number">3.</span> <span class="toc-text">Wiring Diagram</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Circuit-Overview"><span class="toc-number">3.1.</span> <span class="toc-text">Circuit Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LM386-Amplifier-Detailed-Wiring"><span class="toc-number">3.2.</span> <span class="toc-text">LM386 Amplifier Detailed Wiring</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Physical-Assembly"><span class="toc-number">4.</span> <span class="toc-text">Physical Assembly</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-Preparing-the-Resistive-Wire"><span class="toc-number">4.1.</span> <span class="toc-text">Step 1: Preparing the Resistive Wire</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-Button-Mounting"><span class="toc-number">4.2.</span> <span class="toc-text">Step 2: Button Mounting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3-OLED-Display-Installation"><span class="toc-number">4.3.</span> <span class="toc-text">Step 3: OLED Display Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-4-Audio-Wiring"><span class="toc-number">4.4.</span> <span class="toc-text">Step 4: Audio Wiring</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESP32-Programming"><span class="toc-number">5.</span> <span class="toc-text">ESP32 Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arduino-IDE-Configuration"><span class="toc-number">5.1.</span> <span class="toc-text">Arduino IDE Configuration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Complete-Code"><span class="toc-number">5.2.</span> <span class="toc-text">The Complete Code</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Detailed-Features"><span class="toc-number">6.</span> <span class="toc-text">Detailed Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Touch-Interface"><span class="toc-number">6.1.</span> <span class="toc-text">1. Touch Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Waveforms"><span class="toc-number">6.2.</span> <span class="toc-text">2. Waveforms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Musical-Scales"><span class="toc-number">6.3.</span> <span class="toc-text">3. Musical Scales</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Delay-Effect"><span class="toc-number">6.4.</span> <span class="toc-text">4. Delay Effect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Arpeggiator"><span class="toc-number">6.5.</span> <span class="toc-text">5. Arpeggiator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calibration-and-Settings"><span class="toc-number">7.</span> <span class="toc-text">Calibration and Settings</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Resistive-Wire-Calibration"><span class="toc-number">7.1.</span> <span class="toc-text">Resistive Wire Calibration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Volume-Control"><span class="toc-number">7.2.</span> <span class="toc-text">Volume Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Latency-Optimization"><span class="toc-number">7.3.</span> <span class="toc-text">Latency Optimization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enclosure-and-Design"><span class="toc-number">8.</span> <span class="toc-text">Enclosure and Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Option-1-3D-Printed-Enclosure"><span class="toc-number">8.1.</span> <span class="toc-text">Option 1: 3D Printed Enclosure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Option-2-Reuse"><span class="toc-number">8.2.</span> <span class="toc-text">Option 2: Reuse</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Troubleshooting"><span class="toc-number">9.</span> <span class="toc-text">Troubleshooting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Common-Issues"><span class="toc-number">9.1.</span> <span class="toc-text">Common Issues</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Possible-Improvements"><span class="toc-number">9.2.</span> <span class="toc-text">Possible Improvements</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">10.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/&text=MPFII: a Touch-Sensitive Synthesizer"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/&title=MPFII: a Touch-Sensitive Synthesizer"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/&is_video=false&description=MPFII: a Touch-Sensitive Synthesizer"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MPFII: a Touch-Sensitive Synthesizer&body=Check out this article: http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/07/31/MPFII-Construction-dun-synthese-tactile-ESP32/&title=MPFII: a Touch-Sensitive Synthesizer"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

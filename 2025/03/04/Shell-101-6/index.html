@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Chapter 6: Advanced Tools and Practical Tips## Shell Customization Make the shell truly yours by customizing its behavior and appearance. Configuration FilesThe main files that control shell behavior:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell Course 6">
+<meta property="og:url" content="http://tokipona.today/2025/03/04/Shell-101-6/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Chapter 6: Advanced Tools and Practical Tips## Shell Customization Make the shell truly yours by customizing its behavior and appearance. Configuration FilesThe main files that control shell behavior:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-04T17:15:41.000Z">
+<meta property="article:modified_time" content="2025-03-04T07:09:54.506Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Shell Course 6</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Shell Course 6
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Chapter-6-Advanced-Tools-and-Practical-Tips"><a href="#Chapter-6-Advanced-Tools-and-Practical-Tips" class="headerlink" title="Chapter 6: Advanced Tools and Practical Tips"></a>Chapter 6: Advanced Tools and Practical Tips</h1><p><blue>## Shell Customization</blue></p>
+<p>Make the shell truly yours by customizing its behavior and appearance.</p>
+<h3 id="Configuration-Files"><a href="#Configuration-Files" class="headerlink" title="Configuration Files"></a>Configuration Files</h3><p>The main files that control shell behavior:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># For Bash</span></span><br><span class="line">~/.bashrc        <span class="comment"># Settings for interactive shells</span></span><br><span class="line">~/.bash_profile  <span class="comment"># Settings for login shells</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For Zsh (macOS default)</span></span><br><span class="line">~/.zshrc         <span class="comment"># Settings for interactive shells</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Customizing-Your-Prompt"><a href="#Customizing-Your-Prompt" class="headerlink" title="Customizing Your Prompt"></a>Customizing Your Prompt</h3><p>Change your prompt to show useful information:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Basic prompt customization in ~/.bashrc</span></span><br><span class="line">PS1=<span class="string">&quot;\u@\h:\w\$ &quot;</span>  <span class="comment"># username@hostname:current_directory$</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Colorful prompt</span></span><br><span class="line">PS1=<span class="string">&quot;\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[00m\]\$ &quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Creating-Aliases"><a href="#Creating-Aliases" class="headerlink" title="Creating Aliases"></a>Creating Aliases</h3><p>Create shortcuts for common commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add to ~/.bashrc</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -la&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> ..=<span class="string">&#x27;cd ..&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> update=<span class="string">&#x27;sudo apt update &amp;&amp; sudo apt upgrade&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Useful-Functions"><a href="#Useful-Functions" class="headerlink" title="Useful Functions"></a>Useful Functions</h3><p>For more complex operations, use functions:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create and enter directory in one step</span></span><br><span class="line"><span class="function"><span class="title">mkcd</span></span>() &#123;</span><br><span class="line">    mkdir -p <span class="string">&quot;<span class="variable">$1</span>&quot;</span> &amp;&amp; <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract various archive formats</span></span><br><span class="line"><span class="function"><span class="title">extract</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">            *.tar.bz2) tar xjf <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ;;</span><br><span class="line">            *.tar.gz)  tar xzf <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ;;</span><br><span class="line">            *.zip)     unzip <span class="string">&quot;<span class="variable">$1</span>&quot;</span>   ;;</span><br><span class="line">            *)         <span class="built_in">echo</span> <span class="string">&quot;Unknown format&quot;</span> ;;</span><br><span class="line">        <span class="keyword">esac</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;&#x27;<span class="variable">$1</span>&#x27; is not a valid file&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><red>Remember to run <code>source ~/.bashrc</code> after making changes to apply them to your current session.</red></p>
+<hr>
+<p><blue>## Text Processing Tools</blue></p>
+<p>Master these powerful text manipulation utilities to process data efficiently.</p>
+<h3 id="Advanced-grep-Techniques"><a href="#Advanced-grep-Techniques" class="headerlink" title="Advanced grep Techniques"></a>Advanced <code>grep</code> Techniques</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Search recursively with context</span></span><br><span class="line">grep -r -A2 -B1 <span class="string">&quot;error&quot;</span> /var/<span class="built_in">log</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment"># Count matches</span></span><br><span class="line">grep -c <span class="string">&quot;authentication failure&quot;</span> /var/<span class="built_in">log</span>/auth.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show only matching filenames</span></span><br><span class="line">grep -l <span class="string">&quot;TODO&quot;</span> *.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Text-Processing-with-sed"><a href="#Text-Processing-with-sed" class="headerlink" title="Text Processing with sed"></a>Text Processing with <code>sed</code></h3><p>The stream editor for transforming text:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Replace text</span></span><br><span class="line">sed <span class="string">&#x27;s/old/new/&#x27;</span> file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Global replacement (all occurrences in each line)</span></span><br><span class="line">sed <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete lines matching pattern</span></span><br><span class="line">sed <span class="string">&#x27;/pattern/d&#x27;</span> file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># In-place editing with backup</span></span><br><span class="line">sed -i.bak <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Data-Processing-with-awk"><a href="#Data-Processing-with-awk" class="headerlink" title="Data Processing with awk"></a>Data Processing with <code>awk</code></h3><p>Perfect for column-based data:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print specific columns</span></span><br><span class="line">awk <span class="string">&#x27;&#123;print $1, $3&#125;&#x27;</span> file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Process CSV files</span></span><br><span class="line">awk -F, <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> data.csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sum values in a column</span></span><br><span class="line">awk <span class="string">&#x27;&#123;sum += $3&#125; END &#123;print sum&#125;&#x27;</span> data.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculate average</span></span><br><span class="line">awk <span class="string">&#x27;&#123;sum += $1; count++&#125; END &#123;print sum/count&#125;&#x27;</span> data.txt</span><br></pre></td></tr></table></figure>
+
+<p><orange>Combining these tools creates powerful data processing pipelines, like <code>grep &quot;ERROR&quot; logs.txt | awk &#39;&#123;print $1, $2&#125;&#39; | sort | uniq</code> to find unique timestamps of errors.</orange></p>
+<hr>
+<p><blue>## Advanced File Operations</blue></p>
+<p>Go beyond basic file commands with these advanced techniques.</p>
+<h3 id="Find-and-Act-on-Files"><a href="#Find-and-Act-on-Files" class="headerlink" title="Find and Act on Files"></a>Find and Act on Files</h3><p>The versatile <code>find</code> command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Find and delete old files</span></span><br><span class="line">find /tmp -<span class="built_in">type</span> f -mtime +30 -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find and change permissions</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.sh&quot;</span> -<span class="built_in">exec</span> chmod +x &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find large files</span></span><br><span class="line">find . -<span class="built_in">type</span> f -size +10M</span><br></pre></td></tr></table></figure>
+
+<h3 id="Efficient-Remote-File-Operations"><a href="#Efficient-Remote-File-Operations" class="headerlink" title="Efficient Remote File Operations"></a>Efficient Remote File Operations</h3><p>Copy files between systems:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copy to remote system</span></span><br><span class="line">scp file.txt user@remote:/path/</span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy from remote to local</span></span><br><span class="line">scp user@remote:/path/file.txt .</span><br><span class="line"></span><br><span class="line"><span class="comment"># Synchronize directories with rsync</span></span><br><span class="line">rsync -avz --progress local_dir/ user@remote:/path/</span><br></pre></td></tr></table></figure>
+
+<p><red>The trailing slash in rsync source paths matters! <code>source/</code> means “contents of source” while <code>source</code> (no slash) means “the source directory itself.”</red></p>
+<hr>
+<p><blue>## Package Management</blue></p>
+<p>Install and manage software efficiently.</p>
+<h3 id="Advanced-apt-Debian-Ubuntu"><a href="#Advanced-apt-Debian-Ubuntu" class="headerlink" title="Advanced apt (Debian/Ubuntu)"></a>Advanced <code>apt</code> (Debian/Ubuntu)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Search for packages</span></span><br><span class="line">apt search keyword</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show package details</span></span><br><span class="line">apt show package_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># List installed packages</span></span><br><span class="line">apt list --installed</span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove unused dependencies</span></span><br><span class="line">apt autoremove</span><br></pre></td></tr></table></figure>
+
+<h3 id="Advanced-brew-macOS"><a href="#Advanced-brew-macOS" class="headerlink" title="Advanced brew (macOS)"></a>Advanced <code>brew</code> (macOS)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Search for formulae</span></span><br><span class="line">brew search keyword</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show formula information</span></span><br><span class="line">brew info formula</span><br><span class="line"></span><br><span class="line"><span class="comment"># List outdated formulae</span></span><br><span class="line">brew outdated</span><br><span class="line"></span><br><span class="line"><span class="comment"># Services management</span></span><br><span class="line">brew services start mysql</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Network Tools</blue></p>
+<p>Essential tools for network operations and diagnostics.</p>
+<h3 id="Downloading-and-API-Requests"><a href="#Downloading-and-API-Requests" class="headerlink" title="Downloading and API Requests"></a>Downloading and API Requests</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Download with curl</span></span><br><span class="line">curl -O https://example.com/file.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># Resume interrupted download</span></span><br><span class="line">curl -C - -O https://example.com/large-file.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make API request and format JSON</span></span><br><span class="line">curl https://api.example.com/data | jq</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSH-Advanced-Techniques"><a href="#SSH-Advanced-Techniques" class="headerlink" title="SSH Advanced Techniques"></a>SSH Advanced Techniques</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run a command on remote server</span></span><br><span class="line">ssh user@server <span class="string">&quot;df -h&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Local port forwarding (access remote service locally)</span></span><br><span class="line">ssh -L 8080:localhost:80 user@server</span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure SSH with ~/.ssh/config</span></span><br><span class="line">Host myserver</span><br><span class="line">    HostName server.example.com</span><br><span class="line">    User username</span><br><span class="line">    Port 2222</span><br></pre></td></tr></table></figure>
+
+<h3 id="Network-Diagnostics"><a href="#Network-Diagnostics" class="headerlink" title="Network Diagnostics"></a>Network Diagnostics</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Trace network route</span></span><br><span class="line">traceroute example.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># DNS lookup</span></span><br><span class="line">dig example.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check open ports</span></span><br><span class="line">netstat -tuln</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Shell Productivity Boosters</blue></p>
+<p>These shortcuts and techniques will make you much more efficient.</p>
+<h3 id="Command-History-Navigation"><a href="#Command-History-Navigation" class="headerlink" title="Command History Navigation"></a>Command History Navigation</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span>           <span class="comment"># Show command history</span></span><br><span class="line">!42               <span class="comment"># Run command #42 from history</span></span><br><span class="line">!!                <span class="comment"># Repeat last command</span></span><br><span class="line">!string           <span class="comment"># Run most recent command starting with &quot;string&quot;</span></span><br><span class="line">^old^new          <span class="comment"># Replace &quot;old&quot; with &quot;new&quot; in previous command</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Essential-Keyboard-Shortcuts"><a href="#Essential-Keyboard-Shortcuts" class="headerlink" title="Essential Keyboard Shortcuts"></a>Essential Keyboard Shortcuts</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+a            # Move to beginning of line</span><br><span class="line">Ctrl+e            # Move to end of line</span><br><span class="line">Ctrl+u            # Delete from cursor to start of line</span><br><span class="line">Ctrl+k            # Delete from cursor to end of line</span><br><span class="line">Ctrl+r            # Reverse search history</span><br><span class="line">Alt+.             # Insert last argument of previous command</span><br></pre></td></tr></table></figure>
+
+<h3 id="Brace-Expansion"><a href="#Brace-Expansion" class="headerlink" title="Brace Expansion"></a>Brace Expansion</h3><p>Generate strings with patterns:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> file&#123;1,2,3&#125;.txt     <span class="comment"># file1.txt file2.txt file3.txt</span></span><br><span class="line">mkdir -p project/&#123;src,doc,<span class="built_in">test</span>&#125;</span><br><span class="line">cp file.txt&#123;,.bak&#125;       <span class="comment"># Copies file.txt to file.txt.bak</span></span><br><span class="line"><span class="built_in">echo</span> &#123;1..5&#125;              <span class="comment"># 1 2 3 4 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Process-Substitution"><a href="#Process-Substitution" class="headerlink" title="Process Substitution"></a>Process Substitution</h3><p>Treat command output as a file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff &lt;(ls dir1) &lt;(ls dir2)</span><br><span class="line">cat &lt;(grep <span class="string">&quot;error&quot;</span> log1) &lt;(grep <span class="string">&quot;error&quot;</span> log2)</span><br></pre></td></tr></table></figure>
+
+<p><orange>Learning these shortcuts might seem like a small investment, but the time savings add up dramatically over your career.</orange></p>
+<hr>
+<p><blue>## Terminal Multiplexers</blue></p>
+<p>Manage multiple terminal sessions within a single window.</p>
+<h3 id="tmux-Basics"><a href="#tmux-Basics" class="headerlink" title="tmux Basics"></a>tmux Basics</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tmux                  <span class="comment"># Start new session</span></span><br><span class="line">tmux ls               <span class="comment"># List sessions</span></span><br><span class="line">tmux attach -t 0      <span class="comment"># Attach to session 0</span></span><br></pre></td></tr></table></figure>
+
+<p>Inside tmux, use the prefix key (<kbd>Ctrl</kbd>+<kbd>b</kbd>) followed by:</p>
+<ul>
+<li><kbd>c</kbd>: Create new window</li>
+<li><kbd>%</kbd>: Split vertically</li>
+<li><kbd>"</kbd>: Split horizontally</li>
+<li><kbd>arrow keys</kbd>: Move between panes</li>
+<li><kbd>d</kbd>: Detach from session</li>
+</ul>
+<p><red>tmux keeps your sessions running even if your connection drops, making it essential for remote work.</red></p>
+<hr>
+<p><blue>## Shell Security Best Practices</blue></p>
+<p>Keep your scripts and systems secure with these practices.</p>
+<h3 id="Secure-Temporary-Files"><a href="#Secure-Temporary-Files" class="headerlink" title="Secure Temporary Files"></a>Secure Temporary Files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Bad: Predictable filename</span></span><br><span class="line">TEMP_FILE=<span class="string">&quot;/tmp/myapp_data.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Better: Random filename with cleanup</span></span><br><span class="line">TEMP_FILE=$(mktemp)</span><br><span class="line"><span class="built_in">trap</span> <span class="string">&#x27;rm -f &quot;$TEMP_FILE&quot;&#x27;</span> EXIT</span><br></pre></td></tr></table></figure>
+
+<h3 id="Robust-Error-Handling"><a href="#Robust-Error-Handling" class="headerlink" title="Robust Error Handling"></a>Robust Error Handling</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -euo pipefail  <span class="comment"># Exit on error, undefined var, pipeline failure</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">error_handler</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Error on line <span class="variable">$1</span>&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">trap</span> <span class="string">&#x27;error_handler $LINENO&#x27;</span> ERR</span><br></pre></td></tr></table></figure>
+
+<h3 id="Validating-Input"><a href="#Validating-Input" class="headerlink" title="Validating Input"></a>Validating Input</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Check if value is numeric</span></span><br><span class="line"><span class="keyword">if</span> [[ ! <span class="string">&quot;<span class="variable">$input</span>&quot;</span> =~ ^[0-9]+$ ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Error: Input must be numeric&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Quick Practical Examples</blue></p>
+<p>Small, useful scripts you can adapt to your needs.</p>
+<h3 id="System-Status-Checker"><a href="#System-Status-Checker" class="headerlink" title="System Status Checker"></a>System Status Checker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># quick_status.sh - Basic system status check</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;=== System Status at <span class="subst">$(date)</span> ===&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Load average: <span class="subst">$(uptime | awk -F&#x27;[a-z]:&#x27; &#x27;&#123; print $2&#125;&#x27;)</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Memory usage:&quot;</span></span><br><span class="line">    free -h | grep <span class="string">&quot;Mem&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Disk usage:&quot;</span></span><br><span class="line">    df -h / | tail -n 1</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Most CPU-intensive processes:&quot;</span></span><br><span class="line">    ps aux --sort=-%cpu | head -n 6</span><br><span class="line">&#125; | tee ~/status_report.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Log-Monitor"><a href="#Log-Monitor" class="headerlink" title="Log Monitor"></a>Log Monitor</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># quick_log_monitor.sh - Check logs for errors</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="string">&quot;/var/log/syslog&quot;</span></span><br><span class="line">KEYWORDS=(<span class="string">&quot;error&quot;</span> <span class="string">&quot;failed&quot;</span> <span class="string">&quot;critical&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Checking <span class="variable">$LOG_FILE</span> for issues...&quot;</span></span><br><span class="line"><span class="keyword">for</span> keyword <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;KEYWORDS[@]&#125;</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">    count=$(grep -i <span class="string">&quot;<span class="variable">$keyword</span>&quot;</span> <span class="string">&quot;<span class="variable">$LOG_FILE</span>&quot;</span> | wc -l)</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$count</span>&quot;</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Found <span class="variable">$count</span> lines with &#x27;<span class="variable">$keyword</span>&#x27;&quot;</span></span><br><span class="line">        grep -i <span class="string">&quot;<span class="variable">$keyword</span>&quot;</span> <span class="string">&quot;<span class="variable">$LOG_FILE</span>&quot;</span> | tail -n 3</span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Backup-Script"><a href="#Backup-Script" class="headerlink" title="Backup Script"></a>Backup Script</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># quick_backup.sh - Simple backup tool</span></span><br><span class="line"></span><br><span class="line">SOURCE=<span class="string">&quot;<span class="variable">$HOME</span>/Documents&quot;</span></span><br><span class="line">DEST=<span class="string">&quot;<span class="variable">$HOME</span>/Backups&quot;</span></span><br><span class="line">ARCHIVE=<span class="string">&quot;backup_<span class="subst">$(date +%Y%m%d)</span>.tar.gz&quot;</span></span><br><span class="line"></span><br><span class="line">mkdir -p <span class="string">&quot;<span class="variable">$DEST</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Backing up <span class="variable">$SOURCE</span> to <span class="variable">$DEST</span>/<span class="variable">$ARCHIVE</span>...&quot;</span></span><br><span class="line">tar -czf <span class="string">&quot;<span class="variable">$DEST</span>/<span class="variable">$ARCHIVE</span>&quot;</span> -C <span class="string">&quot;<span class="subst">$(dirname <span class="string">&quot;<span class="variable">$SOURCE</span>&quot;</span>)</span>&quot;</span> <span class="string">&quot;<span class="subst">$(basename <span class="string">&quot;<span class="variable">$SOURCE</span>&quot;</span>)</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Done! Archive size: <span class="subst">$(du -h <span class="string">&quot;<span class="variable">$DEST</span>/<span class="variable">$ARCHIVE</span>&quot;</span> | cut -f1)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>These simple scripts demonstrate how powerful the shell can be for automating routine tasks. Adapt them to your specific needs and build your toolkit over time.</orange></p>
+<hr>
+<p><blue>## Conclusion</blue></p>
+<p>Throughout this course, we’ve journeyed from basic shell commands to advanced techniques and tools. You now have the knowledge to navigate the filesystem, manipulate files, process text, automate tasks with scripts, and enhance your productivity with various shell features.</p>
+<p>The shell is more than just a command prompt—it’s a powerful environment for solving problems and extending your capabilities as a developer or system administrator.</p>
+<p><red>Final tips for shell mastery:</red></p>
+<ol>
+<li><strong>Learn incrementally</strong>: Focus on understanding concepts rather than memorizing commands</li>
+<li><strong>Practice regularly</strong>: Use the shell for your daily tasks</li>
+<li><strong>Read others’ scripts</strong>: Learn from experienced users</li>
+<li><strong>Customize thoughtfully</strong>: Build your configuration files over time</li>
+<li><strong>Embrace the philosophy</strong>: Simple tools combined in powerful ways</li>
+</ol>
+<p><orange>The shell may seem arcane at times, with its terse commands and cryptic options, but it’s a tool that rewards investment. The time you spend learning the shell will be repaid many times over in increased productivity throughout your computing career.</orange></p>
+<p>Happy shell scripting!</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-6-Advanced-Tools-and-Practical-Tips"><span class="toc-number">1.</span> <span class="toc-text">Chapter 6: Advanced Tools and Practical Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Configuration-Files"><span class="toc-number">1.0.1.</span> <span class="toc-text">Configuration Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Customizing-Your-Prompt"><span class="toc-number">1.0.2.</span> <span class="toc-text">Customizing Your Prompt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Creating-Aliases"><span class="toc-number">1.0.3.</span> <span class="toc-text">Creating Aliases</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Useful-Functions"><span class="toc-number">1.0.4.</span> <span class="toc-text">Useful Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-grep-Techniques"><span class="toc-number">1.0.5.</span> <span class="toc-text">Advanced grep Techniques</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text-Processing-with-sed"><span class="toc-number">1.0.6.</span> <span class="toc-text">Text Processing with sed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Processing-with-awk"><span class="toc-number">1.0.7.</span> <span class="toc-text">Data Processing with awk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Find-and-Act-on-Files"><span class="toc-number">1.0.8.</span> <span class="toc-text">Find and Act on Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Efficient-Remote-File-Operations"><span class="toc-number">1.0.9.</span> <span class="toc-text">Efficient Remote File Operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-apt-Debian-Ubuntu"><span class="toc-number">1.0.10.</span> <span class="toc-text">Advanced apt (Debian&#x2F;Ubuntu)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-brew-macOS"><span class="toc-number">1.0.11.</span> <span class="toc-text">Advanced brew (macOS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Downloading-and-API-Requests"><span class="toc-number">1.0.12.</span> <span class="toc-text">Downloading and API Requests</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-Advanced-Techniques"><span class="toc-number">1.0.13.</span> <span class="toc-text">SSH Advanced Techniques</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-Diagnostics"><span class="toc-number">1.0.14.</span> <span class="toc-text">Network Diagnostics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Command-History-Navigation"><span class="toc-number">1.0.15.</span> <span class="toc-text">Command History Navigation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Essential-Keyboard-Shortcuts"><span class="toc-number">1.0.16.</span> <span class="toc-text">Essential Keyboard Shortcuts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brace-Expansion"><span class="toc-number">1.0.17.</span> <span class="toc-text">Brace Expansion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Process-Substitution"><span class="toc-number">1.0.18.</span> <span class="toc-text">Process Substitution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux-Basics"><span class="toc-number">1.0.19.</span> <span class="toc-text">tmux Basics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-Temporary-Files"><span class="toc-number">1.0.20.</span> <span class="toc-text">Secure Temporary Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Robust-Error-Handling"><span class="toc-number">1.0.21.</span> <span class="toc-text">Robust Error Handling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Validating-Input"><span class="toc-number">1.0.22.</span> <span class="toc-text">Validating Input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Status-Checker"><span class="toc-number">1.0.23.</span> <span class="toc-text">System Status Checker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-Monitor"><span class="toc-number">1.0.24.</span> <span class="toc-text">Log Monitor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Backup-Script"><span class="toc-number">1.0.25.</span> <span class="toc-text">Backup Script</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/04/Shell-101-6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/04/Shell-101-6/&text=Shell Course 6"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/04/Shell-101-6/&title=Shell Course 6"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/04/Shell-101-6/&is_video=false&description=Shell Course 6"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Shell Course 6&body=Check out this article: http://tokipona.today/2025/03/04/Shell-101-6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/04/Shell-101-6/&title=Shell Course 6"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

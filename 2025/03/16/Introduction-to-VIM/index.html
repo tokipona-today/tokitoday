@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="I first met Vim (or more precisely Vi) as a teenager, on my Amiga. At the time, I only mastered a few basic commands, but there was something indefinably satisfying about coding in this austere termin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Discovering Vim - A Return to Basics">
+<meta property="og:url" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="I first met Vim (or more precisely Vi) as a teenager, on my Amiga. At the time, I only mastered a few basic commands, but there was something indefinably satisfying about coding in this austere termin">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/vim.jpg">
+<meta property="og:image" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/brain.jpg">
+<meta property="og:image" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/amiga.jpg">
+<meta property="og:image" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/headache.jpg">
+<meta property="article:published_time" content="2025-03-16T09:30:00.000Z">
+<meta property="article:modified_time" content="2025-03-16T08:32:03.203Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tokipona.today/2025/03/16/Introduction-to-VIM/vim.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Discovering Vim - A Return to Basics</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Discovering Vim - A Return to Basics
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>I first met Vim (or more precisely Vi) as a teenager, on my Amiga. At the time, I only mastered a few basic commands, but there was something indefinably satisfying about coding in this austere terminal that fascinated me for obscure aesthetic reasons.</p>
+<p>Then life took its course. Decades passed, punctuated by Netbeans, PyCharm, and increasingly sophisticated IDEs. I rediscovered Vim by chance, like finding an old friend. I greeted it with nostalgia, we had a beer and chatted all night as if we’d never been apart.</p>
+<p>Today, I’m gradually adopting it, still in “work in progress” mode, discovering a new facet of its power each day. This tutorial is as much a guide for you as it is for me — a companion in this journey of rediscovering a tool that has stood the test of time for good reason.</p>
+<p>Welcome to this return to basics.</p>
+<img src="/2025/03/16/Introduction-to-VIM/vim.jpg" class="" title="vim">
+
+<blockquote>
+<p>“Vim is like a musical instrument. At first, you produce horrible sounds, but once mastered, it’s pure symphony… even if your colleague using VS Code will never see the difference.”</p>
+</blockquote>
+<h2 id="PART-1-UNDERSTANDING-THE-BEAST"><a href="#PART-1-UNDERSTANDING-THE-BEAST" class="headerlink" title="PART 1: UNDERSTANDING THE BEAST"></a>PART 1: UNDERSTANDING THE BEAST</h2><h3 id="What-is-Vim-and-why-inflict-this-on-yourself"><a href="#What-is-Vim-and-why-inflict-this-on-yourself" class="headerlink" title="What is Vim, and why inflict this on yourself?"></a>What is Vim, and why inflict this on yourself?</h3><p>Vim (Vi IMproved) is a text editor created by Bram Moolenaar in 1991 as an improvement on Vi (1976). If you’re looking for arguments to defend your choice, here are a few reasons:</p>
+<ul>
+<li>Vim works on <strong>all</strong> Unix/Linux systems (even on that prehistoric server your company stubbornly refuses to update)</li>
+<li>Everything is done with the keyboard, meaning you can edit text at the speed of thought (after only… a few years of practice 😉)</li>
+<li>It consumes so few resources it would even work on a connected toaster</li>
+<li>The satisfaction of intimidating your colleagues when you manipulate text at superhuman speed</li>
+</ul>
+<blockquote>
+<p>Vim was created on an Amiga, a computer most current developers have probably never seen outside a museum. Its creator, Bram Moolenaar, continued to maintain Vim until his death in 2023, often alongside his humanitarian work for the ICCF Holland organization. Part of the donations to Vim went directly to child aid projects in Uganda.</p>
+</blockquote>
+<h3 id="Modal-philosophy-why-Vim-seems-so-strange"><a href="#Modal-philosophy-why-Vim-seems-so-strange" class="headerlink" title="Modal philosophy: why Vim seems so strange"></a>Modal philosophy: why Vim seems so strange</h3><p>Unlike “normal” editors where you type and text appears, Vim uses different <strong>modes</strong>. It’s as if your keyboard had multiple personalities, each serving a different purpose.</p>
+<p><strong>💡 FUNDAMENTAL CONCEPT</strong>: In Vim, you spend your time alternating between inserting text and manipulating that text. This separation is at the heart of Vim’s efficiency.</p>
+<p>Here are the main modes:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Function</th>
+<th>How to enter</th>
+<th>How to exit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Normal</td>
+<td>Navigate and manipulate text</td>
+<td><code>Esc</code> (from any mode)</td>
+<td>N/A (default mode)</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>Insert text (like a normal editor)</td>
+<td><code>i</code>, <code>a</code>, <code>o</code>, etc. (from Normal mode)</td>
+<td><code>Esc</code></td>
+</tr>
+<tr>
+<td>Visual</td>
+<td>Select text</td>
+<td><code>v</code>, <code>V</code>, <code>Ctrl+v</code> (from Normal mode)</td>
+<td><code>Esc</code></td>
+</tr>
+<tr>
+<td>Command</td>
+<td>Execute complex commands</td>
+<td><code>:</code> (from Normal mode)</td>
+<td><code>Enter</code> or <code>Esc</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Common trap:</strong> Beginners get stuck in Normal mode, type text, and are surprised when Vim executes random commands instead of writing their words. Remember: to write, you must first switch to Insert mode!</p>
+</blockquote>
+<h2 id="PART-2-SURVIVING-IN-VIM"><a href="#PART-2-SURVIVING-IN-VIM" class="headerlink" title="PART 2: SURVIVING IN VIM"></a>PART 2: SURVIVING IN VIM</h2><h3 id="🔍-EXERCISE-1-ENTERING-AND-EXITING-VIM"><a href="#🔍-EXERCISE-1-ENTERING-AND-EXITING-VIM" class="headerlink" title="🔍 EXERCISE 1: ENTERING AND EXITING VIM"></a>🔍 EXERCISE 1: ENTERING AND EXITING VIM</h3><p>“How to quit Vim?” has generated more views on Stack Overflow than most serious programming questions. Let’s start there to avoid having to restart your computer.</p>
+<ol>
+<li>Open a terminal and type: <code>vim</code></li>
+<li>Admire the minimalist welcome screen (or empty, depending on your installation)</li>
+<li>To quit without doing anything:<ul>
+<li>Press <code>Esc</code> (to ensure you’re in Normal mode)</li>
+<li>Type <code>:q</code> then <code>Enter</code></li>
+</ul>
+</li>
+<li>If you’ve made changes:<ul>
+<li><code>:q!</code> to quit without saving (the <code>!</code> is the computing equivalent of “I know what I’m doing, don’t ask me questions!”)</li>
+<li><code>:wq</code> to save and quit (w for write, q for quit)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Congratulations!</strong> You’ve already surpassed 50% of people who tried Vim for the first time.</p>
+<img src="/2025/03/16/Introduction-to-VIM/brain.jpg" class="" title="vim">
+
+<blockquote>
+<p><strong>The Vim community in action:</strong> In 2017, Stack Overflow revealed that over a million people had consulted the question “How to quit Vim”. The Vim community, rather than being embarrassed, made it a badge of honor. After all, it’s easier to enter Vim than to exit it… like a cult.</p>
+</blockquote>
+<h3 id="🔍-EXERCISE-2-BASIC-MODES-AND-MOVEMENTS"><a href="#🔍-EXERCISE-2-BASIC-MODES-AND-MOVEMENTS" class="headerlink" title="🔍 EXERCISE 2: BASIC MODES AND MOVEMENTS"></a>🔍 EXERCISE 2: BASIC MODES AND MOVEMENTS</h3><p>Now that you know how to exit Vim, let’s create a file and learn how to navigate within it:</p>
+<ol>
+<li>Type: <code>vim first_file.txt</code></li>
+<li>Enter Insert mode by pressing <code>i</code></li>
+<li>Type the following text:</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">First line of text</span><br><span class="line">Second line with various words</span><br><span class="line">A third longer line to practice our movements in Vim</span><br><span class="line">And a final line for the road</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Press <code>Esc</code> to return to Normal mode</li>
+<li>Try these movements and observe the cursor:<ul>
+<li><code>h</code> (left), <code>j</code> (down), <code>k</code> (up), <code>l</code> (right)</li>
+<li><code>w</code> to move forward one word</li>
+<li><code>b</code> to move backward one word</li>
+<li><code>0</code> to go to the beginning of the line</li>
+<li><code>$</code> to go to the end of the line</li>
+</ul>
+</li>
+</ol>
+<p><strong>Why hjkl?</strong> You might wonder why Vim doesn’t use directional arrows like any civilized editor. The answer takes us back to the 70s: the ADM-3A terminal on which Vi (Vim’s ancestor) was developed had these letters printed on its keys with arrows. So yes, you’re using a navigation system designed for a terminal older than most of its users.</p>
+<blockquote>
+<p><strong>Insider tip:</strong> Even though arrows work in modern Vim, experienced users prefer hjkl because it avoids moving hands from the keyboard’s resting position.</p>
+</blockquote>
+<h3 id="🔍-EXERCISE-3-FIRST-EDITS"><a href="#🔍-EXERCISE-3-FIRST-EDITS" class="headerlink" title="🔍 EXERCISE 3: FIRST EDITS"></a>🔍 EXERCISE 3: FIRST EDITS</h3><p>Still in your file, let’s try some simple editing operations:</p>
+<ol>
+<li>Place your cursor on the first line (use <code>k</code> until you reach the top)</li>
+<li>Press <code>dd</code> to delete the entire line</li>
+<li>Type <code>u</code> to undo (yes, Vim has the undo function, it’s not as primitive as it seems)</li>
+<li>Position yourself on a word and press <code>cw</code> (change word)</li>
+<li>Type a new word and press <code>Esc</code></li>
+<li>Place yourself at the beginning of a line and type <code>A</code> to go to the end of the line in Insert mode</li>
+<li>Add text and press <code>Esc</code></li>
+<li>Save with <code>:w</code> then <code>Enter</code></li>
+</ol>
+<h2 id="PART-3-THE-VIM-“LANGUAGE”-OPERATORS-AND-MOVEMENTS"><a href="#PART-3-THE-VIM-“LANGUAGE”-OPERATORS-AND-MOVEMENTS" class="headerlink" title="PART 3: THE VIM “LANGUAGE” - OPERATORS AND MOVEMENTS"></a>PART 3: THE VIM “LANGUAGE” - OPERATORS AND MOVEMENTS</h2><p>Here’s where Vim begins to reveal its true power. Vim works like a language composed of three parts:</p>
+<ul>
+<li><strong>Operators</strong>: actions you want to perform (delete, change, copy…)</li>
+<li><strong>Movements</strong>: where you want to perform the action (word, line, paragraph…)</li>
+<li><strong>Modifiers</strong>: how many times or how to apply the action</li>
+</ul>
+<h3 id="Simplified-Vim-grammar"><a href="#Simplified-Vim-grammar" class="headerlink" title="Simplified Vim grammar:"></a>Simplified Vim grammar:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[count][operator][movement or text object]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Main-operators"><a href="#Main-operators" class="headerlink" title="Main operators:"></a>Main operators:</h3><ul>
+<li><code>d</code>: delete (and place in clipboard)</li>
+<li><code>c</code>: change (delete and switch to Insert mode)</li>
+<li><code>y</code>: yank (copy - yes, “yank” is the official term in Vim)</li>
+<li><code>&gt;</code>: indent</li>
+<li><code>&lt;</code>: unindent</li>
+<li><code>g~</code>: toggle case</li>
+</ul>
+<h3 id="🔍-EXERCISE-4-PRACTICING-THIS-GRAMMAR"><a href="#🔍-EXERCISE-4-PRACTICING-THIS-GRAMMAR" class="headerlink" title="🔍 EXERCISE 4: PRACTICING THIS GRAMMAR"></a>🔍 EXERCISE 4: PRACTICING THIS GRAMMAR</h3><p>Create a new file with <code>vim grammar.txt</code> and insert several paragraphs of text (enter Insert mode with <code>i</code>, paste text if you wish, then return to Normal mode with <code>Esc</code>).</p>
+<p>Try these combinations and observe the results:</p>
+<ol>
+<li><code>dw</code>: delete a word</li>
+<li><code>d3w</code>: delete three words</li>
+<li><code>d$</code>: delete to the end of the line</li>
+<li><code>d0</code>: delete to the beginning of the line</li>
+<li><code>dd</code>: delete the entire line</li>
+<li><code>2dd</code>: delete two lines</li>
+<li><code>yy</code>: copy the entire line</li>
+<li><code>p</code>: paste after the cursor</li>
+<li><code>P</code>: paste before the cursor</li>
+</ol>
+<blockquote>
+<p><strong>Example in context:</strong> Imagine you have this text and your cursor is positioned on the “L” of “Lorem”:</p>
+<p>“Lorem ipsum dolor sit amet.”</p>
+<ul>
+<li><code>d3w</code> will delete “Lorem ipsum dolor”</li>
+<li><code>c$</code> will delete everything to the end and place you in Insert mode</li>
+<li><code>y$</code> will copy everything from the cursor position to the end of the line</li>
+</ul>
+</blockquote>
+<h3 id="Text-objects-another-dimension"><a href="#Text-objects-another-dimension" class="headerlink" title="Text objects: another dimension"></a>Text objects: another dimension</h3><p>Vim isn’t limited to simple movements. It understands “text objects” such as words, sentences, paragraphs, and even text between parentheses or quotation marks.</p>
+<p>Syntax: <code>[operator]i[object]</code> or <code>[operator]a[object]</code></p>
+<ul>
+<li><code>i</code> means “inner”</li>
+<li><code>a</code> means “around” (including the delimiters)</li>
+</ul>
+<h3 id="🔍-EXERCISE-5-TEXT-OBJECTS"><a href="#🔍-EXERCISE-5-TEXT-OBJECTS" class="headerlink" title="🔍 EXERCISE 5: TEXT OBJECTS"></a>🔍 EXERCISE 5: TEXT OBJECTS</h3><p>Create a file containing code or text with different structures:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function exampleFunction(param1, param2) &#123;</span><br><span class="line">    // A comment here</span><br><span class="line">    return &quot;A string with quotes&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Try these commands:</p>
+<ol>
+<li>Place your cursor inside the parentheses and type <code>di(</code> (delete inside parentheses)</li>
+<li>Place your cursor inside the quotes and type <code>ci&quot;</code> (change inside quotes)</li>
+<li>Place your cursor in the function and type <code>da&#123;</code> (delete around curly braces)</li>
+</ol>
+<blockquote>
+<p><strong>Vim philosophy:</strong> The Vim community often talks about “thinking in Vim”. It’s that magical moment when you stop thinking “I want to delete this word” and start thinking “dw”. Advanced users report that their fingers execute commands before their brain consciously formulates the intention. It’s like learning a foreign language - you know you’ve mastered it when you start dreaming in that language.</p>
+</blockquote>
+<h2 id="PART-4-ADVANCED-TECHNIQUES"><a href="#PART-4-ADVANCED-TECHNIQUES" class="headerlink" title="PART 4: ADVANCED TECHNIQUES"></a>PART 4: ADVANCED TECHNIQUES</h2><h3 id="🔍-EXERCISE-6-SEARCH-AND-SUBSTITUTE"><a href="#🔍-EXERCISE-6-SEARCH-AND-SUBSTITUTE" class="headerlink" title="🔍 EXERCISE 6: SEARCH AND SUBSTITUTE"></a>🔍 EXERCISE 6: SEARCH AND SUBSTITUTE</h3><ol>
+<li>In a file with lots of text, press <code>/</code> then type the pattern to search for</li>
+<li>Press <code>Enter</code> to start the search</li>
+<li>Use <code>n</code> to go to the next occurrence, <code>N</code> for the previous occurrence</li>
+<li>To replace text throughout the file: <code>:%s/old/new/g</code><ul>
+<li><code>%</code> means “the whole file”</li>
+<li><code>s</code> for substitute</li>
+<li><code>g</code> for global (all occurrences on a line)</li>
+</ul>
+</li>
+</ol>
+<p>Try this more complex command: <code>:%s/\&lt;word\&gt;/new_word/gc</code></p>
+<ul>
+<li><code>\&lt;</code> and <code>\&gt;</code> mark word boundaries</li>
+<li><code>c</code> asks for confirmation before each replacement</li>
+</ul>
+<h3 id="🔍-EXERCISE-6-5-DELETING-ALL-PYTHON-COMMENTS"><a href="#🔍-EXERCISE-6-5-DELETING-ALL-PYTHON-COMMENTS" class="headerlink" title="🔍 EXERCISE 6.5: DELETING ALL PYTHON COMMENTS"></a>🔍 EXERCISE 6.5: DELETING ALL PYTHON COMMENTS</h3><p>Imagine you have a Python script filled with comments (probably made by ChatGPT) and you want to clean it up. Create a file <code>commented_script.py</code> with content like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example script with lots of comments</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="comment"># This function displays Hello World</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello World&quot;</span>)  <span class="comment"># Display the message</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Another example function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="comment"># Addition of two numbers</span></span><br><span class="line">    <span class="keyword">return</span> a + b  <span class="comment"># Returns the sum</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Function calls</span></span><br><span class="line">hello_world()</span><br><span class="line"><span class="comment"># Calculation and display</span></span><br><span class="line">result = add(<span class="number">5</span>, <span class="number">3</span>)  <span class="comment"># Addition of 5 and 3</span></span><br><span class="line"><span class="built_in">print</span>(result)  <span class="comment"># Display the result</span></span><br></pre></td></tr></table></figure>
+
+<p>To delete all comments from this file, you can use the power of Vim’s regular expressions:</p>
+<ol>
+<li><p>Open the file: <code>vim commented_script.py</code></p>
+</li>
+<li><p>Execute the following command: <code>:%s/#.*$//g</code></p>
+<ul>
+<li><code>#</code> matches the comment character in Python</li>
+<li><code>.*</code> captures everything that follows the # until…</li>
+<li><code>$</code> which represents the end of the line</li>
+<li>The replacement is with an empty string (<code>//</code>)</li>
+</ul>
+</li>
+<li><p>To also delete lines that contain only comments (and would therefore become empty):</p>
+<ul>
+<li>Execute: <code>:%g/^$/d</code></li>
+<li>This command deletes (<code>d</code>) all lines that match the pattern “beginning of line followed directly by end of line” (<code>^$</code>), i.e., empty lines</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Detailed explanation:</strong> This task combines two powerful Vim concepts: substitutions with regular expressions and the global command (<code>g</code>). In a single command, you can modify an entire file according to complex patterns, which would need to be done manually or with a script in other editors. It’s an excellent example of the efficiency Vim can bring to real editing tasks.</p>
+</blockquote>
+<h3 id="Marks-and-jumps"><a href="#Marks-and-jumps" class="headerlink" title="Marks and jumps"></a>Marks and jumps</h3><p>Vim allows you to “mark” positions in the text to quickly return to them.</p>
+<h3 id="🔍-EXERCISE-7-MARKS"><a href="#🔍-EXERCISE-7-MARKS" class="headerlink" title="🔍 EXERCISE 7: MARKS"></a>🔍 EXERCISE 7: MARKS</h3><ol>
+<li>Place your cursor at an important location</li>
+<li>Type <code>ma</code> to set mark ‘a’</li>
+<li>Move elsewhere in the file</li>
+<li>Type <code>&#39;a</code> to return to the marked line, or <code>`a</code> to return to the exact position</li>
+<li>Try other letters to create multiple marks</li>
+</ol>
+<h3 id="Macros-automating-repetitive-tasks"><a href="#Macros-automating-repetitive-tasks" class="headerlink" title="Macros: automating repetitive tasks"></a>Macros: automating repetitive tasks</h3><p>Macros allow you to record a sequence of commands to replay them.</p>
+<h3 id="🔍-EXERCISE-8-SIMPLE-MACROS"><a href="#🔍-EXERCISE-8-SIMPLE-MACROS" class="headerlink" title="🔍 EXERCISE 8: SIMPLE MACROS"></a>🔍 EXERCISE 8: SIMPLE MACROS</h3><p>Imagine you have a list of names that you want to transform into an HTML table:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alice</span><br><span class="line">Bob</span><br><span class="line">Charlie</span><br></pre></td></tr></table></figure>
+
+<p>Here’s how to proceed:</p>
+<ol>
+<li>Place the cursor on the first line</li>
+<li>Type <code>qa</code> to start recording in register ‘a’</li>
+<li>Execute these commands:<ul>
+<li><code>I&lt;tr&gt;&lt;td&gt;</code> (insert at the beginning of the line)</li>
+<li><code>Esc</code> (return to Normal mode)</li>
+<li><code>A&lt;/td&gt;&lt;/tr&gt;</code> (add to the end of the line)</li>
+<li><code>Esc</code> (return to Normal mode)</li>
+<li><code>j</code> (go down one line)</li>
+</ul>
+</li>
+<li>Type <code>q</code> to stop recording</li>
+<li>Type <code>@a</code> to execute the macro once</li>
+<li>Type <code>2@a</code> to execute the macro two more times</li>
+</ol>
+<p>Expected result:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;&lt;td&gt;Bob&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;&lt;td&gt;Charlie&lt;/td&gt;&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Warning about errors:</strong> Macros blindly execute the recorded keystrokes. If your text structure changes (for example, an empty line), the macro might do unexpected things. Experienced Vim users build robust macros that can handle these variations.</p>
+</blockquote>
+<h2 id="PART-5-CONFIGURATION-AND-CUSTOMIZATION"><a href="#PART-5-CONFIGURATION-AND-CUSTOMIZATION" class="headerlink" title="PART 5: CONFIGURATION AND CUSTOMIZATION"></a>PART 5: CONFIGURATION AND CUSTOMIZATION</h2><img src="/2025/03/16/Introduction-to-VIM/amiga.jpg" class="" title="vim">
+
+<p>Vim is highly configurable via the <code>.vimrc</code> file in your home directory.</p>
+<h3 id="🔍-EXERCISE-9-CREATING-A-MINIMAL-VIMRC"><a href="#🔍-EXERCISE-9-CREATING-A-MINIMAL-VIMRC" class="headerlink" title="🔍 EXERCISE 9: CREATING A MINIMAL .VIMRC"></a>🔍 EXERCISE 9: CREATING A MINIMAL .VIMRC</h3><p>Create or modify your <code>~/.vimrc</code> file with these basic options:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; Basic configuration for Vim</span></span><br><span class="line"><span class="string">&quot; Lines starting with &quot;</span> are comments</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Enable line numbering</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Enable syntax highlighting</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Smart indentation</span></span><br><span class="line"><span class="keyword">set</span> smartindent</span><br><span class="line"><span class="keyword">set</span> autoindent</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Tab size: 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> expandtab</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Incremental search (real-time results)</span></span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="comment">&quot; Highlight search results</span></span><br><span class="line"><span class="keyword">set</span> hlsearch</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Display cursor position</span></span><br><span class="line"><span class="keyword">set</span> ruler</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Enable mouse (yes, Vim can use the mouse, scandalous!)</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Enable command-line completion</span></span><br><span class="line"><span class="keyword">set</span> wildmenu</span><br><span class="line"><span class="keyword">set</span> wildmode=lis<span class="variable">t:longest</span>,full</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Define a custom mapping (shortcut)</span></span><br><span class="line"><span class="comment">&quot; Define &lt;leader&gt; as the Space key</span></span><br><span class="line"><span class="keyword">let</span> mapleader = <span class="string">&quot; &quot;</span></span><br><span class="line"><span class="comment">&quot; Pressing Space+w saves the file</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span><span class="keyword">w</span> :<span class="keyword">w</span><span class="symbol">&lt;CR&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Never blindly copy a .vimrc file without understanding what it does. Add options gradually, test them, and build your custom configuration. Your .vimrc is like your Vim fingerprint - it should be unique and tailored to your needs.</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>The editor war:</strong> The rivalry between Vim and Emacs users is legendary in the programming world. It began in the 70s and continues today. The two camps gently mock each other with jokes like “Emacs is an excellent operating system, it just lacks a good text editor” or “Vim is so difficult to exit that it has its own Stack Overflow page”. This rivalry is the geek equivalent of the Coke vs Pepsi wars, but with more keyboard shortcuts and repetitive strain injuries.</p>
+</blockquote>
+<h2 id="PART-6-PRACTICAL-PROJECTS"><a href="#PART-6-PRACTICAL-PROJECTS" class="headerlink" title="PART 6: PRACTICAL PROJECTS"></a>PART 6: PRACTICAL PROJECTS</h2><h3 id="🔍-PROJECT-1-CODE-REFACTORING"><a href="#🔍-PROJECT-1-CODE-REFACTORING" class="headerlink" title="🔍 PROJECT 1: CODE REFACTORING"></a>🔍 PROJECT 1: CODE REFACTORING</h3><p>Download a small, poorly formatted Python script (or create one) and use Vim to clean it up:</p>
+<ol>
+<li>Properly indent the code (<code>=G</code> in Normal mode at the beginning of the file indents everything)</li>
+<li>Rename a variable throughout the file (<code>:%s/old_var/new_var/g</code>)</li>
+<li>Reorganize functions by cutting/pasting</li>
+<li>Add comments</li>
+</ol>
+<h3 id="🔍-PROJECT-2-EFFICIENT-WRITING"><a href="#🔍-PROJECT-2-EFFICIENT-WRITING" class="headerlink" title="🔍 PROJECT 2: EFFICIENT WRITING"></a>🔍 PROJECT 2: EFFICIENT WRITING</h3><p>Write a short paragraph using only Vim, forcing yourself to:</p>
+<ol>
+<li>Never use directional arrows</li>
+<li>Use efficient movement commands (<code>w</code>, <code>b</code>, <code>e</code>, etc.)</li>
+<li>Edit with compound operators (<code>cw</code>, <code>di(</code>, etc.)</li>
+<li>Save with a custom shortcut</li>
+</ol>
+<h2 id="CONCLUSION-THE-CONTINUING-ASCENT"><a href="#CONCLUSION-THE-CONTINUING-ASCENT" class="headerlink" title="CONCLUSION: THE CONTINUING ASCENT"></a>CONCLUSION: THE CONTINUING ASCENT</h2><p>Congratulations! You’ve survived this introduction. You probably feel like you’ve barely scratched the surface, and that’s normal - Vim users are constantly learning new tricks, even after years of use.</p>
+<p>Consider this tutorial as the beginning of a journey. As with learning a musical instrument, regular practice is more important than occasional intensive sessions.</p>
+<img src="/2025/03/16/Introduction-to-VIM/headache.jpg" class="" title="vim">
+
+<h3 id="Resources-to-continue-your-Vim-journey"><a href="#Resources-to-continue-your-Vim-journey" class="headerlink" title="Resources to continue your Vim journey"></a>Resources to continue your Vim journey</h3><ul>
+<li><code>vimtutor</code>: The built-in interactive tutorial (launch it in a terminal)</li>
+<li><a target="_blank" rel="noopener" href="https://vim-adventures.com/">Vim Adventures</a>: Learn Vim by playing a game</li>
+<li><a target="_blank" rel="noopener" href="https://vim.fandom.com/wiki/Vim_Tips_Wiki">Vim Tips Wiki</a>: A goldmine of tips</li>
+<li><a target="_blank" rel="noopener" href="https://pragprog.com/titles/dnvim2/practical-vim-second-edition/">Practical Vim</a>: An excellent book by Drew Neil</li>
+<li><a target="_blank" rel="noopener" href="https://www.reddit.com/r/vim/">r/vim</a>: The Vim Reddit community</li>
+</ul>
+<blockquote>
+<p><strong>Final tip:</strong> The best way to learn Vim is to use it for your daily tasks. Yes, your productivity will drop dramatically at first. Yes, you’ll be frustrated. But one day, without warning, your fingers will start dancing on the keyboard as if Vim were an extension of your thoughts. That day, you’ll understand why so many developers swear by this decades-old editor.</p>
+</blockquote>
+<hr>
+<p><em>“In the universe of text editors, there are tools you use and tools you master. Vim is definitely in the second category - it doesn’t just ask to be used, it asks to be tamed.”</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-1-UNDERSTANDING-THE-BEAST"><span class="toc-number">1.</span> <span class="toc-text">PART 1: UNDERSTANDING THE BEAST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-Vim-and-why-inflict-this-on-yourself"><span class="toc-number">1.1.</span> <span class="toc-text">What is Vim, and why inflict this on yourself?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modal-philosophy-why-Vim-seems-so-strange"><span class="toc-number">1.2.</span> <span class="toc-text">Modal philosophy: why Vim seems so strange</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-2-SURVIVING-IN-VIM"><span class="toc-number">2.</span> <span class="toc-text">PART 2: SURVIVING IN VIM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-1-ENTERING-AND-EXITING-VIM"><span class="toc-number">2.1.</span> <span class="toc-text">🔍 EXERCISE 1: ENTERING AND EXITING VIM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-2-BASIC-MODES-AND-MOVEMENTS"><span class="toc-number">2.2.</span> <span class="toc-text">🔍 EXERCISE 2: BASIC MODES AND MOVEMENTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-3-FIRST-EDITS"><span class="toc-number">2.3.</span> <span class="toc-text">🔍 EXERCISE 3: FIRST EDITS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-3-THE-VIM-%E2%80%9CLANGUAGE%E2%80%9D-OPERATORS-AND-MOVEMENTS"><span class="toc-number">3.</span> <span class="toc-text">PART 3: THE VIM “LANGUAGE” - OPERATORS AND MOVEMENTS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Simplified-Vim-grammar"><span class="toc-number">3.1.</span> <span class="toc-text">Simplified Vim grammar:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-operators"><span class="toc-number">3.2.</span> <span class="toc-text">Main operators:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-4-PRACTICING-THIS-GRAMMAR"><span class="toc-number">3.3.</span> <span class="toc-text">🔍 EXERCISE 4: PRACTICING THIS GRAMMAR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text-objects-another-dimension"><span class="toc-number">3.4.</span> <span class="toc-text">Text objects: another dimension</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-5-TEXT-OBJECTS"><span class="toc-number">3.5.</span> <span class="toc-text">🔍 EXERCISE 5: TEXT OBJECTS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-4-ADVANCED-TECHNIQUES"><span class="toc-number">4.</span> <span class="toc-text">PART 4: ADVANCED TECHNIQUES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-6-SEARCH-AND-SUBSTITUTE"><span class="toc-number">4.1.</span> <span class="toc-text">🔍 EXERCISE 6: SEARCH AND SUBSTITUTE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-6-5-DELETING-ALL-PYTHON-COMMENTS"><span class="toc-number">4.2.</span> <span class="toc-text">🔍 EXERCISE 6.5: DELETING ALL PYTHON COMMENTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Marks-and-jumps"><span class="toc-number">4.3.</span> <span class="toc-text">Marks and jumps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-7-MARKS"><span class="toc-number">4.4.</span> <span class="toc-text">🔍 EXERCISE 7: MARKS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Macros-automating-repetitive-tasks"><span class="toc-number">4.5.</span> <span class="toc-text">Macros: automating repetitive tasks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-8-SIMPLE-MACROS"><span class="toc-number">4.6.</span> <span class="toc-text">🔍 EXERCISE 8: SIMPLE MACROS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-5-CONFIGURATION-AND-CUSTOMIZATION"><span class="toc-number">5.</span> <span class="toc-text">PART 5: CONFIGURATION AND CUSTOMIZATION</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-EXERCISE-9-CREATING-A-MINIMAL-VIMRC"><span class="toc-number">5.1.</span> <span class="toc-text">🔍 EXERCISE 9: CREATING A MINIMAL .VIMRC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PART-6-PRACTICAL-PROJECTS"><span class="toc-number">6.</span> <span class="toc-text">PART 6: PRACTICAL PROJECTS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-PROJECT-1-CODE-REFACTORING"><span class="toc-number">6.1.</span> <span class="toc-text">🔍 PROJECT 1: CODE REFACTORING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-PROJECT-2-EFFICIENT-WRITING"><span class="toc-number">6.2.</span> <span class="toc-text">🔍 PROJECT 2: EFFICIENT WRITING</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CONCLUSION-THE-CONTINUING-ASCENT"><span class="toc-number">7.</span> <span class="toc-text">CONCLUSION: THE CONTINUING ASCENT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Resources-to-continue-your-Vim-journey"><span class="toc-number">7.1.</span> <span class="toc-text">Resources to continue your Vim journey</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/16/Introduction-to-VIM/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/16/Introduction-to-VIM/&text=Discovering Vim - A Return to Basics"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/16/Introduction-to-VIM/&title=Discovering Vim - A Return to Basics"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/16/Introduction-to-VIM/&is_video=false&description=Discovering Vim - A Return to Basics"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Discovering Vim - A Return to Basics&body=Check out this article: http://tokipona.today/2025/03/16/Introduction-to-VIM/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/16/Introduction-to-VIM/&title=Discovering Vim - A Return to Basics"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

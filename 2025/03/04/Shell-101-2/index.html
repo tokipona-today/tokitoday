@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Chapter 2: Navigation and File Manipulation## The Art of Moving About If Chapter 1 was about getting acquainted with the terminal, Chapter 2 is about learning to navigate it with confidence and precis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell Course 2">
+<meta property="og:url" content="http://tokipona.today/2025/03/04/Shell-101-2/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Chapter 2: Navigation and File Manipulation## The Art of Moving About If Chapter 1 was about getting acquainted with the terminal, Chapter 2 is about learning to navigate it with confidence and precis">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-04T17:15:45.000Z">
+<meta property="article:modified_time" content="2025-03-04T07:07:41.481Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Shell Course 2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Shell Course 2
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Chapter-2-Navigation-and-File-Manipulation"><a href="#Chapter-2-Navigation-and-File-Manipulation" class="headerlink" title="Chapter 2: Navigation and File Manipulation"></a>Chapter 2: Navigation and File Manipulation</h1><p><blue>## The Art of Moving About</blue></p>
+<p>If Chapter 1 was about getting acquainted with the terminal, Chapter 2 is about learning to navigate it with confidence and precision. Think of your filesystem as a vast library with countless rooms and shelves - knowing how to move around efficiently is essential.</p>
+<p><orange>Navigation in the shell is rather like finding your way through an unfamiliar city. Initially confusing, perhaps, but ultimately liberating once you’ve mastered it.</orange></p>
+<p>Let’s expand our navigational toolkit beyond the basic <code>cd</code> command we’ve already met.</p>
+<h3 id="Understanding-Paths-Absolute-vs-Relative"><a href="#Understanding-Paths-Absolute-vs-Relative" class="headerlink" title="Understanding Paths: Absolute vs. Relative"></a>Understanding Paths: Absolute vs. Relative</h3><p>There are two ways to tell the shell where to find something:</p>
+<ul>
+<li><strong>Absolute paths</strong> start from the root directory (<code>/</code>) and give the complete address.</li>
+<li><strong>Relative paths</strong> start from your current location.</li>
+</ul>
+<p>For instance, if you’re in your home directory:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Absolute path example</span></span><br><span class="line">$ <span class="built_in">cd</span> /home/username/Documents</span><br><span class="line"></span><br><span class="line"><span class="comment"># Relative path equivalent</span></span><br><span class="line">$ <span class="built_in">cd</span> Documents</span><br></pre></td></tr></table></figure>
+
+<p><red>Think of it like giving someone directions:</red> An absolute path is saying “Starting from the town center, go north for 2 miles, then east for 1 mile.” A relative path is saying “Turn left at the next corner.”</p>
+<h3 id="Navigating-Efficiently"><a href="#Navigating-Efficiently" class="headerlink" title="Navigating Efficiently"></a>Navigating Efficiently</h3><p>Let’s revisit and expand on some navigation shortcuts:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~            <span class="comment"># Home directory (same as just &#x27;cd&#x27;)</span></span><br><span class="line">$ <span class="built_in">cd</span> ..           <span class="comment"># Parent directory (one level up)</span></span><br><span class="line">$ <span class="built_in">cd</span> ../..        <span class="comment"># Two levels up</span></span><br><span class="line">$ <span class="built_in">cd</span> -            <span class="comment"># Previous directory (toggle between locations)</span></span><br><span class="line">$ <span class="built_in">cd</span> ~/Documents  <span class="comment"># Documents inside home directory</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>Pro tip: If you’re not sure where a directory is, use the <code>find</code> command to track it down - rather like having a GPS for your filesystem.</orange></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ find / -<span class="built_in">type</span> d -name <span class="string">&quot;Downloads&quot;</span> 2&gt;/dev/null</span><br><span class="line">/home/username/Downloads</span><br></pre></td></tr></table></figure>
+
+<p>The <code>2&gt;/dev/null</code> part simply tells the shell to discard error messages, which is particularly useful when searching system directories where you might not have permission to look everywhere.</p>
+<hr>
+<p><blue>## File Management: The Daily Bread of Shell Usage</blue></p>
+<p>Now that we can navigate our file system confidently, let’s look at how to manipulate files and directories - tasks you’ll likely perform daily.</p>
+<h3 id="Copying-Files-The-cp-Command"><a href="#Copying-Files-The-cp-Command" class="headerlink" title="Copying Files: The cp Command"></a>Copying Files: The <code>cp</code> Command</h3><p>The <code>cp</code> command copies files or directories from one location to another.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp source.txt destination.txt        <span class="comment"># Copy a file</span></span><br><span class="line">$ cp -r source_dir destination_dir     <span class="comment"># Copy a directory and its contents</span></span><br></pre></td></tr></table></figure>
+
+<p><red>Careful now:</red> <code>cp</code> will overwrite the destination file without warning if it already exists. It’s rather like a helpful assistant who reorganizes your desk without asking first.</p>
+<p>For the cautious:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp -i source.txt destination.txt    <span class="comment"># Interactive mode, asks before overwriting</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Moving-and-Renaming-The-mv-Command"><a href="#Moving-and-Renaming-The-mv-Command" class="headerlink" title="Moving and Renaming: The mv Command"></a>Moving and Renaming: The <code>mv</code> Command</h3><p>The <code>mv</code> command serves a dual purpose: moving files and renaming them (which is technically just “moving” a file to a new name in the same location).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mv oldname.txt newname.txt         <span class="comment"># Rename a file</span></span><br><span class="line">$ mv file.txt /path/to/destination/  <span class="comment"># Move a file</span></span><br></pre></td></tr></table></figure>
+
+<p>Like <code>cp</code>, <code>mv</code> will overwrite destination files without asking. Use <code>-i</code> for interactive mode if you prefer to be asked first.</p>
+<h3 id="Removing-Files-The-rm-Command"><a href="#Removing-Files-The-rm-Command" class="headerlink" title="Removing Files: The rm Command"></a>Removing Files: The <code>rm</code> Command</h3><p>The <code>rm</code> command deletes files and directories. Use with appropriate care.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm filename.txt             <span class="comment"># Delete a file</span></span><br><span class="line">$ rm -r directory_name        <span class="comment"># Delete a directory and its contents</span></span><br></pre></td></tr></table></figure>
+
+<p><red>Warning: There is no recycle bin or trash can in the shell. Once you delete something with <code>rm</code>, it’s gone. Forever. Like that umbrella you left on the Tube.</red></p>
+<p>For the cautious:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -i filename.txt         <span class="comment"># Interactive mode, asks for confirmation</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>For those who prefer efficiency over safety, there’s <code>rm -rf</code>, which recursively deletes directories without asking. Just remember that ‘with great power comes the great ability to accidentally delete your entire home directory’ (LoserMan).</orange></p>
+<h3 id="Creating-Links-The-ln-Command"><a href="#Creating-Links-The-ln-Command" class="headerlink" title="Creating Links: The ln Command"></a>Creating Links: The <code>ln</code> Command</h3><p>Links are like shortcuts or aliases to other files or directories.</p>
+<p><strong>Symbolic links</strong> (soft links) point to another file by name:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ln -s original.txt link.txt    <span class="comment"># Create a symbolic link</span></span><br></pre></td></tr></table></figure>
+
+<p>If you move the original file, the link breaks - it’s pointing to a location that no longer exists.</p>
+<p><strong>Hard links</strong> point to the actual data on disk:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ln original.txt hardlink.txt   <span class="comment"># Create a hard link</span></span><br></pre></td></tr></table></figure>
+
+<p>Move or rename the original, and the hard link still works. It’s less a shortcut and more like having two entrances to the same room.</p>
+<hr>
+<p><blue>## Understanding File Permissions</blue></p>
+<p>Unix-like systems have a permission system that can seem complex at first but makes perfect sense once you understand the logic behind it.</p>
+<h3 id="Viewing-Permissions"><a href="#Viewing-Permissions" class="headerlink" title="Viewing Permissions"></a>Viewing Permissions</h3><p>The <code>ls -l</code> command shows detailed information about files, including their permissions:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l file.txt</span><br><span class="line">-rw-r--r-- 1 username group 123 Mar 4 10:30 file.txt</span><br></pre></td></tr></table></figure>
+
+<p>The permissions are represented by the first 10 characters:</p>
+<ul>
+<li>First character: File type (<code>-</code> for regular file, <code>d</code> for directory)</li>
+<li>Next three: Owner permissions (read, write, execute)</li>
+<li>Next three: Group permissions</li>
+<li>Last three: Everyone else’s permissions</li>
+</ul>
+<h3 id="Understanding-Permission-Notation"><a href="#Understanding-Permission-Notation" class="headerlink" title="Understanding Permission Notation"></a>Understanding Permission Notation</h3><p>Each permission set has three positions:</p>
+<ul>
+<li><code>r</code> (read): Can see the content</li>
+<li><code>w</code> (write): Can modify</li>
+<li><code>x</code> (execute): Can run as a program</li>
+</ul>
+<p>So <code>-rw-r--r--</code> means:</p>
+<ul>
+<li>It’s a regular file (<code>-</code>)</li>
+<li>The owner can read and write (<code>rw-</code>)</li>
+<li>Group members can only read (<code>r--</code>)</li>
+<li>Others can only read (<code>r--</code>)</li>
+</ul>
+<h3 id="Changing-Permissions-The-chmod-Command"><a href="#Changing-Permissions-The-chmod-Command" class="headerlink" title="Changing Permissions: The chmod Command"></a>Changing Permissions: The <code>chmod</code> Command</h3><p>You can change permissions using the <code>chmod</code> command with either symbolic or numeric notation.</p>
+<p><strong>Symbolic notation</strong> uses letters and operators:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ chmod u+x script.sh    <span class="comment"># Add execute permission for the user</span></span><br><span class="line">$ chmod g-w file.txt     <span class="comment"># Remove write permission for the group</span></span><br><span class="line">$ chmod o=r file.txt     <span class="comment"># Set &#x27;others&#x27; permission to read-only</span></span><br><span class="line">$ chmod a+r file.txt     <span class="comment"># Give read permission to everyone</span></span><br></pre></td></tr></table></figure>
+
+<p>Where:</p>
+<ul>
+<li><code>u</code> = user (owner)</li>
+<li><code>g</code> = group</li>
+<li><code>o</code> = others</li>
+<li><code>a</code> = all</li>
+</ul>
+<p><strong>Numeric notation</strong> uses a 3-digit octal number:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 755 script.sh    <span class="comment"># rwxr-xr-x</span></span><br><span class="line">$ chmod 644 file.txt     <span class="comment"># rw-r--r--</span></span><br></pre></td></tr></table></figure>
+
+<p>The digits represent:</p>
+<ol>
+<li>Owner permissions</li>
+<li>Group permissions</li>
+<li>Others permissions</li>
+</ol>
+<p>Each digit is calculated as:</p>
+<ul>
+<li>4 for read</li>
+<li>2 for write</li>
+<li>1 for execute</li>
+</ul>
+<p><orange>So 7 (4+2+1) means read, write, and execute; 6 (4+2) means read and write; 5 (4+1) means read and execute; and 4 means read-only - rather like how your office security badge gives you access to different areas depending on your clearance level.</orange></p>
+<h3 id="Changing-Ownership-The-chown-Command"><a href="#Changing-Ownership-The-chown-Command" class="headerlink" title="Changing Ownership: The chown Command"></a>Changing Ownership: The <code>chown</code> Command</h3><p>The <code>chown</code> command changes the owner and/or group of a file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chown newowner file.txt             <span class="comment"># Change owner</span></span><br><span class="line">$ chown newowner:newgroup file.txt    <span class="comment"># Change owner and group</span></span><br><span class="line">$ chown :newgroup file.txt            <span class="comment"># Change group only</span></span><br></pre></td></tr></table></figure>
+
+<p>You’ll typically need administrative privileges (via <code>sudo</code>) to change ownership:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown root:root system_file.txt</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Viewing and Examining Files</blue></p>
+<p>Let’s explore some sophisticated ways to peek inside files without modifying them.</p>
+<h3 id="Basic-File-Viewing"><a href="#Basic-File-Viewing" class="headerlink" title="Basic File Viewing"></a>Basic File Viewing</h3><p>We’ve already met <code>cat</code>, which displays the entire file at once - perfect for small files, but less ideal for lengthy documents.</p>
+<p>For more controlled viewing:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ less file.txt       <span class="comment"># View file with scrolling and search capabilities</span></span><br></pre></td></tr></table></figure>
+
+<p>Inside <code>less</code>, use:</p>
+<ul>
+<li><kbd>Space</kbd> or <kbd>f</kbd> to page forward</li>
+<li><kbd>b</kbd> to page backward</li>
+<li><kbd>/</kbd> followed by a search term to find text</li>
+<li><kbd>q</kbd> to quit</li>
+</ul>
+<p><orange>The <code>less</code> command is named as a play on the older <code>more</code> command, proving that Unix developers do indeed possess a sense of humor, however dry it might be.</orange></p>
+<p>For peeking at just parts of a file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ head -n 10 file.txt    <span class="comment"># View first 10 lines</span></span><br><span class="line">$ tail -n 10 file.txt    <span class="comment"># View last 10 lines</span></span><br></pre></td></tr></table></figure>
+
+<p>These commands are particularly useful for large log files when you only need to see recent entries.</p>
+<h3 id="Examining-File-Types"><a href="#Examining-File-Types" class="headerlink" title="Examining File Types"></a>Examining File Types</h3><p>The <code>file</code> command tells you what type of file you’re looking at:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file mystery_file</span><br><span class="line">mystery_file: JPEG image data, JFIF standard 1.01</span><br></pre></td></tr></table></figure>
+
+<p>This is particularly useful when dealing with files without extensions or when you’re unsure of a file’s actual format.</p>
+<h3 id="Finding-Text-in-Files-The-grep-Command"><a href="#Finding-Text-in-Files-The-grep-Command" class="headerlink" title="Finding Text in Files: The grep Command"></a>Finding Text in Files: The <code>grep</code> Command</h3><p>The <code>grep</code> command searches for patterns in files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">&quot;search_term&quot;</span> file.txt           <span class="comment"># Search for a term in a file</span></span><br><span class="line">$ grep -i <span class="string">&quot;case insensitive&quot;</span> file.txt   <span class="comment"># Ignore case</span></span><br><span class="line">$ grep -r <span class="string">&quot;term&quot;</span> directory/             <span class="comment"># Search recursively through directories</span></span><br><span class="line">$ grep -v <span class="string">&quot;exclude&quot;</span> file.txt            <span class="comment"># Show lines that DON&#x27;T match</span></span><br></pre></td></tr></table></figure>
+
+<p><red>Combining powers:</red> You can pipe the output of one command to <code>grep</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -la | grep <span class="string">&quot;Jan&quot;</span>        <span class="comment"># Show only files modified in January</span></span><br><span class="line">$ ps aux | grep <span class="string">&quot;firefox&quot;</span>    <span class="comment"># Check if Firefox is running</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>The pipe (<code>|</code>) symbol is one of shell’s most powerful concepts - it takes the output from one command and feeds it as input to another. Think of it as an assembly line where each command performs its specialized task on the data.</orange></p>
+<h3 id="Counting-Words-Lines-and-Characters"><a href="#Counting-Words-Lines-and-Characters" class="headerlink" title="Counting Words, Lines, and Characters"></a>Counting Words, Lines, and Characters</h3><p>The <code>wc</code> (word count) command gives you statistics about text:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wc file.txt</span><br><span class="line">      7      46     237 file.txt</span><br></pre></td></tr></table></figure>
+
+<p>The output shows lines, words, and characters, respectively.</p>
+<p>You can specify what to count:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wc -l file.txt    <span class="comment"># Count lines only</span></span><br><span class="line">$ wc -w file.txt    <span class="comment"># Count words only</span></span><br><span class="line">$ wc -c file.txt    <span class="comment"># Count characters only</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Practical File Operations</blue></p>
+<p>Let’s look at some common everyday tasks and how to accomplish them efficiently.</p>
+<h3 id="Finding-Files"><a href="#Finding-Files" class="headerlink" title="Finding Files"></a>Finding Files</h3><p>The <code>find</code> command is your best friend for locating files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ find ~/Documents -name <span class="string">&quot;*.pdf&quot;</span>              <span class="comment"># Find PDFs in Documents folder</span></span><br><span class="line">$ find /home -<span class="built_in">type</span> f -size +100M              <span class="comment"># Find files larger than 100MB</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -mtime -7                    <span class="comment"># Files modified in the last 7 days</span></span><br><span class="line">$ find /etc -<span class="built_in">type</span> f -user root -perm 644      <span class="comment"># Files owned by root with specific permissions</span></span><br></pre></td></tr></table></figure>
+
+<p><red>Power move:</red> You can execute commands on found files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">&quot;*.tmp&quot;</span> -<span class="built_in">exec</span> rm &#123;&#125; \;        <span class="comment"># Delete all .tmp files</span></span><br></pre></td></tr></table></figure>
+
+<p>The <code>&#123;&#125;</code> is replaced with each found filename, and <code>\;</code> marks the end of the command.</p>
+<h3 id="Comparing-Files"><a href="#Comparing-Files" class="headerlink" title="Comparing Files"></a>Comparing Files</h3><p>The <code>diff</code> command shows the differences between files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ diff file1.txt file2.txt</span><br></pre></td></tr></table></figure>
+
+<p>For a more visual side-by-side comparison:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ diff -y file1.txt file2.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Disk-Usage"><a href="#Disk-Usage" class="headerlink" title="Disk Usage"></a>Disk Usage</h3><p>The <code>du</code> (disk usage) command shows space used by files and directories:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ du -h file.txt              <span class="comment"># Show file size in human-readable format</span></span><br><span class="line">$ du -sh directory/           <span class="comment"># Show total directory size (summary)</span></span><br><span class="line">$ du -h --max-depth=1 /home/  <span class="comment"># Show first-level directory sizes</span></span><br></pre></td></tr></table></figure>
+
+<p>The <code>df</code> command shows disk space available on mounted filesystems:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ df -h                       <span class="comment"># Show disk space in human-readable format</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Practical Exercises</blue></p>
+<p>Let’s practice what we’ve learned with some hands-on exercises:</p>
+<ol>
+<li><p>Create a directory structure for a hypothetical project:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p Project/&#123;src,docs,tests&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Create a few sample files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ touch Project/src/&#123;main.c,helper.c,utils.c&#125;</span><br><span class="line">$ touch Project/docs/README.md</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;This is a test file&quot;</span> &gt; Project/tests/test1.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Copy a file and examine the differences:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cp Project/tests/test1.txt Project/tests/test2.txt</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;With some changes&quot;</span> &gt;&gt; Project/tests/test2.txt</span><br><span class="line">$ diff Project/tests/test1.txt Project/tests/test2.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Change file permissions:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 755 Project/src/*.c</span><br><span class="line">$ ls -l Project/src/</span><br></pre></td></tr></table></figure></li>
+<li><p>Find all text files in your project:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find Project/ -name <span class="string">&quot;*.txt&quot;</span> -o -name <span class="string">&quot;*.md&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Count the words in your test files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wc Project/tests/*.txt</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><red>Challenge:</red> Create a single command that finds all <code>.c</code> files in your project and counts their lines.</p>
+<p><orange>Solution: <code>find Project/ -name &quot;*.c&quot; -exec wc -l &#123;&#125; \;</code></orange></p>
+<hr>
+<p><blue>## Conclusion</blue></p>
+<p>In this chapter, we’ve expanded our shell skills to include navigating the filesystem efficiently, manipulating files and directories, understanding permissions, and examining file contents. These are the fundamental operations you’ll use daily when working with the shell.</p>
+<p>Remember that the shell commands are tools in your toolkit. Like any good craftsperson, you’ll become more proficient as you use them regularly. Don’t be afraid to experiment in a safe environment (perhaps a dedicated practice directory), and make liberal use of the <code>man</code> pages when you need a refresher on specific options.</p>
+<p>In the next chapter, we’ll explore how to work with text in more sophisticated ways, introducing powerful text processing tools that can help you extract and manipulate information from files.</p>
+<p><orange>Practice is key - blah blah, you know the drill…</orange></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Navigation-and-File-Manipulation"><span class="toc-number">1.</span> <span class="toc-text">Chapter 2: Navigation and File Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Understanding-Paths-Absolute-vs-Relative"><span class="toc-number">1.0.1.</span> <span class="toc-text">Understanding Paths: Absolute vs. Relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Navigating-Efficiently"><span class="toc-number">1.0.2.</span> <span class="toc-text">Navigating Efficiently</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copying-Files-The-cp-Command"><span class="toc-number">1.0.3.</span> <span class="toc-text">Copying Files: The cp Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Moving-and-Renaming-The-mv-Command"><span class="toc-number">1.0.4.</span> <span class="toc-text">Moving and Renaming: The mv Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Removing-Files-The-rm-Command"><span class="toc-number">1.0.5.</span> <span class="toc-text">Removing Files: The rm Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Creating-Links-The-ln-Command"><span class="toc-number">1.0.6.</span> <span class="toc-text">Creating Links: The ln Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Viewing-Permissions"><span class="toc-number">1.0.7.</span> <span class="toc-text">Viewing Permissions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Understanding-Permission-Notation"><span class="toc-number">1.0.8.</span> <span class="toc-text">Understanding Permission Notation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Changing-Permissions-The-chmod-Command"><span class="toc-number">1.0.9.</span> <span class="toc-text">Changing Permissions: The chmod Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Changing-Ownership-The-chown-Command"><span class="toc-number">1.0.10.</span> <span class="toc-text">Changing Ownership: The chown Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-File-Viewing"><span class="toc-number">1.0.11.</span> <span class="toc-text">Basic File Viewing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Examining-File-Types"><span class="toc-number">1.0.12.</span> <span class="toc-text">Examining File Types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-Text-in-Files-The-grep-Command"><span class="toc-number">1.0.13.</span> <span class="toc-text">Finding Text in Files: The grep Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Counting-Words-Lines-and-Characters"><span class="toc-number">1.0.14.</span> <span class="toc-text">Counting Words, Lines, and Characters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-Files"><span class="toc-number">1.0.15.</span> <span class="toc-text">Finding Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparing-Files"><span class="toc-number">1.0.16.</span> <span class="toc-text">Comparing Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disk-Usage"><span class="toc-number">1.0.17.</span> <span class="toc-text">Disk Usage</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/04/Shell-101-2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/04/Shell-101-2/&text=Shell Course 2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/04/Shell-101-2/&title=Shell Course 2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/04/Shell-101-2/&is_video=false&description=Shell Course 2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Shell Course 2&body=Check out this article: http://tokipona.today/2025/03/04/Shell-101-2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/04/Shell-101-2/&title=Shell Course 2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

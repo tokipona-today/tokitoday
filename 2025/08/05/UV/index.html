@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[!note] UV &#x3D; future‑proof your Python workflowUV is a rust‑powered Python package &amp; project manager that handles Python versions, virtual environments, dependencies, lockfiles, scripts and tools—">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UV pour Python">
+<meta property="og:url" content="http://tokipona.today/2025/08/05/UV/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="[!note] UV &#x3D; future‑proof your Python workflowUV is a rust‑powered Python package &amp; project manager that handles Python versions, virtual environments, dependencies, lockfiles, scripts and tools—">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-05T20:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-06T12:30:25.822Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>UV pour Python</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        UV pour Python
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>[!note] <strong>UV = future‑proof your Python workflow</strong><br>UV is a rust‑powered Python package &amp; project manager that handles Python versions, virtual environments, dependencies, lockfiles, scripts and tools—all insanely fast and unified.</p>
+</blockquote>
+<h2 id="🚀-What-is-uv"><a href="#🚀-What-is-uv" class="headerlink" title="🚀 What is uv?"></a>🚀 What is <strong>uv</strong>?</h2><p><code>uv</code> (pronounced “you‑vee”) is a <strong>single tool</strong> that replaces <code>pip</code>, <code>pipx</code>, <code>pyenv</code>, <code>pip-tools</code>, <code>venv</code>, even <code>poetry</code>.<br>It supports cross-platform lockfiles, Python version management, script execution with embedded metadata, and legacy pip interface compatibility—written in Rust for <strong>speed and reliability</strong>.</p>
+<hr>
+<h2 id="🌟-Key-Features"><a href="#🌟-Key-Features" class="headerlink" title="🌟 Key Features"></a>🌟 Key Features</h2><ul>
+<li><strong>Python version manager</strong>: install and use specific versions or PyPy builds, entirely managed by uv. It auto-downloads missing versions as needed.</li>
+<li><strong>Automatic virtual environments</strong>: when you run <code>uv run</code> or <code>uv sync</code> in a project, uv will auto-create a <code>.venv</code> folder if none exists—no prompt needed.</li>
+<li><strong>Dependency management</strong>: <code>uv add</code>, <code>uv remove</code>, <code>uv sync</code>, <code>uv lock</code> vs. <code>pip compile</code>, <code>pip sync</code>, etc.—a universal lockfile (<code>uv.lock</code>) ensures consistent installs across platforms.</li>
+<li><strong>Script execution</strong>: run single-file scripts with inline dependency declarations and optional reproducibility via exclude-newer timestamps.</li>
+<li><strong>Pip-compatible CLI</strong>: <code>uv pip install</code>, <code>uv pip freeze</code>, <code>uv pip compile</code>, etc., work just like familiar pip tools—with massive performance gains.</li>
+<li><strong>Tool runner</strong>: commands like <code>uvx</code> (alias for <code>uv tool run</code>) let you run tools like <code>ruff</code> or <code>pycowsay</code> in isolated environments.</li>
+</ul>
+<hr>
+<h2 id="🛠️-Installation-quick-start"><a href="#🛠️-Installation-quick-start" class="headerlink" title="🛠️ Installation (quick-start)"></a>🛠️ Installation (quick-start)</h2><h3 id="On-macOS-Linux"><a href="#On-macOS-Linux" class="headerlink" title="On macOS/Linux:"></a>On macOS/Linux:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsSf https://astral.sh/uv/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="On-Windows-PowerShell"><a href="#On-Windows-PowerShell" class="headerlink" title="On Windows (PowerShell):"></a>On Windows (PowerShell):</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">irm</span> https://astral.sh/uv/install.ps1 | <span class="built_in">iex</span></span><br></pre></td></tr></table></figure>
+
+<p>Self-contained and updatable with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv self update</span><br></pre></td></tr></table></figure>
+
+<p>You can also install via <code>pip install uv</code> or using <code>pipx</code>.</p>
+<hr>
+<h2 id="⚙️-Project-Workflow"><a href="#⚙️-Project-Workflow" class="headerlink" title="⚙️ Project Workflow"></a>⚙️ Project Workflow</h2><h3 id="1-Initialize-a-new-project"><a href="#1-Initialize-a-new-project" class="headerlink" title="1. Initialize a new project"></a>1. Initialize a new project</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv init</span><br></pre></td></tr></table></figure>
+
+<p>Creates <code>pyproject.toml</code>, <code>.venv</code>, and initial project structure. You can specify Python version:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv init --python 3.12.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Add-dependencies"><a href="#2-Add-dependencies" class="headerlink" title="2. Add dependencies"></a>2. Add dependencies</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add fastapi uvicorn[standard]</span><br></pre></td></tr></table></figure>
+
+<p>Updates both <code>pyproject.toml</code> and environment—auto-creates <code>.venv</code> if needed.</p>
+<h3 id="3-Sync-amp-lock"><a href="#3-Sync-amp-lock" class="headerlink" title="3. Sync &amp; lock"></a>3. Sync &amp; lock</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv sync</span><br><span class="line">uv lock</span><br></pre></td></tr></table></figure>
+
+<p><code>uv sync</code> ensures <code>.venv</code> matches <code>uv.lock</code>; <code>uv lock</code> updates the lockfile.</p>
+<h3 id="4-Run-commands"><a href="#4-Run-commands" class="headerlink" title="4. Run commands"></a>4. Run commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run -- flask run --port 8000</span><br></pre></td></tr></table></figure>
+
+<p>No need to activate <code>.venv</code>—<code>uv run</code> handles everything automatically.</p>
+<hr>
+<h2 id="✍️-Script-Mode"><a href="#✍️-Script-Mode" class="headerlink" title="✍️ Script Mode"></a>✍️ Script Mode</h2><p>For one-off scripts:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example.py</span></span><br><span class="line"><span class="comment"># dependencies = [&quot;requests&quot;]</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="built_in">print</span>(requests.__version__)</span><br></pre></td></tr></table></figure>
+
+<p>Run it with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run example.py</span><br></pre></td></tr></table></figure>
+
+<p>You can also lock dependencies:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv lock --script example.py</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔧-Pip-like-Interface-amp-Environments"><a href="#🔧-Pip-like-Interface-amp-Environments" class="headerlink" title="🔧 Pip-like Interface &amp; Environments"></a>🔧 Pip-like Interface &amp; Environments</h2><h3 id="Create-a-virtual-environment"><a href="#Create-a-virtual-environment" class="headerlink" title="Create a virtual environment:"></a>Create a virtual environment:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv venv</span><br></pre></td></tr></table></figure>
+
+<p>Or specify version:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv venv --python 3.11</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-packages-manually"><a href="#Install-packages-manually" class="headerlink" title="Install packages manually:"></a>Install packages manually:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip install numpy pandas</span><br></pre></td></tr></table></figure>
+
+<p>Requires <code>.venv</code> to exist (not auto-created in pip mode).</p>
+<h3 id="Lock-amp-sync-via-pip-interface"><a href="#Lock-amp-sync-via-pip-interface" class="headerlink" title="Lock &amp; sync via pip interface:"></a>Lock &amp; sync via pip interface:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv pip compile requirements.in</span><br><span class="line">uv pip sync requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>Or export to <code>pylock.toml</code> for standardization.</p>
+<hr>
+<h2 id="🧪-Full-Workflow-Example"><a href="#🧪-Full-Workflow-Example" class="headerlink" title="🧪 Full Workflow Example"></a>🧪 Full Workflow Example</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir myproj &amp;&amp; <span class="built_in">cd</span> myproj</span><br><span class="line">uv init --python 3.12</span><br><span class="line">uv add fastapi uvicorn</span><br><span class="line">uv sync</span><br><span class="line">uv lock</span><br><span class="line">uv run python -c <span class="string">&quot;import fastapi; print(fastapi.__version__)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💡-Tips-amp-Smart-Tricks"><a href="#💡-Tips-amp-Smart-Tricks" class="headerlink" title="💡 Tips &amp; Smart Tricks"></a>💡 Tips &amp; Smart Tricks</h2><ul>
+<li><code>uv python install 3.10 3.11 3.12</code> — install multiple Python versions</li>
+<li><code>uv python pin 3.11</code> — write <code>.python-version</code> to pin interpreter</li>
+<li><code>uv cache dir</code> — view shared package cache location</li>
+<li><code>uvx ruff</code> — run ephemeral tools without global install</li>
+</ul>
+<hr>
+<h2 id="🚫-Limitations-amp-Notes"><a href="#🚫-Limitations-amp-Notes" class="headerlink" title="🚫 Limitations &amp; Notes"></a>🚫 Limitations &amp; Notes</h2><ul>
+<li><code>.venv</code> is created automatically — but not <code>.env</code> (for environment variables)</li>
+<li>No automatic env var loading: use <code>direnv</code>, <code>dotenv</code>, etc.</li>
+<li>Python binaries are not auto-symlinked — use <code>uv python pin</code> or link manually</li>
+</ul>
+<hr>
+<h2 id="🧠-Why-switch"><a href="#🧠-Why-switch" class="headerlink" title="🧠 Why switch?"></a>🧠 Why switch?</h2><ul>
+<li><strong>Speed</strong>: 10× to 100× faster than pip/poetry/pip-tools</li>
+<li><strong>Unified</strong>: CLI handles venvs, Python installs, deps, lockfiles, scripts, tools</li>
+<li><strong>Reproducible</strong>: deterministic lockfiles, cache-first installs, <code>.venv</code> by default</li>
+</ul>
+<hr>
+<h2 id="📎-Further-Reading"><a href="#📎-Further-Reading" class="headerlink" title="📎 Further Reading"></a>📎 Further Reading</h2><ul>
+<li>Docs: <a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a></li>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/astral-sh/uv">https://github.com/astral-sh/uv</a></li>
+<li>Blog: <a target="_blank" rel="noopener" href="https://astral.sh/blog/introducing-uv/">https://astral.sh/blog/introducing-uv/</a></li>
+</ul>
+<p><em>📅 Last updated: August 6, 2025</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-What-is-uv"><span class="toc-number">1.</span> <span class="toc-text">🚀 What is uv?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%9F-Key-Features"><span class="toc-number">2.</span> <span class="toc-text">🌟 Key Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-Installation-quick-start"><span class="toc-number">3.</span> <span class="toc-text">🛠️ Installation (quick-start)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#On-macOS-Linux"><span class="toc-number">3.1.</span> <span class="toc-text">On macOS&#x2F;Linux:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#On-Windows-PowerShell"><span class="toc-number">3.2.</span> <span class="toc-text">On Windows (PowerShell):</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%99%EF%B8%8F-Project-Workflow"><span class="toc-number">4.</span> <span class="toc-text">⚙️ Project Workflow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Initialize-a-new-project"><span class="toc-number">4.1.</span> <span class="toc-text">1. Initialize a new project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Add-dependencies"><span class="toc-number">4.2.</span> <span class="toc-text">2. Add dependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Sync-amp-lock"><span class="toc-number">4.3.</span> <span class="toc-text">3. Sync &amp; lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Run-commands"><span class="toc-number">4.4.</span> <span class="toc-text">4. Run commands</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%8D%EF%B8%8F-Script-Mode"><span class="toc-number">5.</span> <span class="toc-text">✍️ Script Mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-Pip-like-Interface-amp-Environments"><span class="toc-number">6.</span> <span class="toc-text">🔧 Pip-like Interface &amp; Environments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-virtual-environment"><span class="toc-number">6.1.</span> <span class="toc-text">Create a virtual environment:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-packages-manually"><span class="toc-number">6.2.</span> <span class="toc-text">Install packages manually:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lock-amp-sync-via-pip-interface"><span class="toc-number">6.3.</span> <span class="toc-text">Lock &amp; sync via pip interface:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AA-Full-Workflow-Example"><span class="toc-number">7.</span> <span class="toc-text">🧪 Full Workflow Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-Tips-amp-Smart-Tricks"><span class="toc-number">8.</span> <span class="toc-text">💡 Tips &amp; Smart Tricks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%AB-Limitations-amp-Notes"><span class="toc-number">9.</span> <span class="toc-text">🚫 Limitations &amp; Notes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-Why-switch"><span class="toc-number">10.</span> <span class="toc-text">🧠 Why switch?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8E-Further-Reading"><span class="toc-number">11.</span> <span class="toc-text">📎 Further Reading</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/08/05/UV/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/08/05/UV/&text=UV pour Python"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/08/05/UV/&title=UV pour Python"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/08/05/UV/&is_video=false&description=UV pour Python"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UV pour Python&body=Check out this article: http://tokipona.today/2025/08/05/UV/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/08/05/UV/&title=UV pour Python"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

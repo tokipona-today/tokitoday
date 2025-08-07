@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="For my birthday, my wife bought me a magnificent wooden Backgammon set. It’s a particularly fascinating game. Unlike chess, which is perfectly deterministic, Backgammon distinguishes itself by its use">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backgammon - Behind the Moves">
+<meta property="og:url" content="http://tokipona.today/2025/03/26/Behind-the-Moves/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="For my birthday, my wife bought me a magnificent wooden Backgammon set. It’s a particularly fascinating game. Unlike chess, which is perfectly deterministic, Backgammon distinguishes itself by its use">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-26T13:30:00.000Z">
+<meta property="article:modified_time" content="2025-05-03T21:34:35.554Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Backgammon - Behind the Moves</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Backgammon - Behind the Moves
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>For my birthday, my wife bought me a magnificent wooden Backgammon set. It’s a particularly fascinating game. Unlike chess, which is perfectly deterministic, Backgammon distinguishes itself by its use of chance. Not to randomly determine the winner, but rather to put the players’ skills to the test <em>against</em> the whims of fate. With every roll of the dice, the game configuration evolves, constantly suspended in a state of uncertainty. The equation is therefore complex. Rest assured, though: a good Backgammon player, even with terrible luck on the dice, will almost always emerge victorious against an average player blessed with excellent rolls. Personally, I find myself somewhere in the middle: mediocre and unlucky…</p>
+<p>As I started working on understanding various tactics and trying to grasp the probabilities inherent in the game mechanics, I began programming a simple ASCII Backgammon board editor. The initial goal was just to illustrate the articles I planned to write about my own progress.</p>
+ <!-- Assuming you might have an image -->
+
+<p>Once the editor was finished, I thought, “Well, since the board representation is there, why not program the computer to play against me?” Initially, I just coded the basic rules for moving the checkers. A few days later, I figured that by integrating some more elaborate principles, I’d have a more seasoned opponent against whom I could measure my mediocrity. So, I armed it with principles gleaned from an excellent 1973 book: “Beginning Backgammon” by Tim Holland. Curiously, this wasn’t too difficult: by adjusting two dynamic variables (reward and penalty) based on the game situation (isolated blots, building primes, hitting opponent’s blots…), the computer’s capabilities genuinely improved. The level of play started approaching that of the apps you can download on your phone.</p>
+<p>Chatting about this with a few colleagues, the idea of training a <em>real</em> AI model quickly surfaced. By literally changing just a few lines of code to enable self-play, I launched the computer against itself in an epic journey of 165,000 games. All were meticulously recorded in an SQLite database (now weighing in at 3 GB), offering a future model over 6 million moves to analyze.</p>
+<p>Then came the moment to dive into the actual learning process. I’ll be honest: apart from training simple categorization models (often limited to binary answers), I had no idea how to conceptualize such training. So, I leaned heavily on Claude.ai and Gemini (Google AI Studio) to help me with this task.</p>
+<h2 id="What-Makes-Backgammon-Challenging-for-AI"><a href="#What-Makes-Backgammon-Challenging-for-AI" class="headerlink" title="What Makes Backgammon Challenging for AI?"></a>What Makes Backgammon Challenging for AI?</h2><p><pink>Backgammon presents unique challenges for artificial intelligence:</pink></p>
+<ul>
+<li>It combines <strong>skill and luck</strong> through dice rolls</li>
+<li>It requires both <strong>tactical moves</strong> and <strong>long-term strategy</strong></li>
+<li>The number of possible game states is <strong>astronomically large</strong></li>
+<li>Players must adapt to <strong>constantly changing board situations</strong></li>
+</ul>
+<p>Unlike chess or Go, where every move is deterministic, Backgammon’s dice element introduces <w>probability and risk management</w> - making it a great AI challenge.</p>
+<h2 id="Step-1-Creating-a-Minimalist-Model"><a href="#Step-1-Creating-a-Minimalist-Model" class="headerlink" title="Step 1: Creating a Minimalist Model"></a>Step 1: Creating a Minimalist Model</h2><p>Just to see… and to avoid being completely overwhelmed, I asked these AIs to write a minimal reinforcement learning model. I provided them with the database structure and not much else. After a few clicks (okay, I exaggerate… probably a few hundred rounds of discussion, testing, and debugging), I had a functional script. The model didn’t take long to train – about ten minutes, if I recall correctly. A small model without grand ambitions, but one that knew how to play Backgammon. Well, it knew how to move its pieces legally and was ultimately a pretty good sport, in the sense that it never got angry watching me thoroughly beat it in every game.</p>
+<h2 id="Step-2-Designing-the-Advanced-Training-Pipeline"><a href="#Step-2-Designing-the-Advanced-Training-Pipeline" class="headerlink" title="Step 2: Designing the Advanced Training Pipeline"></a>Step 2: Designing the Advanced Training Pipeline</h2><p>I then returned to my AI friends to improve the training. This is where I truly started feeling out of my depth. Through extensive discussions about Backgammon tactics, the AIs converged on a finely tuned, bespoke training protocol (the pipeline). Here’s what I managed to understand about its workings (without being capable of coding even 1/1000th of it…). My role in this design was mostly to offer very theoretical ideas which, echoing already established techniques, were rapidly transcribed into Python. Here’s an overview of the pipeline:</p>
+<ol>
+<li><p><strong>Supervised Learning (Pretraining)</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> Learn by imitating a “teacher” or existing examples. Instead of learning through trial-and-error (like in RL), we show the model game situations (state) and the “correct” move to play (target policy) or the final outcome of the game (target value) drawn from expert games or previous model versions.</li>
+<li><strong>How?</strong> Load data (e.g., from my 6M+ move database). Each data point is a triplet: (Game State, Move Played, Final Game Outcome). Train the model to:<ul>
+<li>  <em>Predict the move:</em> The policy head learns to output a high probability for the move actually played in that state in the database (using <code>policy_loss</code>, often Cross-Entropy). Success is measured by accuracy (percentage of times the predicted most likely move is the correct one).</li>
+<li>  <em>Predict the outcome:</em> The value head learns to predict whether the game was won (+1) or lost (-1) from that state (using <code>value_loss</code>, often Huber Loss or MSE).</li>
+</ul>
+</li>
+<li>  <strong>Why?</strong> Often used as pretraining. It gives the model an initial understanding of the game (legal moves, which positions generally lead to wins/losses) before letting it learn on its own via RL. This speeds up the RL process.</li>
+</ul>
+</li>
+<li><p><strong>Reinforcement Learning (RL)</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> Learn through trial-and-error and delayed rewards. The agent plays against itself or an opponent, tries moves, and receives “rewards” (or “penalties”) based on the game’s outcome or intermediate goals (bearing off a checker, hitting the opponent). It adjusts its policy to maximize total long-term rewards.</li>
+<li><strong>How?</strong><ul>
+<li>  <em>Experience Generation:</em> The agent plays games (<code>advanced_self_play</code>, <code>_generate_...</code>). For each move, it records: state (s), action chosen (a), policy used (π(a|s)), immediate reward (r), and next state (s’).</li>
+<li>  <em>Learning (Update):</em> Use collected experiences to improve the policy and value function. This is where PPO and GAE come in: GAE estimates the <em>advantage</em> of each action (A), and PPO updates the policy to favor advantageous actions and updates the value function to better predict future returns (more on that later).</li>
+</ul>
+</li>
+<li>  <strong>Why?</strong> Allows the model to potentially discover strategies better than those in the initial data and adapt to the long-term consequences of its actions.</li>
+</ul>
+</li>
+<li><p><strong>Curriculum Learning</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> Start with simple problems and gradually increase the difficulty, like a student in school.</li>
+<li><strong>How (in my code)?</strong><ul>
+<li>  <em>Supervised:</em> <code>CURRICULUM_THRESHOLDS</code> and stages in <code>_get_curriculum_weights</code> adjust how the loss is calculated. Early on (stage 0), focus more on learning the policy (what moves to play). Later, increase the weight of the value (is this a good position?).</li>
+<li><em>Structured Reinforcement:</em> The <code>train_with_structured_curriculum</code> function implements a curriculum based on game phases:<ul>
+<li>  Phase 1 (Endgame): Agent only plays endgames (<code>_generate_bearing_off...</code>). Simpler, only bearing-off decisions.</li>
+<li>  Phase 2 (Simplified): Games with fewer checkers (<code>_generate_simplified...</code>). Less tactical complexity.</li>
+<li>  Phase 3 (Full): Complete games (<code>advanced_self_play...</code>). The hardest problem.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>  <strong>Why?</strong> Helps the model learn faster and more stably by not immediately confronting it with the full complexity of the game.</li>
+</ul>
+</li>
+<li><p><strong>Data Augmentation</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> Artificially create more training data from existing data to make the model more robust and help it generalize better.</li>
+<li>  <strong>How (<code>augmented_supervised_training</code>)?</strong> Take an existing example (state, policy, value). Create a new version by adding slight “noise” (random variations) to the state (numeric features, not directly checker positions to avoid invalidating the board) and/or the target policy.</li>
+<li>  <strong>Why?</strong> Exposing the model to slight variations of the same situations helps it avoid merely “memorizing” exact examples and react better to slightly different situations in actual play.</li>
+</ul>
+</li>
+<li><p><strong>Elo Rating Evaluation</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> Measure the relative strength of different model versions (or against other players/models) by simulating matches, inspired by the chess rating system.</li>
+<li>  <strong>How (<code>evaluate_elo_verbose</code>)?</strong> The current model plays a number of games (<code>EVAL_GAMES</code>) against one or more opponents (previous versions, noisy version). Based on results (wins, losses, draws) and initial Elo difference, each player’s Elo is adjusted. Winning against a stronger opponent yields a large Elo gain; losing to a weaker one causes a significant drop. The K-factor (<code>ELO_K_FACTOR</code>) controls the magnitude of adjustments.</li>
+<li>  <strong>Why?</strong> Provides an objective (though potentially noisy) measure of the model’s playing strength progression over time, more direct than just looking at loss curves.</li>
+</ul>
+</li>
+<li><p><strong>Arbitrator</strong></p>
+<ul>
+<li>  <strong>The Idea:</strong> A part of the code that knows the fundamental rules of the game, can verify if a model’s proposed move is valid, and can detect situations of stalemate or lack of progress.</li>
+<li><strong>How (<code>BackgammonArbitrator</code>)?</strong><ul>
+<li>  <code>validate_move</code>: Checks if an action (move) is legal given the dice roll and board position (e.g., can I land here? Is the die available?).</li>
+<li>  <code>check_for_progress</code>: Looks at the recent history of positions to see if the game is stagnating (no checkers borne off, very similar positions).</li>
+</ul>
+</li>
+<li><strong>Why?</strong><ul>
+<li>  <em>Validation:</em> Prevents the model (especially during evaluation or if using a basic action selection logic) from making illegal moves.</li>
+<li>  <em>Stagnation:</em> Allows ending games stuck in infinite loops or dead-end situations, saving computation time.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><a href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens" class="headerlink" title="Deeper Dive: PPO and GAE (How the RL Magic Happens)"></a>Deeper Dive: PPO and GAE (How the RL Magic Happens)</h2><p>Imagine learning Backgammon. You make a move. Was it good? Hard to tell immediately. It might lead to a great position in 5 turns, or seem good now but cost you the game later. RL aims to learn a <strong>Policy</strong> (how to choose a move) that maximizes long-term <strong>Reward</strong> (winning).</p>
+<ol>
+<li><p><strong>PPO (Proximal Policy Optimization) - Learning Better, Cautiously</strong></p>
+<ul>
+<li>  <strong>The Problem:</strong> When updating our strategy (policy), changing it too drastically based on a few recent games can be risky. What worked in those few games might be terrible overall.</li>
+<li>  <strong>PPO’s Idea:</strong> Update the policy prudently. “I want to improve, but not change <em>too</em> much from my current strategy (the one I just used to play).”</li>
+<li>  <strong>How (Simplified):</strong> The agent plays using its current <code>old_policy</code>. It assesses if actions taken were better or worse than expected (using the Advantage, see GAE). It calculates a ratio: <code>probability(action | new_policy) / probability(action | old_policy)</code>. PPO then “clips” this ratio. If the new policy wants to make a good action <em>much</em> more likely (large ratio), PPO limits the increase. If it wants to make a bad action <em>much</em> less likely (small ratio), PPO limits the decrease. This “limit” is controlled by <code>epsilon</code>.</li>
+<li>  <strong>Goal:</strong> By taking small, careful steps, PPO avoids breaking a somewhat working policy, ensuring stable, gradual improvement. It’s robust and popular.</li>
+</ul>
+</li>
+<li><p><strong>GAE (Generalized Advantage Estimation) - Judging a Move’s Quality</strong></p>
+<ul>
+<li>  <strong>The Problem:</strong> How good was that move on turn 5 if the reward (+1 win/-1 loss) only comes at turn 40?</li>
+<li>  <strong>GAE’s Idea:</strong> Estimate the <strong>Advantage</strong> of taking a specific action in a state: “How much better (or worse) was this action compared to the <em>average</em> action I could have taken?”</li>
+<li>  <strong>How (Simplified):</strong> We need a <strong>Value Function (V)</strong> that estimates the expected future reward from a state <code>s</code>. For each step (state <code>s</code> -&gt; reward <code>r</code> -&gt; state <code>s&#39;</code>), calculate the <strong>TD Error</strong>: <code>delta = r + gamma * V(s&#39;) - V(s)</code>. This measures how reality (<code>r + gamma * V(s&#39;)</code>) differed from prediction (<code>V(s)</code>). GAE then looks at a weighted combination of future deltas: <code>delta_t + (gamma*lambda)*delta_&#123;t+1&#125; + (gamma*lambda)^2*delta_&#123;t+2&#125; + ...</code>. <code>lambda</code> controls how much future errors matter.</li>
+<li>  <strong>Goal:</strong> GAE provides a more stable, less noisy estimate of Advantage than simpler methods by balancing immediate feedback with longer-term consequences. PPO uses this Advantage estimate to update the policy.</li>
+</ul>
+</li>
+</ol>
+<p><strong>In Short:</strong> The pipeline combines:</p>
+<ul>
+<li>  <strong>Supervised Learning:</strong> Initial knowledge base.</li>
+<li>  <strong>Augmentation:</strong> Robustness for that base.</li>
+<li>  <strong>RL (PPO+GAE):</strong> Self-improvement beyond initial data.</li>
+<li>  <strong>Curriculum:</strong> Easier learning curve.</li>
+<li>  <strong>Elo:</strong> Measuring real strength.</li>
+<li>  <strong>Arbitrator:</strong> Rule enforcement and game termination.</li>
+</ul>
+<p><strong>First Training Run &amp; The Facepalm Moment</strong></p>
+<h2 id="Teaching-a-Computer-to-Play"><a href="#Teaching-a-Computer-to-Play" class="headerlink" title="Teaching a Computer to Play"></a>Teaching a Computer to Play</h2><p>backgammon/<br>  │<br>  ├── environment/<br>  │   ├── <strong>init</strong>.py<br>  │   ├── game.py               # Backgammon Game Environment<br>  │   └── arbitrator.py         # Backgammon Arbitrator<br>  │<br>  ├── models/<br>  │   ├── <strong>init</strong>.py<br>  │   ├── backgammon_model.py   # Classe Improved Backgammon Model<br>  │   └── version_manager.py    # Model Version Manager<br>  │<br>  ├── training/<br>  │   ├── <strong>init</strong>.py<br>  │   ├── agent.py              # Advanced BackgammonRL<br>  │   ├── supervised.py         # Supervised training methods<br>  │   └── reinforcement.py      # Renforcement Learning methods<br>  │<br>  ├── utils/<br>  │   ├── <strong>init</strong>.py<br>  │   ├── encoders.py           # Stat coding functions<br>  │   ├── evaluators.py         # Elo system for evaluation<br>  │   └── visualization.py      # Visualization appetizer<br>  │<br>  └── main.py                   # Main script</p>
+<p>I launched my first “victorious” training run early in the evening, expecting to find a fully baked model in the morning. To my surprise, it finished cooking in just 3 hours! I immediately integrated it into my ASCII interface and started testing, fully expecting to get crushed. Ultimately, while it was a bit more adept than the previous version and sometimes even delightfully aggressive, it proved incapable of adapting its play to the different phases of a Backgammon game. I logged several games I played against it and discussed its inability to weave any real strategy with the AIs. While they were more nuanced in their diagnosis than I was, they agreed that variable adjustments were necessary.</p>
+<p>It was at that moment I remembered something stupid: during the testing phases, I had temporarily reduced its database usage to just 0.1%… What an idiot!</p>
+<p>I’ve now rectified that oversight and relaunched the calculation. This time, it’s definitely not going to finish overnight… but hopefully, in a few days, I’ll have an opponent capable of putting me in my place. Wish me luck!</p>
+<h2 id="Oh-well…"><a href="#Oh-well…" class="headerlink" title="Oh well…"></a>Oh well…</h2><p>I’m writing these lines a month later. That brilliant plan? Turns out it was even more complicated than it already looked on paper. Supervised training went surprisingly well (over 80% prediction accuracy — not bad!), but reinforcement learning… let’s just say it was a lot less straightforward and far less forgiving of my total lack of experience. Between the endless bugs and the hyperparameter drama, I got absolutely nowhere. Each attempt would lock up my poor personal computer for an entire day (yes, I’m talking about a first-gen M1 Mac with 16GB of RAM — clearly not built for this kind of abuse). So I gave up on that quest and pivoted to something a bit more manageable: a heuristic blended with minimax, itself backed by an AI model that helps prune what, from my perspective, is a monstrously large decision tree. And that, dear reader, is what this new post is all about.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Makes-Backgammon-Challenging-for-AI"><span class="toc-number">1.</span> <span class="toc-text">What Makes Backgammon Challenging for AI?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Creating-a-Minimalist-Model"><span class="toc-number">2.</span> <span class="toc-text">Step 1: Creating a Minimalist Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Designing-the-Advanced-Training-Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Step 2: Designing the Advanced Training Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deeper-Dive-PPO-and-GAE-How-the-RL-Magic-Happens"><span class="toc-number">4.</span> <span class="toc-text">Deeper Dive: PPO and GAE (How the RL Magic Happens)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Teaching-a-Computer-to-Play"><span class="toc-number">5.</span> <span class="toc-text">Teaching a Computer to Play</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oh-well%E2%80%A6"><span class="toc-number">6.</span> <span class="toc-text">Oh well…</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/26/Behind-the-Moves/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/26/Behind-the-Moves/&text=Backgammon - Behind the Moves"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/26/Behind-the-Moves/&title=Backgammon - Behind the Moves"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/26/Behind-the-Moves/&is_video=false&description=Backgammon - Behind the Moves"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Backgammon - Behind the Moves&body=Check out this article: http://tokipona.today/2025/03/26/Behind-the-Moves/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/26/Behind-the-Moves/&title=Backgammon - Behind the Moves"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

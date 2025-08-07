@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Chapter 3: Working with Text## The Power of Text Manipulation Text processing is where the shell truly shines. In our increasingly data-driven world, the ability to extract, transform, and analyze tex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell Course 3">
+<meta property="og:url" content="http://tokipona.today/2025/03/04/Shell-101-3/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Chapter 3: Working with Text## The Power of Text Manipulation Text processing is where the shell truly shines. In our increasingly data-driven world, the ability to extract, transform, and analyze tex">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-04T17:15:44.000Z">
+<meta property="article:modified_time" content="2025-03-04T07:07:30.651Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Shell Course 3</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Shell Course 3
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Chapter-3-Working-with-Text"><a href="#Chapter-3-Working-with-Text" class="headerlink" title="Chapter 3: Working with Text"></a>Chapter 3: Working with Text</h1><p><blue>## The Power of Text Manipulation</blue></p>
+<p>Text processing is where the shell truly shines. In our increasingly data-driven world, the ability to extract, transform, and analyze text efficiently is invaluable. Whether you’re parsing log files, cleaning data sets, or automating document processing, the shell offers a remarkable toolkit for text manipulation.</p>
+<p><orange>Text in Unix systems is rather like water in the natural world - it flows between commands, can be filtered, redirected, and transformed. Understanding how to control this flow gives you tremendous power over your computing environment.</orange></p>
+<p>Let’s dive deeper into the tools that make text processing in the shell so powerful.</p>
+<hr>
+<p><blue>## Input and Output Redirection</blue></p>
+<p>Before we explore text processing commands, we need to understand how to control where text comes from and where it goes.</p>
+<h3 id="Standard-Streams"><a href="#Standard-Streams" class="headerlink" title="Standard Streams"></a>Standard Streams</h3><p>The shell uses three standard “streams” for input and output:</p>
+<ul>
+<li><strong>stdin (0)</strong>: Standard input - where commands read their input</li>
+<li><strong>stdout (1)</strong>: Standard output - where commands send their normal output</li>
+<li><strong>stderr (2)</strong>: Standard error - where commands send error messages</li>
+</ul>
+<h3 id="Redirecting-Output"><a href="#Redirecting-Output" class="headerlink" title="Redirecting Output"></a>Redirecting Output</h3><p>To save command output to a file instead of displaying it on the screen:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l &gt; file_list.txt      <span class="comment"># Save output to file (overwrites existing file)</span></span><br><span class="line">$ ls -l &gt;&gt; file_list.txt     <span class="comment"># Append output to file (preserves existing content)</span></span><br></pre></td></tr></table></figure>
+
+<p>To redirect error messages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ find / -name <span class="string">&quot;*.conf&quot;</span> 2&gt; errors.txt    <span class="comment"># Save only errors to file</span></span><br><span class="line">$ find / -name <span class="string">&quot;*.conf&quot;</span> 2&gt; /dev/null     <span class="comment"># Discard errors entirely</span></span><br></pre></td></tr></table></figure>
+
+<p>To redirect both standard output and errors to the same file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l non_existent_file &gt; output.txt 2&gt;&amp;1    <span class="comment"># Redirect both to output.txt</span></span><br></pre></td></tr></table></figure>
+
+<p><red>A modern, cleaner syntax for redirecting both streams:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l non_existent_file &amp;&gt; output.txt    <span class="comment"># Redirect both to output.txt</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Redirecting-Input"><a href="#Redirecting-Input" class="headerlink" title="Redirecting Input"></a>Redirecting Input</h3><p>To use a file as input to a command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sort &lt; unsorted_list.txt     <span class="comment"># Use file content as input to sort</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>Redirection allows you to create pipelines that transform your data step by step - rather like a factory production line where each station performs a specific operation on the materials passing through it.</orange></p>
+<hr>
+<p><blue>## Pipes: Connecting Commands</blue></p>
+<p>The pipe operator (<code>|</code>) connects the output of one command to the input of another, allowing you to build powerful command chains.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l | grep <span class="string">&quot;Mar&quot;</span>    <span class="comment"># List files and filter for those containing &quot;Mar&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Pipes can be chained to create complex data processing workflows:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat access.log | grep <span class="string">&quot;ERROR&quot;</span> | sort | uniq -c | sort -nr</span><br></pre></td></tr></table></figure>
+
+<p>This pipeline:</p>
+<ol>
+<li>Reads the log file</li>
+<li>Filters for lines containing “ERROR”</li>
+<li>Sorts the matching lines</li>
+<li>Counts unique occurrences</li>
+<li>Sorts numerically in reverse order (most frequent first)</li>
+</ol>
+<p><red>Thinking in pipelines is a fundamental skill for shell mastery. Each command does one thing well, and their power comes from combining them in creative ways.</red></p>
+<hr>
+<p><blue>## Text Processing Commands</blue></p>
+<p>Now let’s explore the essential text processing tools in your shell toolkit.</p>
+<h3 id="The-Swiss-Army-Knives-grep-sed-and-awk"><a href="#The-Swiss-Army-Knives-grep-sed-and-awk" class="headerlink" title="The Swiss Army Knives: grep, sed, and awk"></a>The Swiss Army Knives: <code>grep</code>, <code>sed</code>, and <code>awk</code></h3><p>These three commands form the cornerstone of text processing in the shell. They each deserve their own book, but we’ll cover the essentials.</p>
+<h4 id="grep-Pattern-Matching-and-Text-Search"><a href="#grep-Pattern-Matching-and-Text-Search" class="headerlink" title="grep: Pattern Matching and Text Search"></a><code>grep</code>: Pattern Matching and Text Search</h4><p>We introduced <code>grep</code> in the previous chapter, but let’s explore it further:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">&quot;pattern&quot;</span> file.txt               <span class="comment"># Find lines matching pattern</span></span><br><span class="line">$ grep -i <span class="string">&quot;pattern&quot;</span> file.txt            <span class="comment"># Case-insensitive search</span></span><br><span class="line">$ grep -v <span class="string">&quot;pattern&quot;</span> file.txt            <span class="comment"># Find lines NOT matching pattern</span></span><br><span class="line">$ grep -n <span class="string">&quot;pattern&quot;</span> file.txt            <span class="comment"># Show line numbers with matches</span></span><br><span class="line">$ grep -c <span class="string">&quot;pattern&quot;</span> file.txt            <span class="comment"># Count matching lines</span></span><br><span class="line">$ grep -o <span class="string">&quot;pattern&quot;</span> file.txt            <span class="comment"># Show only the matched part</span></span><br><span class="line">$ grep -E <span class="string">&quot;pattern1|pattern2&quot;</span> file.txt  <span class="comment"># Extended grep (supports OR)</span></span><br><span class="line">$ grep -A 2 <span class="string">&quot;pattern&quot;</span> file.txt          <span class="comment"># Show 2 lines after match</span></span><br><span class="line">$ grep -B 2 <span class="string">&quot;pattern&quot;</span> file.txt          <span class="comment"># Show 2 lines before match</span></span><br><span class="line">$ grep -C 2 <span class="string">&quot;pattern&quot;</span> file.txt          <span class="comment"># Show 2 lines before and after match</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>The name <code>grep</code> comes from the ed editor command <code>g/re/p</code> (globally search for a regular expression and print matching lines) - a delightful piece of computing archaeology that reminds us how command names that seem arbitrary today often have perfectly logical historical origins.</orange></p>
+<h4 id="sed-Stream-Editor"><a href="#sed-Stream-Editor" class="headerlink" title="sed: Stream Editor"></a><code>sed</code>: Stream Editor</h4><p><code>sed</code> is designed for transforming text with search-and-replace operations:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sed <span class="string">&#x27;s/old/new/&#x27;</span> file.txt             <span class="comment"># Replace first occurrence on each line</span></span><br><span class="line">$ sed <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt            <span class="comment"># Replace all occurrences</span></span><br><span class="line">$ sed <span class="string">&#x27;s/old/new/gi&#x27;</span> file.txt           <span class="comment"># Replace all occurrences, case-insensitive</span></span><br><span class="line">$ sed <span class="string">&#x27;1,5s/old/new/g&#x27;</span> file.txt         <span class="comment"># Replace only in lines 1-5</span></span><br><span class="line">$ sed <span class="string">&#x27;/pattern/s/old/new/g&#x27;</span> file.txt   <span class="comment"># Replace only in lines matching pattern</span></span><br></pre></td></tr></table></figure>
+
+<p><red>By default, <code>sed</code> prints every line, modified or not. To print only modified lines:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sed -n <span class="string">&#x27;s/old/new/p&#x27;</span> file.txt         <span class="comment"># Print only lines that were changed</span></span><br></pre></td></tr></table></figure>
+
+<p>To delete lines:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sed <span class="string">&#x27;5d&#x27;</span> file.txt                     <span class="comment"># Delete line 5</span></span><br><span class="line">$ sed <span class="string">&#x27;/pattern/d&#x27;</span> file.txt             <span class="comment"># Delete lines matching pattern</span></span><br><span class="line">$ sed <span class="string">&#x27;1,5d&#x27;</span> file.txt                   <span class="comment"># Delete lines 1-5</span></span><br></pre></td></tr></table></figure>
+
+<p>Remember that <code>sed</code> doesn’t modify the original file. To save changes:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sed <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt &gt; new_file.txt    <span class="comment"># Save to new file</span></span><br><span class="line">$ sed -i <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt               <span class="comment"># Modify in place (be careful!)</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>The <code>-i</code> option for in-place editing is like performing surgery without a backup plan. Consider using <code>-i.bak</code> instead, which creates a backup file with the .bak extension:</orange></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sed -i.bak <span class="string">&#x27;s/old/new/g&#x27;</span> file.txt     <span class="comment"># Creates file.txt.bak before modifying</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="awk-Text-Processing-Language"><a href="#awk-Text-Processing-Language" class="headerlink" title="awk: Text Processing Language"></a><code>awk</code>: Text Processing Language</h4><p>While <code>grep</code> finds patterns and <code>sed</code> performs replacements, <code>awk</code> is a full-featured text processing language for more complex transformations:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> file.txt             <span class="comment"># Print first column of each line</span></span><br><span class="line">$ awk <span class="string">&#x27;&#123;print $1, $3&#125;&#x27;</span> file.txt         <span class="comment"># Print first and third columns</span></span><br><span class="line">$ awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> file.txt            <span class="comment"># Print last column</span></span><br><span class="line">$ awk <span class="string">&#x27;&#123;print NF&#125;&#x27;</span> file.txt             <span class="comment"># Print number of columns in each line</span></span><br><span class="line">$ awk <span class="string">&#x27;&#123;sum += $1&#125; END &#123;print sum&#125;&#x27;</span> file.txt    <span class="comment"># Sum values in first column</span></span><br></pre></td></tr></table></figure>
+
+<p><red>Pattern-action pairs make <code>awk</code> particularly powerful:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;/pattern/ &#123;print $1&#125;&#x27;</span> file.txt        <span class="comment"># Print first column of matching lines</span></span><br><span class="line">$ awk <span class="string">&#x27;$3 &gt; 100 &#123;print $1, $3&#125;&#x27;</span> file.txt     <span class="comment"># Print when third column exceeds 100</span></span><br><span class="line">$ awk <span class="string">&#x27;NR==10, NR==20 &#123;print&#125;&#x27;</span> file.txt      <span class="comment"># Print lines 10-20</span></span><br></pre></td></tr></table></figure>
+
+<p><code>awk</code> can format output with printf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;printf &quot;Name: %-10s Age: %d\n&quot;, $1, $2&#125;&#x27;</span> people.txt</span><br></pre></td></tr></table></figure>
+
+<p><orange>Learning <code>awk</code> is rather like discovering that your adjustable spanner is actually a complete workshop in disguise. What seems like a simple command at first reveals itself to be a full programming language with variables, functions, and control structures.</orange></p>
+<h3 id="Sorting-and-Uniqueness"><a href="#Sorting-and-Uniqueness" class="headerlink" title="Sorting and Uniqueness"></a>Sorting and Uniqueness</h3><h4 id="sort-Arranging-Text"><a href="#sort-Arranging-Text" class="headerlink" title="sort: Arranging Text"></a><code>sort</code>: Arranging Text</h4><p>The <code>sort</code> command arranges lines of text:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sort file.txt                     <span class="comment"># Sort alphabetically</span></span><br><span class="line">$ sort -r file.txt                  <span class="comment"># Reverse sort</span></span><br><span class="line">$ sort -n file.txt                  <span class="comment"># Numerical sort</span></span><br><span class="line">$ sort -k 2 file.txt                <span class="comment"># Sort by second column</span></span><br><span class="line">$ sort -k 2,2 -k 1,1 file.txt       <span class="comment"># Sort by second column, then first</span></span><br><span class="line">$ sort -t, -k2,2n data.csv          <span class="comment"># Sort CSV by second column numerically</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="uniq-Finding-Unique-Lines"><a href="#uniq-Finding-Unique-Lines" class="headerlink" title="uniq: Finding Unique Lines"></a><code>uniq</code>: Finding Unique Lines</h4><p>The <code>uniq</code> command reports or filters out repeated lines:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ uniq file.txt                   <span class="comment"># Remove adjacent duplicate lines</span></span><br><span class="line">$ sort file.txt | uniq            <span class="comment"># Remove all duplicates (must sort first)</span></span><br><span class="line">$ uniq -c file.txt                <span class="comment"># Count occurrences of each line</span></span><br><span class="line">$ uniq -d file.txt                <span class="comment"># Show only duplicate lines</span></span><br><span class="line">$ uniq -u file.txt                <span class="comment"># Show only unique lines</span></span><br></pre></td></tr></table></figure>
+
+<p><red>A common pattern for finding the most frequent items:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sort file.txt | uniq -c | sort -nr    <span class="comment"># Count and sort by frequency</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Cutting-and-Pasting-Text"><a href="#Cutting-and-Pasting-Text" class="headerlink" title="Cutting and Pasting Text"></a>Cutting and Pasting Text</h3><h4 id="cut-Extracting-Columns"><a href="#cut-Extracting-Columns" class="headerlink" title="cut: Extracting Columns"></a><code>cut</code>: Extracting Columns</h4><p>The <code>cut</code> command extracts sections from each line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cut -c 1-5 file.txt              <span class="comment"># Characters 1-5 from each line</span></span><br><span class="line">$ cut -d, -f 1,3 data.csv          <span class="comment"># Fields 1 and 3 from CSV file</span></span><br><span class="line">$ cut -d: -f1 /etc/passwd          <span class="comment"># Extract usernames from passwd file</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="paste-Merging-Lines"><a href="#paste-Merging-Lines" class="headerlink" title="paste: Merging Lines"></a><code>paste</code>: Merging Lines</h4><p>The <code>paste</code> command merges lines from different files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ paste file1.txt file2.txt         <span class="comment"># Combine lines side by side with tabs</span></span><br><span class="line">$ paste -d, file1.txt file2.txt     <span class="comment"># Combine using comma as delimiter</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Text-Transformation"><a href="#Text-Transformation" class="headerlink" title="Text Transformation"></a>Text Transformation</h3><h4 id="tr-Translating-Characters"><a href="#tr-Translating-Characters" class="headerlink" title="tr: Translating Characters"></a><code>tr</code>: Translating Characters</h4><p>The <code>tr</code> command translates or deletes characters:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat file.txt | tr <span class="string">&#x27;a-z&#x27;</span> <span class="string">&#x27;A-Z&#x27;</span>      <span class="comment"># Convert to uppercase</span></span><br><span class="line">$ cat file.txt | tr -d <span class="string">&#x27;\r&#x27;</span>          <span class="comment"># Remove carriage returns</span></span><br><span class="line">$ cat file.txt | tr -s <span class="string">&#x27; &#x27;</span>           <span class="comment"># Squeeze multiple spaces into one</span></span><br><span class="line">$ cat file.txt | tr <span class="string">&#x27;[:punct:]&#x27;</span> <span class="string">&#x27; &#x27;</span>  <span class="comment"># Replace punctuation with spaces</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="rev-Reversing-Lines"><a href="#rev-Reversing-Lines" class="headerlink" title="rev: Reversing Lines"></a><code>rev</code>: Reversing Lines</h4><p>The <code>rev</code> command reverses characters in each line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span> | rev                <span class="comment"># Outputs &quot;olleh&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>While this might seem like a party trick, <code>rev</code> can be surprisingly useful for certain text processing tasks, such as extracting parts of filenames from the end.</orange></p>
+<h4 id="fold-Wrapping-Lines"><a href="#fold-Wrapping-Lines" class="headerlink" title="fold: Wrapping Lines"></a><code>fold</code>: Wrapping Lines</h4><p>The <code>fold</code> command wraps lines to a specified width:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ fold -w 80 file.txt               <span class="comment"># Wrap at 80 characters</span></span><br><span class="line">$ fold -s -w 80 file.txt            <span class="comment"># Wrap at 80 characters at word boundaries</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Text Editors in the Shell</blue></p>
+<p>Sometimes you need to edit text directly rather than processing it through pipes. Let’s explore the most common text editors available in the shell.</p>
+<h3 id="nano-Beginner-Friendly-Editor"><a href="#nano-Beginner-Friendly-Editor" class="headerlink" title="nano: Beginner-Friendly Editor"></a><code>nano</code>: Beginner-Friendly Editor</h3><p>Nano is a simple, user-friendly editor that displays commands at the bottom of the screen:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nano file.txt</span><br></pre></td></tr></table></figure>
+
+<p>Common commands (^ means Ctrl):</p>
+<ul>
+<li>^O: Save file</li>
+<li>^X: Exit</li>
+<li>^K: Cut line</li>
+<li>^U: Paste</li>
+<li>^W: Search</li>
+<li>^G: Get help</li>
+</ul>
+<p><red>Nano is perfect for quick edits when you don’t want to deal with the learning curve of more powerful editors.</red></p>
+<h3 id="vim-The-Programmer’s-Editor"><a href="#vim-The-Programmer’s-Editor" class="headerlink" title="vim: The Programmer’s Editor"></a><code>vim</code>: The Programmer’s Editor</h3><p>Vim is a powerful, modal editor with a steeper learning curve but tremendous capabilities:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim file.txt</span><br></pre></td></tr></table></figure>
+
+<p>Vim has different modes:</p>
+<ul>
+<li><strong>Normal mode</strong>: For navigation and commands (default)</li>
+<li><strong>Insert mode</strong>: For typing text (press <code>i</code> to enter)</li>
+<li><strong>Visual mode</strong>: For selecting text (press <code>v</code> to enter)</li>
+<li><strong>Command mode</strong>: For saving, quitting, etc. (press <code>:</code> to enter)</li>
+</ul>
+<p><orange>Vim has a reputation for being difficult to exit, to the point where “How to exit Vim” is a perennial favorite on programming forums. For the record, it’s <code>:q!</code> to quit without saving or <code>:wq</code> to save and quit - consider this your emergency exit information.</orange></p>
+<p>Basic vim commands (in normal mode):</p>
+<ul>
+<li><code>i</code>: Enter insert mode</li>
+<li><code>Esc</code>: Return to normal mode</li>
+<li><code>:w</code>: Save file</li>
+<li><code>:q</code>: Quit</li>
+<li><code>:wq</code>: Save and quit</li>
+<li><code>:q!</code>: Quit without saving</li>
+<li><code>/pattern</code>: Search for pattern</li>
+<li><code>n</code>: Next search result</li>
+<li><code>dd</code>: Delete line</li>
+<li><code>yy</code>: Copy line</li>
+<li><code>p</code>: Paste</li>
+</ul>
+<h3 id="emacs-The-Extensible-Editor"><a href="#emacs-The-Extensible-Editor" class="headerlink" title="emacs: The Extensible Editor"></a><code>emacs</code>: The Extensible Editor</h3><p>Emacs is another powerful editor with its own ecosystem:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emacs file.txt</span><br></pre></td></tr></table></figure>
+
+<p>Common commands:</p>
+<ul>
+<li>C-x C-s: Save file (Ctrl+x, Ctrl+s)</li>
+<li>C-x C-c: Exit</li>
+<li>C-k: Cut line</li>
+<li>C-y: Paste</li>
+<li>C-s: Search forward</li>
+</ul>
+<p><red>The vi vs. emacs debate is one of computing’s oldest religious wars, with passionate adherents on both sides. Choose wisely, or risk being drawn into debates that have been ongoing since the 1970s.</red></p>
+<hr>
+<p><blue>## Practical Examples</blue></p>
+<p>Let’s cement our understanding with some practical examples of text processing in the shell.</p>
+<h3 id="Example-1-Analyzing-Log-Files"><a href="#Example-1-Analyzing-Log-Files" class="headerlink" title="Example 1: Analyzing Log Files"></a>Example 1: Analyzing Log Files</h3><p>Extract all ERROR messages from a log file, count their occurrences, and sort by frequency:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">&quot;ERROR&quot;</span> application.log | cut -d: -f4 | sort | uniq -c | sort -nr</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-2-CSV-Processing"><a href="#Example-2-CSV-Processing" class="headerlink" title="Example 2: CSV Processing"></a>Example 2: CSV Processing</h3><p>Extract and format specific columns from a CSV file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat data.csv | cut -d, -f1,3,5 | sed <span class="string">&#x27;s/,/ | /g&#x27;</span> | sort -k 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-3-Finding-Duplicate-Files"><a href="#Example-3-Finding-Duplicate-Files" class="headerlink" title="Example 3: Finding Duplicate Files"></a>Example 3: Finding Duplicate Files</h3><p>List potential duplicate files based on size:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> ls -l &#123;&#125; \; | awk <span class="string">&#x27;&#123;print $5, $9&#125;&#x27;</span> | sort -n | uniq -D -f1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-4-Word-Count-in-a-Document"><a href="#Example-4-Word-Count-in-a-Document" class="headerlink" title="Example 4: Word Count in a Document"></a>Example 4: Word Count in a Document</h3><p>Count words in a document and find the most common ones:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat document.txt | tr -cs <span class="string">&#x27;[:alpha:]&#x27;</span> <span class="string">&#x27;\n&#x27;</span> | tr <span class="string">&#x27;[:upper:]&#x27;</span> <span class="string">&#x27;[:lower:]&#x27;</span> | sort | uniq -c | sort -nr | head -10</span><br></pre></td></tr></table></figure>
+
+<p>This pipeline:</p>
+<ol>
+<li>Extracts words by converting non-letters to newlines</li>
+<li>Converts everything to lowercase</li>
+<li>Sorts the words</li>
+<li>Counts occurrences</li>
+<li>Sorts by frequency (most common first)</li>
+<li>Shows the top 10</li>
+</ol>
+<h3 id="Example-5-Converting-File-Formats"><a href="#Example-5-Converting-File-Formats" class="headerlink" title="Example 5: Converting File Formats"></a>Example 5: Converting File Formats</h3><p>Convert a Windows text file to Unix format (removing carriage returns):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat windows.txt | tr -d <span class="string">&#x27;\r&#x27;</span> &gt; unix.txt</span><br></pre></td></tr></table></figure>
+
+<p><orange>If you’ve ever opened a Windows text file on a Unix system and seen those mysterious ^M characters at the end of each line, this command is your friend.</orange></p>
+<hr>
+<p><blue>## Regular Expressions: The Secret Sauce</blue></p>
+<p>Many text processing tools use regular expressions (regex) for pattern matching. While a complete regex tutorial is beyond our scope, here are some fundamental patterns:</p>
+<ul>
+<li><code>.</code> - Matches any single character</li>
+<li><code>^</code> - Matches the start of a line</li>
+<li><code>$</code> - Matches the end of a line</li>
+<li><code>*</code> - Matches zero or more of the previous character</li>
+<li><code>+</code> - Matches one or more of the previous character</li>
+<li><code>?</code> - Matches zero or one of the previous character</li>
+<li><code>[abc]</code> - Matches any one of the characters in brackets</li>
+<li><code>[^abc]</code> - Matches any character NOT in brackets</li>
+<li><code>\d</code> - Matches a digit</li>
+<li><code>\w</code> - Matches a word character (alphanumeric)</li>
+<li><code>\s</code> - Matches a whitespace character</li>
+</ul>
+<p><red>Examples in action:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">&quot;^#&quot;</span> file.txt           <span class="comment"># Lines starting with #</span></span><br><span class="line">$ grep <span class="string">&quot;[0-9]\&#123;3\&#125;&quot;</span> file.txt   <span class="comment"># Lines containing 3 consecutive digits</span></span><br><span class="line">$ sed <span class="string">&#x27;s/[0-9]\+/NUMBER/g&#x27;</span>     <span class="comment"># Replace all numbers with &quot;NUMBER&quot;</span></span><br><span class="line">$ grep -E <span class="string">&#x27;\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]&#123;2,&#125;\b&#x27;</span>   <span class="comment"># Find email addresses</span></span><br></pre></td></tr></table></figure>
+
+<p><orange>Regular expressions are like a language unto themselves - cryptic at first glance, but remarkably expressive once you learn their vocabulary. They’re the difference between saying “find me something that looks vaguely like an email” and precisely defining what pattern constitutes a valid email address.</orange></p>
+<hr>
+<p><blue>## Practical Exercises</blue></p>
+<p>Let’s practice what we’ve learned with some hands-on exercises:</p>
+<ol>
+<li><p>Create a text file with the following content:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Alice,25,London</span><br><span class="line">Bob,32,Manchester</span><br><span class="line">Charlie,45,Birmingham</span><br><span class="line">Diana,28,Glasgow</span><br><span class="line">Edward,39,Liverpool</span><br></pre></td></tr></table></figure></li>
+<li><p>Extract only the names and ages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cut -d, -f1,2 people.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Sort the file by age (numerically):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t, -k2,2n people.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Replace all commas with tabs:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat people.txt | tr <span class="string">&#x27;,&#x27;</span> <span class="string">&#x27;\t&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Add line numbers to the file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat -n people.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Find all people from cities that contain the letter ‘m’:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -i <span class="string">&quot;m&quot;</span> people.txt</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><red>Challenge:</red> Create a one-liner that extracts just the city names, sorts them alphabetically, and shows each city only once.</p>
+<p><orange>Solution: <code>cut -d, -f3 people.txt | sort | uniq</code></orange></p>
+<hr>
+<p><blue>## Conclusion</blue></p>
+<p>Text processing is one of the shell’s greatest strengths. The commands we’ve explored in this chapter provide a powerful toolkit for manipulating, analyzing, and transforming text data of all kinds. While there’s certainly more to learn, mastering these fundamental tools will enable you to handle a vast array of text processing tasks efficiently.</p>
+<p>Remember that the real power comes from combining these tools using pipes and redirection. Each command does one thing well, and their strength emerges when you connect them in creative ways to solve complex problems.</p>
+<p>In the next chapter, we’ll explore process management – how to control running programs, monitor system resources, and multitask effectively in the shell environment.</p>
+<p><orange>Practice these text manipulation techniques, and you’ll soon find yourself processing data with the elegant efficiency of a master chef preparing ingredients - each slice, dice, and transformation bringing you closer to the final desired result.</orange></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Working-with-Text"><span class="toc-number">1.</span> <span class="toc-text">Chapter 3: Working with Text</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Standard-Streams"><span class="toc-number">1.0.1.</span> <span class="toc-text">Standard Streams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redirecting-Output"><span class="toc-number">1.0.2.</span> <span class="toc-text">Redirecting Output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redirecting-Input"><span class="toc-number">1.0.3.</span> <span class="toc-text">Redirecting Input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Swiss-Army-Knives-grep-sed-and-awk"><span class="toc-number">1.0.4.</span> <span class="toc-text">The Swiss Army Knives: grep, sed, and awk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sorting-and-Uniqueness"><span class="toc-number">1.0.5.</span> <span class="toc-text">Sorting and Uniqueness</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cutting-and-Pasting-Text"><span class="toc-number">1.0.6.</span> <span class="toc-text">Cutting and Pasting Text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text-Transformation"><span class="toc-number">1.0.7.</span> <span class="toc-text">Text Transformation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nano-Beginner-Friendly-Editor"><span class="toc-number">1.0.8.</span> <span class="toc-text">nano: Beginner-Friendly Editor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim-The-Programmer%E2%80%99s-Editor"><span class="toc-number">1.0.9.</span> <span class="toc-text">vim: The Programmer’s Editor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#emacs-The-Extensible-Editor"><span class="toc-number">1.0.10.</span> <span class="toc-text">emacs: The Extensible Editor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-1-Analyzing-Log-Files"><span class="toc-number">1.0.11.</span> <span class="toc-text">Example 1: Analyzing Log Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-2-CSV-Processing"><span class="toc-number">1.0.12.</span> <span class="toc-text">Example 2: CSV Processing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-3-Finding-Duplicate-Files"><span class="toc-number">1.0.13.</span> <span class="toc-text">Example 3: Finding Duplicate Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-4-Word-Count-in-a-Document"><span class="toc-number">1.0.14.</span> <span class="toc-text">Example 4: Word Count in a Document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-5-Converting-File-Formats"><span class="toc-number">1.0.15.</span> <span class="toc-text">Example 5: Converting File Formats</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/04/Shell-101-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/04/Shell-101-3/&text=Shell Course 3"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/04/Shell-101-3/&title=Shell Course 3"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/04/Shell-101-3/&is_video=false&description=Shell Course 3"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Shell Course 3&body=Check out this article: http://tokipona.today/2025/03/04/Shell-101-3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/04/Shell-101-3/&title=Shell Course 3"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

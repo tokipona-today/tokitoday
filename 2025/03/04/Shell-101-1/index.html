@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Chapter 1: Shell Basics## What is the shell? The shell is a text-based interface that allows you to interact with your operating system. Think of it as a command interpreter: you type instructions, an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell Course 1">
+<meta property="og:url" content="http://tokipona.today/2025/03/04/Shell-101-1/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Chapter 1: Shell Basics## What is the shell? The shell is a text-based interface that allows you to interact with your operating system. Think of it as a command interpreter: you type instructions, an">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-04T17:15:46.000Z">
+<meta property="article:modified_time" content="2025-03-04T07:07:55.541Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Shell Course 1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Shell Course 1
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Chapter-1-Shell-Basics"><a href="#Chapter-1-Shell-Basics" class="headerlink" title="Chapter 1: Shell Basics"></a>Chapter 1: Shell Basics</h1><p><blue>## What is the shell?</blue></p>
+<p>The shell is a text-based interface that allows you to interact with your operating system. Think of it as a command interpreter: you type instructions, and the shell executes them for you. It’s like having a conversation with your computer where you tell it exactly what you want it to do.</p>
+<p>Unlike the graphical user interfaces (GUIs) you’re probably used to, the shell offers a more direct and often more powerful approach to working with your system. It’s the tool of choice for developers, system administrators, and power users.</p>
+<p><red>Why learn the shell?</red></p>
+<ul>
+<li><strong>Efficiency</strong>: Performing certain tasks is much faster via command line</li>
+<li><strong>Automation</strong>: Easily repeat complex tasks</li>
+<li><strong>Remote access</strong>: Control servers or remote machines</li>
+<li><strong>Power</strong>: Access features not available through graphical interfaces</li>
+</ul>
+<p><orange>The shell is like a digital Swiss Army knife: it might seem intimidating at first, but once you master the basics, you’ll wonder how you ever managed without it.</orange></p>
+<hr>
+<p><blue>## First steps with the shell</blue></p>
+<p>The first time you open a terminal, you’re greeted with what’s called the <strong>prompt</strong>. It typically looks something like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username@hostname:~$</span><br></pre></td></tr></table></figure>
+
+<p>This prompt tells you:</p>
+<ul>
+<li>Your username (<code>username</code>)</li>
+<li>Your machine’s name (<code>hostname</code>)</li>
+<li>Your current directory (<code>~</code>, which is a shortcut for your home folder)</li>
+<li>The <code>$</code> symbol marking the end of the prompt (on some systems, this might be <code>%</code> or <code>&gt;</code>)</li>
+</ul>
+<p><red>This is where the magic happens.</red> You can now type commands and press <kbd>Enter</kbd> to execute them.</p>
+<hr>
+<p><blue>## Essential commands to get started</blue></p>
+<p>Let’s begin with the basic commands that every shell user should know. These are the foundations upon which you’ll build your expertise.</p>
+<h3 id="1-pwd-Print-Working-Directory"><a href="#1-pwd-Print-Working-Directory" class="headerlink" title="1. pwd - Print Working Directory"></a>1. <code>pwd</code> - Print Working Directory</h3><p>The <code>pwd</code> command tells you which directory you’re currently in.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username</span><br></pre></td></tr></table></figure>
+
+<p>This is equivalent to asking “Where am I?” to the system. Particularly useful when navigating between different folders.</p>
+<h3 id="2-ls-List"><a href="#2-ls-List" class="headerlink" title="2. ls - List"></a>2. <code>ls</code> - List</h3><p>The <code>ls</code> command displays the contents of the current directory.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">Documents  Downloads  Music  Pictures  Videos</span><br></pre></td></tr></table></figure>
+
+<p><red>Useful variations:</red></p>
+<ul>
+<li><p><code>ls -l</code>: Displays details (permissions, size, modification date)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">total 28</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:15 Documents</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:15 Downloads</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:15 Music</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:15 Pictures</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:15 Videos</span><br></pre></td></tr></table></figure></li>
+<li><p><code>ls -a</code>: Shows all files, including hidden ones (starting with <code>.</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -a</span><br><span class="line">.  ..  .bash_history  .bashrc  Documents  Downloads  Music  Pictures  Videos</span><br></pre></td></tr></table></figure></li>
+<li><p><code>ls -lh</code>: Like <code>-l</code>, but with human-readable sizes (MB, GB, etc.)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls -lh</span><br><span class="line">total 28K</span><br><span class="line">drwxr-xr-x 2 username group 4.0K Mar 4 10:15 Documents</span><br><span class="line">drwxr-xr-x 2 username group 4.0K Mar 4 10:15 Downloads</span><br><span class="line">drwxr-xr-x 2 username group 4.0K Mar 4 10:15 Music</span><br><span class="line">drwxr-xr-x 2 username group 4.0K Mar 4 10:15 Pictures</span><br><span class="line">drwxr-xr-x 2 username group 4.0K Mar 4 10:15 Videos</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><orange>Tip: You can combine options! For example, <code>ls -lha</code> shows all files with their details and human-readable sizes.</orange></p>
+<h3 id="3-cd-Change-Directory"><a href="#3-cd-Change-Directory" class="headerlink" title="3. cd - Change Directory"></a>3. <code>cd</code> - Change Directory</h3><p>The <code>cd</code> command allows you to navigate between directories.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> Documents</span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username/Documents</span><br></pre></td></tr></table></figure>
+
+<p><red>Essential navigation shortcuts:</red></p>
+<ul>
+<li><code>cd ~</code> or simply <code>cd</code>: Returns to your home directory</li>
+<li><code>cd ..</code>: Moves up one level in the directory tree</li>
+<li><code>cd -</code>: Returns to the previous directory</li>
+</ul>
+<p><orange>Navigation example:</orange></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username</span><br><span class="line">$ <span class="built_in">cd</span> Documents</span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username/Documents</span><br><span class="line">$ <span class="built_in">cd</span> ..</span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username</span><br><span class="line">$ <span class="built_in">cd</span> /etc</span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/etc</span><br><span class="line">$ <span class="built_in">cd</span> -</span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/username</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-mkdir-Make-Directory"><a href="#4-mkdir-Make-Directory" class="headerlink" title="4. mkdir - Make Directory"></a>4. <code>mkdir</code> - Make Directory</h3><p>The <code>mkdir</code> command creates a new directory.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir Projects</span><br><span class="line">$ ls</span><br><span class="line">Documents  Downloads  Music  Pictures  Projects  Videos</span><br></pre></td></tr></table></figure>
+
+<p>To create a nested directory structure in a single command, use the <code>-p</code> option:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p Projects/Web/HTML</span><br><span class="line">$ ls -R Projects</span><br><span class="line">Projects:</span><br><span class="line">Web</span><br><span class="line"></span><br><span class="line">Projects/Web:</span><br><span class="line">HTML</span><br><span class="line"></span><br><span class="line">Projects/Web/HTML:</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-touch-Create-an-empty-file"><a href="#5-touch-Create-an-empty-file" class="headerlink" title="5. touch - Create an empty file"></a>5. <code>touch</code> - Create an empty file</h3><p>The <code>touch</code> command creates an empty file or updates the modification date of an existing file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ touch Projects/notes.txt</span><br><span class="line">$ ls -l Projects</span><br><span class="line">total 4</span><br><span class="line">-rw-r--r-- 1 username group 0 Mar 4 10:30 notes.txt</span><br><span class="line">drwxr-xr-x 2 username group 4096 Mar 4 10:25 Web</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-cat-Concatenate-and-print-files"><a href="#6-cat-Concatenate-and-print-files" class="headerlink" title="6. cat - Concatenate and print files"></a>6. <code>cat</code> - Concatenate and print files</h3><p>The <code>cat</code> command displays the contents of a file. For small files, it’s a quick way to see what they contain.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;Hello, Shell!&quot;</span> &gt; hello.txt</span><br><span class="line">$ cat hello.txt</span><br><span class="line">Hello, Shell!</span><br></pre></td></tr></table></figure>
+
+<p><red>Note: <code>echo &quot;text&quot; &gt; file</code> is a quick way to write text to a file.</red></p>
+<h3 id="7-man-Manual"><a href="#7-man-Manual" class="headerlink" title="7. man - Manual"></a>7. <code>man</code> - Manual</h3><p>The <code>man</code> command displays the manual for a command. It’s your best friend for learning how to use a command or discovering its options.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ man ls</span><br></pre></td></tr></table></figure>
+
+<p>To exit the manual, press <kbd>q</kbd>.</p>
+<p><orange>Tip: If you’re not sure of the exact name of a command, you can use <code>apropos</code> followed by a keyword to search for related commands.</orange></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ apropos directory</span><br><span class="line">basename (1)         - strip directory and suffix from filenames</span><br><span class="line">...</span><br><span class="line">mkdir (1)            - make directories</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-clear-Clean-the-screen"><a href="#8-clear-Clean-the-screen" class="headerlink" title="8. clear - Clean the screen"></a>8. <code>clear</code> - Clean the screen</h3><p>The <code>clear</code> command erases the content of your terminal, giving you a clean slate. This is particularly useful when your terminal becomes too cluttered.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ clear</span><br></pre></td></tr></table></figure>
+
+<p><red>Keyboard shortcut: </red> <kbd>Ctrl</kbd> + <kbd>L</kbd> does the same thing in most shells.</p>
+<hr>
+<p><blue>## Getting help</blue></p>
+<p>Even experts sometimes need help. Here’s how to get it:</p>
+<ol>
+<li><p><strong>Built-in documentation</strong>: Most commands accept the <code>--help</code> or <code>-h</code> option</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls --<span class="built_in">help</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Manual pages</strong>: As seen earlier with <code>man</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ man mkdir</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>The <code>whatis</code> command</strong>: Gives a very brief description of a command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ whatis ls</span><br><span class="line">ls (1)               - list directory contents</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>The <code>info</code> command</strong>: Similar to <code>man</code>, but often more detailed</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ info ls</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><orange>Don’t be afraid to explore! If you’re not sure what a command does, check its documentation before running it.</orange></p>
+<hr>
+<p><blue>## Practical exercises</blue></p>
+<p>To help solidify these concepts, here are some simple exercises:</p>
+<ol>
+<li>Open a terminal and determine which directory you’re in.</li>
+<li>List the files in your home directory, including hidden files.</li>
+<li>Create a directory named <code>ShellPractice</code>.</li>
+<li>Navigate to this directory.</li>
+<li>Create an empty text file named <code>notes.txt</code>.</li>
+<li>Add the phrase “I’m learning the shell!” to this file (hint: use <code>echo</code> and <code>&gt;</code>).</li>
+<li>Display the contents of your file.</li>
+<li>Return to your home directory.</li>
+<li>Check the manual for the <code>cp</code> command (we’ll use it in the next chapter).</li>
+</ol>
+<p><red>Solution:</red></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">$ ls -a</span><br><span class="line">$ mkdir ShellPractice</span><br><span class="line">$ <span class="built_in">cd</span> ShellPractice</span><br><span class="line">$ touch notes.txt</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;I&#x27;m learning the shell!&quot;</span> &gt; notes.txt</span><br><span class="line">$ cat notes.txt</span><br><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line">$ man cp</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><blue>## Conclusion</blue></p>
+<p>In this first chapter, we’ve explored the fundamentals of the shell. These basic commands form the foundation upon which we’ll build in the coming chapters. Though simple, they constitute a large part of your daily interaction with the terminal.</p>
+<p>In the next chapter, we’ll delve deeper into file navigation and manipulation, learning how to copy, move, and delete files, as well as understanding permissions and access rights.</p>
+<p><orange>Remember: practice is key! Try to use these commands regularly until they become second nature.</orange></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-Shell-Basics"><span class="toc-number">1.</span> <span class="toc-text">Chapter 1: Shell Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-pwd-Print-Working-Directory"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. pwd - Print Working Directory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ls-List"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. ls - List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-cd-Change-Directory"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. cd - Change Directory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-mkdir-Make-Directory"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. mkdir - Make Directory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-touch-Create-an-empty-file"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. touch - Create an empty file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-cat-Concatenate-and-print-files"><span class="toc-number">1.0.6.</span> <span class="toc-text">6. cat - Concatenate and print files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-man-Manual"><span class="toc-number">1.0.7.</span> <span class="toc-text">7. man - Manual</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-clear-Clean-the-screen"><span class="toc-number">1.0.8.</span> <span class="toc-text">8. clear - Clean the screen</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/03/04/Shell-101-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/03/04/Shell-101-1/&text=Shell Course 1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/03/04/Shell-101-1/&title=Shell Course 1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/03/04/Shell-101-1/&is_video=false&description=Shell Course 1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Shell Course 1&body=Check out this article: http://tokipona.today/2025/03/04/Shell-101-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/03/04/Shell-101-1/&title=Shell Course 1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
