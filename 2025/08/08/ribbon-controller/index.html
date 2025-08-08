@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Schémas pratiques (avec et sans ampli op)Vous avez 50 cm de fil résistif ≈ 22 Ω. On l’utilise comme “piste” alimentée via une résistance série pour limiter le courant, et on lit la position via un wip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ribbon Controller">
+<meta property="og:url" content="http://tokipona.today/2025/08/08/ribbon-controller/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Schémas pratiques (avec et sans ampli op)Vous avez 50 cm de fil résistif ≈ 22 Ω. On l’utilise comme “piste” alimentée via une résistance série pour limiter le courant, et on lit la position via un wip">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-08T03:13:00.000Z">
+<meta property="article:modified_time" content="2025-08-08T07:14:57.614Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Ribbon Controller</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Ribbon Controller
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Schemas-pratiques-avec-et-sans-ampli-op"><a href="#Schemas-pratiques-avec-et-sans-ampli-op" class="headerlink" title="Schémas pratiques (avec et sans ampli op)"></a>Schémas pratiques (avec et sans ampli op)</h2><p>Vous avez 50 cm de fil résistif ≈ 22 Ω. On l’utilise comme “piste” alimentée via une résistance série pour limiter le courant, et on lit la position via un wiper. Ci‑dessous deux options:</p>
+<ul>
+<li>Option A: sans ampli op (simple, immédiat)</li>
+<li>Option B: avec ampli op (pleine échelle ADC, meilleure SNR)</li>
+</ul>
+<p>Je propose un AOP très courant et facile à trouver: MCP6002 (ou MCP6001 en simple). Alternatives: TLV9002, LMV358 (RRIO). À éviter: LM358 “classique” sous 3,3 V (pas rail‑to‑rail, écrêtage vers le haut).</p>
+<hr>
+<h2 id="Option-A-—-Sans-ampli-op-ADC-direct"><a href="#Option-A-—-Sans-ampli-op-ADC-direct" class="headerlink" title="Option A — Sans ampli op (ADC direct)"></a>Option A — Sans ampli op (ADC direct)</h2><p>Idée: ajouter une résistance série Rs pour limiter courant/chaleur; la piste (22 Ω) ne verra qu’une fraction de 3,3 V. Le wiper prélève la tension locale. On protège et on filtre l’ADC.</p>
+<ul>
+<li><p>Valeur recommandée: Rs = 150 Ω (compromis conso/dynamique)</p>
+<ul>
+<li>Courant I ≈ 3,3 / (22 + 150) ≈ 19 mA</li>
+<li>Tension le long de la piste Vfil ≈ 0,42 V</li>
+<li>Puissances: PRs ≈ 55 mW (prendre 1/4 W), Pfil ≈ 8 mW</li>
+</ul>
+</li>
+<li><p>Variante basse conso: Rs = 220 Ω → I ≈ 13,6 mA, Vfil ≈ 0,30 V, PRs ≈ 41 mW, Pfil ≈ 4 mW</p>
+</li>
+</ul>
+<p>Schéma (ASCII):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">3V3 ── Rs 150 Ω (¼ W) ──●────── Fil résistif 22 Ω (50 cm) ─── GND</span><br><span class="line">                         │</span><br><span class="line">                         ●───(wiper mécanique)─── Rprot 1 kΩ ──●───→ GPIO ADC (ESP32)</span><br><span class="line">                                                             │</span><br><span class="line">                                                           C 100–220 nF</span><br><span class="line">                                                             │</span><br><span class="line">                                                           GND</span><br><span class="line">                                                             │</span><br><span class="line">                                                          Rpull 1 MΩ</span><br><span class="line">                                                             │</span><br><span class="line">                                                           GND</span><br><span class="line"></span><br><span class="line">(option) clamps ESD au nœud ADC:</span><br><span class="line">- Dhigh: anode au nœud ADC, cathode à 3V3 (1N4148 ou Schottky BAT54)</span><br><span class="line">- Dlow : anode à GND, cathode au nœud ADC</span><br></pre></td></tr></table></figure>
+
+<p>Notes:</p>
+<ul>
+<li>Réglez l’ADC en 0 dB (pleine échelle ≈ 1,1 V) pour bien exploiter 0–0,3/0,42 V.</li>
+<li>Impédance source côté wiper ≈ 22/4 ≈ 5,5 Ω au milieu: excellent pour le bruit; gardez le 1 kΩ série pour protéger l’ADC.</li>
+</ul>
+<hr>
+<h2 id="Option-B-—-Avec-ampli-op-pleine-echelle-0–3-3-V"><a href="#Option-B-—-Avec-ampli-op-pleine-echelle-0–3-3-V" class="headerlink" title="Option B — Avec ampli op (pleine échelle 0–3,3 V)"></a>Option B — Avec ampli op (pleine échelle 0–3,3 V)</h2><p>On garde Rs = 150 Ω (faible chauffe) donc Vfil ≈ 0,42 V, puis on amplifie en non‑inverseur vers 0–3,3 V.</p>
+<p>AOP conseillé: MCP6002 (double) ou MCP6001 (simple), rail‑to‑rail entrée/sortie, alim 3,3 V.<br>Alternatives: TLV9002/TLV9062, LMV358 (RRIO). Éviter LM358 “ancien”.</p>
+<p>Schéma (ASCII):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">3V3 ── Rs 150 Ω (¼ W) ──●────── Fil résistif 22 Ω (50 cm) ─── GND</span><br><span class="line">                         │</span><br><span class="line">                         ●───(wiper)── Rin 100 Ω ──┐</span><br><span class="line">                                                  │  Vin(+)</span><br><span class="line">                                 MCP6001/2 3V3  ┌─┴─┐</span><br><span class="line">                                                │   │</span><br><span class="line">                                   Rg 10 kΩ ────┤ − │────┬──── Rf 68 kΩ ──┐</span><br><span class="line">                                    (→ GND)     │   │    │                │</span><br><span class="line">                                                └───┘    │               Cf 47 nF</span><br><span class="line">                                                        Rout 1 kΩ         │</span><br><span class="line">                                                           │              │</span><br><span class="line">Sortie AOP ────────────────●───────────────→ GPIO ADC      └──────────────┘</span><br><span class="line">                           │</span><br><span class="line">                         C 100–220 nF</span><br><span class="line">                           │</span><br><span class="line">                         GND</span><br><span class="line">                           │</span><br><span class="line">                        Rpull 1 MΩ</span><br><span class="line">                           │</span><br><span class="line">                         GND</span><br><span class="line"></span><br><span class="line">Découplage AOP: 100 nF (et 4,7–10 µF) entre Vcc et GND près du boîtier.</span><br><span class="line"></span><br><span class="line">(option) clamps ESD au nœud ADC:</span><br><span class="line">- Dhigh: anode au nœud ADC, cathode à 3V3</span><br><span class="line">- Dlow : anode à GND, cathode au nœud ADC</span><br></pre></td></tr></table></figure>
+
+<p>Valeurs:</p>
+<ul>
+<li>Gain non‑inverseur = 1 + Rf/Rg = 1 + 68k/10k ≈ 7,8 → 0–0,42 V devient ≈ 0–3,28 V</li>
+<li>Cf 47 nF en // sur Rf → fc ≈ 1 / (2π · 68k · 47 nF) ≈ 50 Hz (lissage de contact)<ul>
+<li>Plus réactif: Cf 22 nF (fc ≈ 106 Hz)</li>
+</ul>
+</li>
+<li>Rin 100 Ω: limite ESD et améliore la stabilité d’entrée +</li>
+<li>Rout 1 kΩ + C 100–220 nF: filtre RC et protection de l’ADC</li>
+</ul>
+<p>Grandeurs:</p>
+<ul>
+<li>I total ≈ 19 mA (comme Option A)</li>
+<li>Vout AOP ≈ 0–3,28 V (pas d’écrêtage avec MCP600x à charge élevée, typ. &gt; 0,02–0,05 V des rails)</li>
+</ul>
+<hr>
+<h2 id="BOM-recapitulatif"><a href="#BOM-recapitulatif" class="headerlink" title="BOM récapitulatif"></a>BOM récapitulatif</h2><ul>
+<li>Rs: 150 Ω, 1/4 W (ou 220 Ω pour baisser la conso)</li>
+<li>Fil résistif 22 Ω (50 cm) = “piste”</li>
+<li>Wiper mécanique (fil/lame) + guidage (film PET avec fente 1–2 mm)</li>
+<li>Protection ADC: Rprot/Rout 1 kΩ, C 100–220 nF (X7R), Rpull 1 MΩ</li>
+<li>Diodes de clamp (option): 2× 1N4148 ou 1× BAT54S (double Schottky)</li>
+<li>Option B (AOP):<ul>
+<li>MCP6001 (simple) ou MCP6002 (double)</li>
+<li>Rg 10 kΩ, Rf 68 kΩ, Cf 47 nF, Rin 100 Ω</li>
+<li>Découplage: 100 nF + 4,7–10 µF près des broches Vcc/GND de l’AOP</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Plan-de-routage-guidelines"><a href="#Plan-de-routage-guidelines" class="headerlink" title="Plan de routage (guidelines)"></a>Plan de routage (guidelines)</h2><p>Objectifs: garder le nœud analogique propre, boucles courtes, filtrage au plus près, séparer numérique/bruit.</p>
+<ol>
+<li>Placement prioritaire</li>
+</ol>
+<ul>
+<li>Placez le réseau d’entrée ADC (Rprot/Rout 1 kΩ, C 100–220 nF, Rpull 1 MΩ) au plus près de la broche ADC de l’ESP32.</li>
+<li>Si AOP: placez l’AOP à 1–2 cm max du connecteur wiper. Gardez la boucle de contre‑réaction (sortie → Rf//Cf → entrée −) la plus courte possible (quelques mm).</li>
+<li>Rs (150 Ω) peut être un peu éloignée; elle dissipe ~55 mW (1/4 W suffit).</li>
+</ul>
+<ol start="2">
+<li>Routage du nœud wiper</li>
+</ol>
+<ul>
+<li>Le segment wiper → (Rin/AOP ou Rprot/ADC) doit être court et éloigné des pistes I2S, PWM, CLK, et du HP.</li>
+<li>Si possible, bordez ce segment par un plan de masse ou une “garde” à la masse.</li>
+</ul>
+<ol start="3">
+<li>Masse et alimentation</li>
+</ol>
+<ul>
+<li>Plan de masse continu sous la partie analogique.</li>
+<li>Découplage: condo 100 nF entre 3V3 et GND près de:<ul>
+<li>l’ESP32 (déjà requis),</li>
+<li>l’AOP (obligatoire),</li>
+<li>éventuellement près du connecteur de la piste pour absorber les clamps ESD.</li>
+</ul>
+</li>
+<li>Évitez que les retours de courant HP/ampli (MAX98357A) traversent la zone ADC: routez leur GND séparé jusqu’à un point d’étoile proche de l’alim 5 V/3,3 V.</li>
+</ul>
+<ol start="4">
+<li>Clamps ESD</li>
+</ol>
+<ul>
+<li>Placez les diodes de clamp au plus près du nœud ADC (après Rprot/Rout). Préférez Schottky (BAT54) pour un clamp plus bas.</li>
+<li>Attention: ces diodes déversent dans le rail 3V3: assurez un découplage local (100 nF + 10 µF) et un régulateur tolérant.</li>
+</ul>
+<ol start="5">
+<li>Filtre RC et stabilité</li>
+</ol>
+<ul>
+<li>Le C 100–220 nF doit être collé entre la broche ADC et GND. Trajet &lt; 5 mm.</li>
+<li>Avec AOP: Cf en // sur Rf directement au‑dessus de l’AOP; gardez la piste sortie→entrée− très courte.</li>
+</ul>
+<ol start="6">
+<li>Séparation analogique/digitale</li>
+</ol>
+<ul>
+<li>Maintenez 5–10 mm d’écart entre la piste wiper/ADC et:<ul>
+<li>pistes I2S (BCLK/LRCLK/DIN),</li>
+<li>lignes vers le HP et l’ampli.</li>
+</ul>
+</li>
+<li>Si croisement inévitable: croisez à 90° et sur couche opposée au plan GND.</li>
+</ul>
+<ol start="7">
+<li>Connexions vers la “piste” 22 Ω</li>
+</ol>
+<ul>
+<li>Amenez 3V3 → Rs → extrémité “haut” de la piste avec une piste un peu plus large (I ≈ 20 mA).</li>
+<li>L’extrémité “bas” directement à GND (retour court vers le plan).</li>
+<li>Le contact wiper: connecteur dédié; si câble, utilisez un fil blindé ou une paire torsadée (wiper + GND).</li>
+</ul>
+<p>Esquisse de placement (ASCII):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ Piste 22 Ω (50 cm) ]====================(vers GND)</span><br><span class="line">          |</span><br><span class="line">          +-- via connecteur → (court) → [AOP] (option B)</span><br><span class="line">                                  |           |</span><br><span class="line">                                Rout        Rf//Cf</span><br><span class="line">                                1k           |</span><br><span class="line">                                  |           +→ court vers entrée (−)</span><br><span class="line">                             [C 100–220 nF]   |</span><br><span class="line">                                  |           |</span><br><span class="line">                                 GND        Rg → GND</span><br><span class="line"></span><br><span class="line">               3V3 → Rs 150Ω → extrémité “haut” de la piste</span><br><span class="line"></span><br><span class="line">[AOP] et/ou [Rout+C+Rpull] groupés à 1–2 cm de la broche ADC de l’ESP32.</span><br><span class="line">Plan GND sous toute la zone. I2S/HP routés à l’écart.</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Conseils-d’usage"><a href="#Conseils-d’usage" class="headerlink" title="Conseils d’usage"></a>Conseils d’usage</h2><ul>
+<li>Le wiper ne doit jamais toucher directement 3V3 ou GND: guidez‑le avec un film PET/Kapton percé d’une fente de 1–2 mm au‑dessus de la piste.</li>
+<li>Si ça “craque” (micro‑coupures): augmentez C (100 → 220 nF), utilisez Cf 47 nF (option B), et soignez la surface de contact.</li>
+<li>Sur batterie: envisagez Rs = 220–330 Ω (I = 10–14 mA) et, si AOP, augmentez le gain (p.ex. 11× pour Rs = 220 Ω: Rg 10 kΩ, Rf 100 kΩ, Cf ~33 nF).</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Schemas-pratiques-avec-et-sans-ampli-op"><span class="toc-number">1.</span> <span class="toc-text">Schémas pratiques (avec et sans ampli op)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Option-A-%E2%80%94-Sans-ampli-op-ADC-direct"><span class="toc-number">2.</span> <span class="toc-text">Option A — Sans ampli op (ADC direct)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Option-B-%E2%80%94-Avec-ampli-op-pleine-echelle-0%E2%80%933-3-V"><span class="toc-number">3.</span> <span class="toc-text">Option B — Avec ampli op (pleine échelle 0–3,3 V)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM-recapitulatif"><span class="toc-number">4.</span> <span class="toc-text">BOM récapitulatif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plan-de-routage-guidelines"><span class="toc-number">5.</span> <span class="toc-text">Plan de routage (guidelines)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conseils-d%E2%80%99usage"><span class="toc-number">6.</span> <span class="toc-text">Conseils d’usage</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/08/08/ribbon-controller/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/08/08/ribbon-controller/&text=Ribbon Controller"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/08/08/ribbon-controller/&title=Ribbon Controller"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/08/08/ribbon-controller/&is_video=false&description=Ribbon Controller"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ribbon Controller&body=Check out this article: http://tokipona.today/2025/08/08/ribbon-controller/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/08/08/ribbon-controller/&title=Ribbon Controller"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
