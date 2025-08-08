@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Piste résistive au graphite: recette et intégrationObjectif: réaliser une piste résistive linéaire pour wiper sur 50 cm × 5–8 mm avec une résistance totale ≈ 10–20 kΩ. Cible de résistivité surfacique">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Encre Résistive DIY">
+<meta property="og:url" content="http://tokipona.today/2025/08/08/piste-r-sistive-diy/index.html">
+<meta property="og:site_name" content="toki pona today!">
+<meta property="og:description" content="Piste résistive au graphite: recette et intégrationObjectif: réaliser une piste résistive linéaire pour wiper sur 50 cm × 5–8 mm avec une résistance totale ≈ 10–20 kΩ. Cible de résistivité surfacique">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-07T23:15:00.000Z">
+<meta property="article:modified_time" content="2025-08-08T09:39:30.021Z">
+<meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Encre Résistive DIY</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="toki pona today!" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>toki pona today!</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/tags/lesson">Lessons</a></li>
+      
+        <li><a href="/tags/practice">practice</a></li>
+      
+        <li><a href="/tags/blog">blog</a></li>
+      
+        <li><a href="/tags/other">other</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+      
+        <li><a href="/About/">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Encre Résistive DIY
+    </h1>
+
+
+    <div class="meta">
+    
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Piste-resistive-au-graphite-recette-et-integration"><a href="#Piste-resistive-au-graphite-recette-et-integration" class="headerlink" title="Piste résistive au graphite: recette et intégration"></a>Piste résistive au graphite: recette et intégration</h2><p>Objectif: réaliser une piste résistive linéaire pour wiper sur 50 cm × 5–8 mm avec une résistance totale ≈ 10–20 kΩ. Cible de résistivité surfacique Rs ≈ 100–200 Ω/□.</p>
+<p>Résumé (TL;DR)</p>
+<ul>
+<li>Mélange maison: poudre de graphite + encre de Chine + un gel à base de colle papier peint + 1 goutte de liquide vaisselle.</li>
+<li>Appliquer 2–4 couches fines, sécher, burnisher léger.</li>
+<li>Mesurer Rs sur un coupon 100 × 5 mm, viser 100–200 Ω/□. Ajuster graphite/encre selon le résultat.</li>
+<li>Intégration: possible sans AOP, ou avec LM358P (DIP‑8) en non‑inverseur (gain ≈ 5) pour ~0–2,1 V.</li>
+</ul>
+<hr>
+<h2 id="Principe-et-cibles"><a href="#Principe-et-cibles" class="headerlink" title="Principe et cibles"></a>Principe et cibles</h2><ul>
+<li>Résistance d’une bande: R ≈ Rs × (L/W).</li>
+<li>Pour 50 cm × 5 mm: L/W ≈ 100. Avec Rs = 100–200 Ω/□ → R ≈ 10–20 kΩ.</li>
+<li>Plus la bande est étroite, plus R monte (et inversement).</li>
+</ul>
+<hr>
+<h2 id="Ingredients-disponibles-version-“maison”"><a href="#Ingredients-disponibles-version-“maison”" class="headerlink" title="Ingrédients disponibles (version “maison”)"></a>Ingrédients disponibles (version “maison”)</h2><ul>
+<li>Poudre de graphite (lubrifiant) — conducteur principal.</li>
+<li>Encre de Chine (contient noir de carbone + liant) — améliore la conduction fine et le bruit de contact.</li>
+<li>Colle papier peint (HEC/CMC) — épaississant/thixotrope.</li>
+<li>Liquide vaisselle — agent mouillant.</li>
+</ul>
+<p>Matériel utile:</p>
+<ul>
+<li>Balance au gramme (ou cuillères/volumes), petit mortier/spatule, plaque de verre, pinceau dur ou petite raclette, source de chaleur douce (option).</li>
+</ul>
+<hr>
+<h2 id="Preparer-un-gel-“colle-5-”-stock"><a href="#Preparer-un-gel-“colle-5-”-stock" class="headerlink" title="Préparer un gel “colle 5 %” (stock)"></a>Préparer un gel “colle 5 %” (stock)</h2><ul>
+<li>95 g d’eau + 5 g de colle papier peint. Mélanger vigoureusement, laisser hydrater 20–30 min jusqu’au gel. Se garde quelques jours fermé.</li>
+</ul>
+<hr>
+<h2 id="Recettes"><a href="#Recettes" class="headerlink" title="Recettes"></a>Recettes</h2><p>Deux variantes selon l’application (par 10 g de pâte):</p>
+<ul>
+<li><p>Recette A — à la raclette (pâte ferme, peu de coulure)</p>
+<ul>
+<li>Graphite: 7,0 g (70 %)</li>
+<li>Encre de Chine: 2,5 g (25 %)</li>
+<li>Gel colle 5 %: 0,45 g (4,5 %)</li>
+<li>Liquide vaisselle: 1 goutte (~0,5 %)</li>
+</ul>
+</li>
+<li><p>Recette B — au pinceau (plus fluide, couches fines)</p>
+<ul>
+<li>Graphite: 6,0 g (60 %)</li>
+<li>Encre de Chine: 3,5 g (35 %)</li>
+<li>Gel colle 5 %: 0,45 g (4,5 %)</li>
+<li>Liquide vaisselle: 1 goutte (~0,5 %)</li>
+</ul>
+</li>
+</ul>
+<p>Sans balance: 3 parts graphite / 1 part encre. Ajouter un peu de gel jusqu’à consistance “dentifrice” (A) ou “yaourt épais” (B). Finir par 1 goutte de liquide vaisselle.</p>
+<hr>
+<h2 id="Procede"><a href="#Procede" class="headerlink" title="Procédé"></a>Procédé</h2><ol>
+<li>Base liquide</li>
+</ol>
+<ul>
+<li>Mélanger l’encre + 1 goutte de liquide vaisselle.</li>
+<li>Ajouter 1–2 petites noisettes de gel (≈ 0,4–0,6 g) et homogénéiser.</li>
+</ul>
+<ol start="2">
+<li>Dispersion du graphite</li>
+</ol>
+<ul>
+<li>Incorporer le graphite en 3–4 fois. Broyer/écraser au mortier ou spatule sur verre pour éliminer les grumeaux.</li>
+</ul>
+<ol start="3">
+<li>Ajuster la rhéologie</li>
+</ol>
+<ul>
+<li>Si la pâte s’affaisse: un soupçon de gel en plus.</li>
+<li>Si trop sèche/granuleuse: un peu d’encre.</li>
+</ul>
+<ol start="4">
+<li>Application</li>
+</ol>
+<ul>
+<li>Support dégraissé (IPA). Idéal: gorge guidant le wiper.</li>
+<li>Tirer 1–2 couches (A) ou peindre 2–4 couches (B), fines et régulières.</li>
+<li>Séchage entre couches: 15–30 min.</li>
+</ul>
+<ol start="5">
+<li>Cure et finition</li>
+</ol>
+<ul>
+<li>Cure à l’air 12–24 h, ou 60–80 °C pendant 30–60 min.</li>
+<li>Burnissage léger avec chiffon coton pour lisser la surface.</li>
+</ul>
+<p>Option topcoat</p>
+<ul>
+<li>Un voile très fin d’encre diluée 1:1 à l’eau peut lisser encore la surface. Vérifier que la résistance n’augmente pas de plus de ~10 %.</li>
+</ul>
+<hr>
+<h2 id="Controle-et-calibration"><a href="#Controle-et-calibration" class="headerlink" title="Contrôle et calibration"></a>Contrôle et calibration</h2><p>Essai sur coupon 100 × 5 mm:</p>
+<ul>
+<li>Mesurer la résistance R entre extrémités.</li>
+<li>Calculer Rs = R × (W/L) = R × 0,05.</li>
+<li>Cible: Rs 100–200 Ω/□.</li>
+</ul>
+<p>Ajustements:</p>
+<ul>
+<li>Rs trop haut (&gt;200 Ω/□):<ul>
+<li>Ajouter 5–10 % de graphite (ou passer une couche fine supplémentaire).</li>
+<li>Réduire légèrement la part de gel.</li>
+</ul>
+</li>
+<li>Rs trop bas (&lt;100 Ω/□):<ul>
+<li>Ajouter un peu d’encre (augmente liant + noir fin) ou une touche de gel.</li>
+<li>Éventuellement amincir par un très léger ponçage P1000.</li>
+</ul>
+</li>
+<li>Bruit de contact/crackle:<ul>
+<li>Ajouter une couche de finition très fine (encre diluée), burnis léger.</li>
+<li>Côté électronique, augmenter un peu le filtrage (ex: C ADC 100 → 220 nF).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Integration-electronique-bref"><a href="#Integration-electronique-bref" class="headerlink" title="Intégration électronique (bref)"></a>Intégration électronique (bref)</h2><p>Sans ampli‑op (simple, immédiat):</p>
+<ul>
+<li>Résistance série d’alim: Rsérie ≈ 150 Ω depuis 3V3 vers l’extrémité “haut” de la piste, “bas” à GND.</li>
+<li>Wiper → Rprot 1 kΩ → ADC; C 100–220 nF de l’ADC vers GND; Rpull 1 MΩ vers GND.</li>
+<li>Courant typique avec R piste ≈ 15 kΩ: I ≈ 3,3 / (150 + 15000) ≈ 0,22 mA (varie avec ta R réelle).</li>
+<li>Protection option: diodes clamp vers 3V3 et GND.</li>
+</ul>
+<p>Avec LM358P (DIP‑8) à 3,3 V (gain ≈ 5):</p>
+<ul>
+<li>Alim: Pin 8 → 3V3; Pin 4 → GND; découplage 100 nF + 4,7–10 µF près du boîtier.</li>
+<li>Entrée: Wiper → Rin 100 Ω → Pin 3 (IN+ A).</li>
+<li>Boucle: Rg 10 kΩ de Pin 2 (IN− A) vers GND; Rf 39 kΩ entre Pin 1 (OUT A) et Pin 2; Cf 47 nF en parallèle sur Rf.</li>
+<li>Sortie: Pin 1 → Rout 1 kΩ → ADC; à l’ADC: C 100–220 nF et Rpull 1 MΩ vers GND.</li>
+<li>Atténuation ADC: 6 dB (pleine échelle ≈ 2,2 V) recommandé; Vout attendu ≈ 0–2,1 V.</li>
+</ul>
+<p>Routage essentiel:</p>
+<ul>
+<li>Boucle Rf//Cf ultra‑courte (quelques mm).</li>
+<li>C ADC au plus près de la broche.</li>
+<li>Éviter les pistes I2S/PWM et audio puissance à proximité du nœud wiper/ADC.</li>
+<li>Plan de masse continu sous la zone analogique.</li>
+</ul>
+<hr>
+<h2 id="Conseils-de-durabilite"><a href="#Conseils-de-durabilite" class="headerlink" title="Conseils de durabilité"></a>Conseils de durabilité</h2><ul>
+<li>Plus de graphite = couche plus “sèche” et résistante mécaniquement; plus d’encre = surface plus lisse mais film plus fragile si trop chargée.</li>
+<li>Éviter l’excès d’épaississant: augmente la sensibilité à l’humidité et la résistance.</li>
+<li>Topcoat très léger seulement si nécessaire; tester d’abord sur coupon.</li>
+</ul>
+<hr>
+<h2 id="Checklist-rapide-de-mise-au-point"><a href="#Checklist-rapide-de-mise-au-point" class="headerlink" title="Checklist rapide de mise au point"></a>Checklist rapide de mise au point</h2><ul>
+<li>Coupon 100 × 5 mm préparé et mesuré → Rs dans la cible.</li>
+<li>Piste finale appliquée en 2–4 couches fines, surface burnishée.</li>
+<li>Mesure R totale de la piste → dans l’intervalle 10–20 kΩ (ou noter la valeur réelle).</li>
+<li>Montage électronique testé à blanc (wiper à 0 % et 100 %): Vout ≈ 0 V et ≈ 2,0–2,2 V (avec LM358).</li>
+<li>Pas de crackle audible/visible à la lecture; sinon, ajouter une fine couche d’encre ou augmenter le filtrage.</li>
+</ul>
+<hr>
+<h2 id="Annexe-formules-utiles"><a href="#Annexe-formules-utiles" class="headerlink" title="Annexe: formules utiles"></a>Annexe: formules utiles</h2><ul>
+<li>Rs (Ω/□) = Rmesurée × (W/L).</li>
+<li>Rbande ≈ Rs × (L/W).</li>
+<li>Puissance dissipée piste ≈ I² × Rbande; rester très faible (mW) ici.</li>
+</ul>
+<p>Besoin d’un schéma récap ou d’un gabarit de gorge à imprimer pour guider le wiper ? Dis‑le moi et je te génère un croquis à l’échelle.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/tags/lesson">Lessons</a></li>
+        
+          <li><a href="/tags/practice">practice</a></li>
+        
+          <li><a href="/tags/blog">blog</a></li>
+        
+          <li><a href="/tags/other">other</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+        
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Piste-resistive-au-graphite-recette-et-integration"><span class="toc-number">1.</span> <span class="toc-text">Piste résistive au graphite: recette et intégration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Principe-et-cibles"><span class="toc-number">2.</span> <span class="toc-text">Principe et cibles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingredients-disponibles-version-%E2%80%9Cmaison%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">Ingrédients disponibles (version “maison”)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Preparer-un-gel-%E2%80%9Ccolle-5-%E2%80%9D-stock"><span class="toc-number">4.</span> <span class="toc-text">Préparer un gel “colle 5 %” (stock)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recettes"><span class="toc-number">5.</span> <span class="toc-text">Recettes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Procede"><span class="toc-number">6.</span> <span class="toc-text">Procédé</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controle-et-calibration"><span class="toc-number">7.</span> <span class="toc-text">Contrôle et calibration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Integration-electronique-bref"><span class="toc-number">8.</span> <span class="toc-text">Intégration électronique (bref)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conseils-de-durabilite"><span class="toc-number">9.</span> <span class="toc-text">Conseils de durabilité</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Checklist-rapide-de-mise-au-point"><span class="toc-number">10.</span> <span class="toc-text">Checklist rapide de mise au point</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Annexe-formules-utiles"><span class="toc-number">11.</span> <span class="toc-text">Annexe: formules utiles</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/08/08/piste-r-sistive-diy/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/08/08/piste-r-sistive-diy/&text=Encre Résistive DIY"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/08/08/piste-r-sistive-diy/&title=Encre Résistive DIY"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/08/08/piste-r-sistive-diy/&is_video=false&description=Encre Résistive DIY"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Encre Résistive DIY&body=Check out this article: http://tokipona.today/2025/08/08/piste-r-sistive-diy/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/08/08/piste-r-sistive-diy/&title=Encre Résistive DIY"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    jan Pitaki
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/lesson">Lessons</a></li>
+         
+          <li><a href="/tags/practice">practice</a></li>
+         
+          <li><a href="/tags/blog">blog</a></li>
+         
+          <li><a href="/tags/other">other</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://tokipona.org">links</a></li>
+         
+          <li><a href="/About/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
