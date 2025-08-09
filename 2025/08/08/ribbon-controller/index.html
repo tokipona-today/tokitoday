@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="toki pona today!">
 <meta property="og:description" content="Schémas pratiques (avec et sans ampli op)Vous avez 50 cm de fil résistif ≈ 22 Ω. On l’utilise comme “piste” alimentée via une résistance série pour limiter le courant, et on lit la position via un wip">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-08-08T03:13:00.000Z">
-<meta property="article:modified_time" content="2025-08-08T07:14:57.614Z">
+<meta property="article:published_time" content="2025-08-08T01:13:00.000Z">
+<meta property="article:modified_time" content="2025-08-09T05:42:25.761Z">
 <meta property="article:author" content="jan Pitaki">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -150,135 +150,83 @@ p.spoiler {
 <li>Option A: sans ampli op (simple, immédiat)</li>
 <li>Option B: avec ampli op (pleine échelle ADC, meilleure SNR)</li>
 </ul>
-<p>Je propose un AOP très courant et facile à trouver: MCP6002 (ou MCP6001 en simple). Alternatives: TLV9002, LMV358 (RRIO). À éviter: LM358 “classique” sous 3,3 V (pas rail‑to‑rail, écrêtage vers le haut).</p>
+<p><strong>Objectif:</strong> lire la position 0–100 % d’une piste résistive (≈10–20 kΩ sur 50 cm) avec un microcontrôleur. Deux variantes:</p>
+<ul>
+<li>Sans LM358: diviseur simple → 0–3,3 V.</li>
+<li>Avec LM358: excitation à ~2,0 V + suiveur → source basse impédance, propre pour ADC.</li>
+</ul>
+<p>Note: L’ADC est supposé référencé à 3,3 V.</p>
 <hr>
-<h2 id="Option-A-—-Sans-ampli-op-ADC-direct"><a href="#Option-A-—-Sans-ampli-op-ADC-direct" class="headerlink" title="Option A — Sans ampli op (ADC direct)"></a>Option A — Sans ampli op (ADC direct)</h2><p>Idée: ajouter une résistance série Rs pour limiter courant/chaleur; la piste (22 Ω) ne verra qu’une fraction de 3,3 V. Le wiper prélève la tension locale. On protège et on filtre l’ADC.</p>
-<ul>
-<li><p>Valeur recommandée: Rs = 150 Ω (compromis conso/dynamique)</p>
-<ul>
-<li>Courant I ≈ 3,3 / (22 + 150) ≈ 19 mA</li>
-<li>Tension le long de la piste Vfil ≈ 0,42 V</li>
-<li>Puissances: PRs ≈ 55 mW (prendre 1/4 W), Pfil ≈ 8 mW</li>
-</ul>
-</li>
-<li><p>Variante basse conso: Rs = 220 Ω → I ≈ 13,6 mA, Vfil ≈ 0,30 V, PRs ≈ 41 mW, Pfil ≈ 4 mW</p>
-</li>
-</ul>
-<p>Schéma (ASCII):</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">3V3 ── Rs 150 Ω (¼ W) ──●────── Fil résistif 22 Ω (50 cm) ─── GND</span><br><span class="line">                         │</span><br><span class="line">                         ●───(wiper mécanique)─── Rprot 1 kΩ ──●───→ GPIO ADC (ESP32)</span><br><span class="line">                                                             │</span><br><span class="line">                                                           C 100–220 nF</span><br><span class="line">                                                             │</span><br><span class="line">                                                           GND</span><br><span class="line">                                                             │</span><br><span class="line">                                                          Rpull 1 MΩ</span><br><span class="line">                                                             │</span><br><span class="line">                                                           GND</span><br><span class="line"></span><br><span class="line">(option) clamps ESD au nœud ADC:</span><br><span class="line">- Dhigh: anode au nœud ADC, cathode à 3V3 (1N4148 ou Schottky BAT54)</span><br><span class="line">- Dlow : anode à GND, cathode au nœud ADC</span><br></pre></td></tr></table></figure>
+<h2 id="Variante-1-—-Sans-LM358-diviseur-simple"><a href="#Variante-1-—-Sans-LM358-diviseur-simple" class="headerlink" title="Variante 1 — Sans LM358 (diviseur simple)"></a>Variante 1 — Sans LM358 (diviseur simple)</h2><p>Principe: on alimente la piste en 3,3 V; le wiper est un diviseur ratiométrique → Vwiper ∈ [0; 3,3 V], directement proportionnel à la position.</p>
+<p>Schéma</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">3V3 ────────────────┐</span><br><span class="line">                    │</span><br><span class="line">                [ PISTE ]  ←— curseur (wiper)</span><br><span class="line">                    │           (≈10–20 kΩ totale)</span><br><span class="line">GND ────────────────┘</span><br><span class="line"></span><br><span class="line">Wiper ── Rprot 1k ──●───→ ADC_in</span><br><span class="line">                    │</span><br><span class="line">                  C 100–220 nF</span><br><span class="line">                    │</span><br><span class="line">                   GND</span><br><span class="line"></span><br><span class="line">Option: Rpull 1 MΩ (Wiper → GND) pour un niveau défini si le wiper “flotte”.</span><br></pre></td></tr></table></figure>
 
-<p>Notes:</p>
 <ul>
-<li>Réglez l’ADC en 0 dB (pleine échelle ≈ 1,1 V) pour bien exploiter 0–0,3/0,42 V.</li>
-<li>Impédance source côté wiper ≈ 22/4 ≈ 5,5 Ω au milieu: excellent pour le bruit; gardez le 1 kΩ série pour protéger l’ADC.</li>
+<li>Impédance source au milieu ≈ R/4 ≈ 2,5–5 kΩ: OK pour la plupart des ADC.</li>
+<li>Rprot 1 kΩ + C 100–220 nF: filtrage anti‑bruit, protège l’ADC.</li>
+<li>Diodes clamp (option): vers 3V3 et GND si environnement bruyant.</li>
+</ul>
+<p>Calcul position</p>
+<ul>
+<li>p (0..1) ≈ Vwiper / 3,3 V</li>
+<li>En comptages ADC: p ≈ ADC_count / ADC_full_scale</li>
+</ul>
+<p>Avantages</p>
+<ul>
+<li>Minimal, pleine échelle 0–3,3 V, très peu de composants.</li>
 </ul>
 <hr>
-<h2 id="Option-B-—-Avec-ampli-op-pleine-echelle-0–3-3-V"><a href="#Option-B-—-Avec-ampli-op-pleine-echelle-0–3-3-V" class="headerlink" title="Option B — Avec ampli op (pleine échelle 0–3,3 V)"></a>Option B — Avec ampli op (pleine échelle 0–3,3 V)</h2><p>On garde Rs = 150 Ω (faible chauffe) donc Vfil ≈ 0,42 V, puis on amplifie en non‑inverseur vers 0–3,3 V.</p>
-<p>AOP conseillé: MCP6002 (double) ou MCP6001 (simple), rail‑to‑rail entrée/sortie, alim 3,3 V.<br>Alternatives: TLV9002/TLV9062, LMV358 (RRIO). Éviter LM358 “ancien”.</p>
-<p>Schéma (ASCII):</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">3V3 ── Rs 150 Ω (¼ W) ──●────── Fil résistif 22 Ω (50 cm) ─── GND</span><br><span class="line">                         │</span><br><span class="line">                         ●───(wiper)── Rin 100 Ω ──┐</span><br><span class="line">                                                  │  Vin(+)</span><br><span class="line">                                 MCP6001/2 3V3  ┌─┴─┐</span><br><span class="line">                                                │   │</span><br><span class="line">                                   Rg 10 kΩ ────┤ − │────┬──── Rf 68 kΩ ──┐</span><br><span class="line">                                    (→ GND)     │   │    │                │</span><br><span class="line">                                                └───┘    │               Cf 47 nF</span><br><span class="line">                                                        Rout 1 kΩ         │</span><br><span class="line">                                                           │              │</span><br><span class="line">Sortie AOP ────────────────●───────────────→ GPIO ADC      └──────────────┘</span><br><span class="line">                           │</span><br><span class="line">                         C 100–220 nF</span><br><span class="line">                           │</span><br><span class="line">                         GND</span><br><span class="line">                           │</span><br><span class="line">                        Rpull 1 MΩ</span><br><span class="line">                           │</span><br><span class="line">                         GND</span><br><span class="line"></span><br><span class="line">Découplage AOP: 100 nF (et 4,7–10 µF) entre Vcc et GND près du boîtier.</span><br><span class="line"></span><br><span class="line">(option) clamps ESD au nœud ADC:</span><br><span class="line">- Dhigh: anode au nœud ADC, cathode à 3V3</span><br><span class="line">- Dlow : anode à GND, cathode au nœud ADC</span><br></pre></td></tr></table></figure>
+<h2 id="Variante-2-—-Avec-LM358-excitation-2-0-V-suiveur"><a href="#Variante-2-—-Avec-LM358-excitation-2-0-V-suiveur" class="headerlink" title="Variante 2 — Avec LM358 (excitation 2,0 V + suiveur)"></a>Variante 2 — Avec LM358 (excitation 2,0 V + suiveur)</h2><p>Pourquoi: le LM358 n’est pas rail‑to‑rail en sortie à 3,3 V (sature vers ~2,1–2,2 V). Pour couvrir 0–100 % proprement, on excite la piste à ~2,0 V (dans la zone “safe” du LM358), puis on bufferise le wiper.</p>
+<p>Topologie (LM358P DIP‑8, dual)</p>
+<ul>
+<li>Canal A: génère et bufferise Vexc ≈ 1,98 V à partir de 3,3 V.</li>
+<li>Canal B: suiveur (buffer) du wiper → ADC.</li>
+</ul>
+<p>Schéma</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">               Rtop 10k</span><br><span class="line">3V3 ──────────/\/\/\───● Vexc_div ──/\/\/\─── GND</span><br><span class="line">                        |           Rbot 15k</span><br><span class="line">                        |  (Vexc_div ≈ 1.98 V)</span><br><span class="line">                        v</span><br><span class="line">                   LM358 (canal A en suiveur)</span><br><span class="line">Vexc = ~1.98 V  ─────────● (sortie canal A)</span><br><span class="line"></span><br><span class="line">Alimentation LM358:</span><br><span class="line">- Pin 8 → 3V3</span><br><span class="line">- Pin 4 → GND</span><br><span class="line">- Découplage: 100 nF + 4.7–10 µF près du boîtier</span><br><span class="line"></span><br><span class="line">Piste:</span><br><span class="line">Vexc (~1.98 V) ──┐</span><br><span class="line">                 │</span><br><span class="line">             [ PISTE ]  ←— wiper</span><br><span class="line">                 │</span><br><span class="line">GND ─────────────┘</span><br><span class="line"></span><br><span class="line">Wiper → LM358 canal B (suiveur):</span><br><span class="line">- Pin 5 (IN+) ← Wiper</span><br><span class="line">- Pin 6 (IN−) ← Pin 7 (OUT B)  (suiveur)</span><br><span class="line">- Sortie canal B (Pin 7) ── Rprot 1k ──●──→ ADC_in</span><br><span class="line">                                       │</span><br><span class="line">                                     C 100–220 nF</span><br><span class="line">                                       │</span><br><span class="line">                                      GND</span><br><span class="line"></span><br><span class="line">Option: Rpull 1 MΩ (Wiper → GND) et/ou clamps ESD au nœud ADC.</span><br></pre></td></tr></table></figure>
 
-<p>Valeurs:</p>
+<p>Remarques</p>
 <ul>
-<li>Gain non‑inverseur = 1 + Rf/Rg = 1 + 68k/10k ≈ 7,8 → 0–0,42 V devient ≈ 0–3,28 V</li>
-<li>Cf 47 nF en // sur Rf → fc ≈ 1 / (2π · 68k · 47 nF) ≈ 50 Hz (lissage de contact)<ul>
-<li>Plus réactif: Cf 22 nF (fc ≈ 106 Hz)</li>
+<li>Vexc par 10k/15k donne ~1,98 V; le canal A le bufferise pour une source basse impédance.</li>
+<li>Le canal B peut suivre le wiper jusqu’à ~1,9–2,0 V sans saturer, parfait pour l’ADC si vous réglez sa pleine échelle proche de 2,0–2,2 V (si disponible). Sinon, on corrige par logiciel.</li>
+</ul>
+<p>Calcul position</p>
+<ul>
+<li>p (0..1) = Vwiper / Vexc</li>
+<li>Avec ADC référencé à 3,3 V: p = (ADC_count / ADC_full_scale) × (3,3 V / Vexc)<ul>
+<li>Exemple avec Vexc ≈ 1,98 V: facteur ≈ 3,3 / 1,98 ≈ 1,667</li>
+<li>Clippez p entre 0 et 1.</li>
 </ul>
 </li>
-<li>Rin 100 Ω: limite ESD et améliore la stabilité d’entrée +</li>
-<li>Rout 1 kΩ + C 100–220 nF: filtre RC et protection de l’ADC</li>
 </ul>
-<p>Grandeurs:</p>
+<p>Avantages</p>
 <ul>
-<li>I total ≈ 19 mA (comme Option A)</li>
-<li>Vout AOP ≈ 0–3,28 V (pas d’écrêtage avec MCP600x à charge élevée, typ. &gt; 0,02–0,05 V des rails)</li>
+<li>Source très basse impédance (meilleure linéarité/rapidité ADC).</li>
+<li>Pleine échelle contrôlée et compatible headroom LM358.</li>
+</ul>
+<p>Note alternative</p>
+<ul>
+<li>Si votre ADC offre une pleine échelle ~2,2 V (p. ex. “atténuation 6 dB”), vous pouvez aussi exciter la piste à ~2,1–2,2 V (Rtop:Rbot = 1:2), et lire directement sans correction (p ≈ ADC/FS_2V2).</li>
 </ul>
 <hr>
-<h2 id="BOM-recapitulatif"><a href="#BOM-recapitulatif" class="headerlink" title="BOM récapitulatif"></a>BOM récapitulatif</h2><ul>
-<li>Rs: 150 Ω, 1/4 W (ou 220 Ω pour baisser la conso)</li>
-<li>Fil résistif 22 Ω (50 cm) = “piste”</li>
-<li>Wiper mécanique (fil/lame) + guidage (film PET avec fente 1–2 mm)</li>
-<li>Protection ADC: Rprot/Rout 1 kΩ, C 100–220 nF (X7R), Rpull 1 MΩ</li>
-<li>Diodes de clamp (option): 2× 1N4148 ou 1× BAT54S (double Schottky)</li>
-<li>Option B (AOP):<ul>
-<li>MCP6001 (simple) ou MCP6002 (double)</li>
-<li>Rg 10 kΩ, Rf 68 kΩ, Cf 47 nF, Rin 100 Ω</li>
-<li>Découplage: 100 nF + 4,7–10 µF près des broches Vcc/GND de l’AOP</li>
-</ul>
-</li>
+<h2 id="Choix-rapide"><a href="#Choix-rapide" class="headerlink" title="Choix rapide"></a>Choix rapide</h2><ul>
+<li>Vous voulez simple et pleine échelle 3,3 V: Variante 1.</li>
+<li>Vous voulez un signal “propre” et robuste (longs câbles, bruit) avec votre LM358: Variante 2 (Vexc ≈ 2,0 V + buffers).</li>
 </ul>
 <hr>
-<h2 id="Plan-de-routage-guidelines"><a href="#Plan-de-routage-guidelines" class="headerlink" title="Plan de routage (guidelines)"></a>Plan de routage (guidelines)</h2><p>Objectifs: garder le nœud analogique propre, boucles courtes, filtrage au plus près, séparer numérique/bruit.</p>
-<ol>
-<li>Placement prioritaire</li>
-</ol>
-<ul>
-<li>Placez le réseau d’entrée ADC (Rprot/Rout 1 kΩ, C 100–220 nF, Rpull 1 MΩ) au plus près de la broche ADC de l’ESP32.</li>
-<li>Si AOP: placez l’AOP à 1–2 cm max du connecteur wiper. Gardez la boucle de contre‑réaction (sortie → Rf//Cf → entrée −) la plus courte possible (quelques mm).</li>
-<li>Rs (150 Ω) peut être un peu éloignée; elle dissipe ~55 mW (1/4 W suffit).</li>
+<h2 id="Conseils-pratiques"><a href="#Conseils-pratiques" class="headerlink" title="Conseils pratiques"></a>Conseils pratiques</h2><ul>
+<li>Placez C 100–220 nF au plus près de la broche ADC.</li>
+<li>Gardez des masses propres et un plan GND sous la zone analogique.</li>
+<li>Calibrez deux points (0 % et 100 %) en logiciel pour corriger les tolérances mécaniques/recette d’encre.</li>
+<li>Courant dans la piste (Variante 2): I ≈ Vexc / R_piste ≈ 1,98 V / (10–20 kΩ) ≈ 0,10–0,20 mA → puissance négligeable.</li>
 </ul>
-<ol start="2">
-<li>Routage du nœud wiper</li>
-</ol>
-<ul>
-<li>Le segment wiper → (Rin/AOP ou Rprot/ADC) doit être court et éloigné des pistes I2S, PWM, CLK, et du HP.</li>
-<li>Si possible, bordez ce segment par un plan de masse ou une “garde” à la masse.</li>
-</ul>
-<ol start="3">
-<li>Masse et alimentation</li>
-</ol>
-<ul>
-<li>Plan de masse continu sous la partie analogique.</li>
-<li>Découplage: condo 100 nF entre 3V3 et GND près de:<ul>
-<li>l’ESP32 (déjà requis),</li>
-<li>l’AOP (obligatoire),</li>
-<li>éventuellement près du connecteur de la piste pour absorber les clamps ESD.</li>
-</ul>
-</li>
-<li>Évitez que les retours de courant HP/ampli (MAX98357A) traversent la zone ADC: routez leur GND séparé jusqu’à un point d’étoile proche de l’alim 5 V/3,3 V.</li>
-</ul>
-<ol start="4">
-<li>Clamps ESD</li>
-</ol>
-<ul>
-<li>Placez les diodes de clamp au plus près du nœud ADC (après Rprot/Rout). Préférez Schottky (BAT54) pour un clamp plus bas.</li>
-<li>Attention: ces diodes déversent dans le rail 3V3: assurez un découplage local (100 nF + 10 µF) et un régulateur tolérant.</li>
-</ul>
-<ol start="5">
-<li>Filtre RC et stabilité</li>
-</ol>
-<ul>
-<li>Le C 100–220 nF doit être collé entre la broche ADC et GND. Trajet &lt; 5 mm.</li>
-<li>Avec AOP: Cf en // sur Rf directement au‑dessus de l’AOP; gardez la piste sortie→entrée− très courte.</li>
-</ul>
-<ol start="6">
-<li>Séparation analogique/digitale</li>
-</ol>
-<ul>
-<li>Maintenez 5–10 mm d’écart entre la piste wiper/ADC et:<ul>
-<li>pistes I2S (BCLK/LRCLK/DIN),</li>
-<li>lignes vers le HP et l’ampli.</li>
-</ul>
-</li>
-<li>Si croisement inévitable: croisez à 90° et sur couche opposée au plan GND.</li>
-</ul>
-<ol start="7">
-<li>Connexions vers la “piste” 22 Ω</li>
-</ol>
-<ul>
-<li>Amenez 3V3 → Rs → extrémité “haut” de la piste avec une piste un peu plus large (I ≈ 20 mA).</li>
-<li>L’extrémité “bas” directement à GND (retour court vers le plan).</li>
-<li>Le contact wiper: connecteur dédié; si câble, utilisez un fil blindé ou une paire torsadée (wiper + GND).</li>
-</ul>
-<p>Esquisse de placement (ASCII):</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ Piste 22 Ω (50 cm) ]====================(vers GND)</span><br><span class="line">          |</span><br><span class="line">          +-- via connecteur → (court) → [AOP] (option B)</span><br><span class="line">                                  |           |</span><br><span class="line">                                Rout        Rf//Cf</span><br><span class="line">                                1k           |</span><br><span class="line">                                  |           +→ court vers entrée (−)</span><br><span class="line">                             [C 100–220 nF]   |</span><br><span class="line">                                  |           |</span><br><span class="line">                                 GND        Rg → GND</span><br><span class="line"></span><br><span class="line">               3V3 → Rs 150Ω → extrémité “haut” de la piste</span><br><span class="line"></span><br><span class="line">[AOP] et/ou [Rout+C+Rpull] groupés à 1–2 cm de la broche ADC de l’ESP32.</span><br><span class="line">Plan GND sous toute la zone. I2S/HP routés à l’écart.</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Exemples-de-calcul-pseudo‑code"><a href="#Exemples-de-calcul-pseudo‑code" class="headerlink" title="Exemples de calcul (pseudo‑code)"></a>Exemples de calcul (pseudo‑code)</h2><p>Sans LM358 (3,3 V pleine échelle):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> p = (<span class="keyword">float</span>)adc / (<span class="keyword">float</span>)ADC_FULL_SCALE; <span class="comment">// 0..1</span></span><br><span class="line">p = clamp(p, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="Conseils-d’usage"><a href="#Conseils-d’usage" class="headerlink" title="Conseils d’usage"></a>Conseils d’usage</h2><ul>
-<li>Le wiper ne doit jamais toucher directement 3V3 ou GND: guidez‑le avec un film PET/Kapton percé d’une fente de 1–2 mm au‑dessus de la piste.</li>
-<li>Si ça “craque” (micro‑coupures): augmentez C (100 → 220 nF), utilisez Cf 47 nF (option B), et soignez la surface de contact.</li>
-<li>Sur batterie: envisagez Rs = 220–330 Ω (I = 10–14 mA) et, si AOP, augmentez le gain (p.ex. 11× pour Rs = 220 Ω: Rg 10 kΩ, Rf 100 kΩ, Cf ~33 nF).</li>
-</ul>
+<p>Avec LM358 (Vexc ≈ 1.98 V, ADC ref 3.3 V):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> VrefADC = <span class="number">3.3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> Vexc = <span class="number">1.98f</span>;           <span class="comment">// mesurez-la au multimètre pour être précis</span></span><br><span class="line"><span class="keyword">float</span> v = (adc * VrefADC) / ADC_FULL_SCALE; <span class="comment">// V à l’ADC</span></span><br><span class="line"><span class="keyword">float</span> p = v / Vexc;                 <span class="comment">// 0..1</span></span><br><span class="line">p = clamp(p, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
+
 
   </div>
 </article>
@@ -310,7 +258,7 @@ p.spoiler {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Schemas-pratiques-avec-et-sans-ampli-op"><span class="toc-number">1.</span> <span class="toc-text">Schémas pratiques (avec et sans ampli op)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Option-A-%E2%80%94-Sans-ampli-op-ADC-direct"><span class="toc-number">2.</span> <span class="toc-text">Option A — Sans ampli op (ADC direct)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Option-B-%E2%80%94-Avec-ampli-op-pleine-echelle-0%E2%80%933-3-V"><span class="toc-number">3.</span> <span class="toc-text">Option B — Avec ampli op (pleine échelle 0–3,3 V)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM-recapitulatif"><span class="toc-number">4.</span> <span class="toc-text">BOM récapitulatif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plan-de-routage-guidelines"><span class="toc-number">5.</span> <span class="toc-text">Plan de routage (guidelines)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conseils-d%E2%80%99usage"><span class="toc-number">6.</span> <span class="toc-text">Conseils d’usage</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Schemas-pratiques-avec-et-sans-ampli-op"><span class="toc-number">1.</span> <span class="toc-text">Schémas pratiques (avec et sans ampli op)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Variante-1-%E2%80%94-Sans-LM358-diviseur-simple"><span class="toc-number">2.</span> <span class="toc-text">Variante 1 — Sans LM358 (diviseur simple)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Variante-2-%E2%80%94-Avec-LM358-excitation-2-0-V-suiveur"><span class="toc-number">3.</span> <span class="toc-text">Variante 2 — Avec LM358 (excitation 2,0 V + suiveur)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choix-rapide"><span class="toc-number">4.</span> <span class="toc-text">Choix rapide</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conseils-pratiques"><span class="toc-number">5.</span> <span class="toc-text">Conseils pratiques</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exemples-de-calcul-pseudo%E2%80%91code"><span class="toc-number">6.</span> <span class="toc-text">Exemples de calcul (pseudo‑code)</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

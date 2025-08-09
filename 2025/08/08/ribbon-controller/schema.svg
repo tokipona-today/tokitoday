@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40mm" height="35mm" viewBox="0 0 40 35" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>Gabarit PCB LM358 + headers 1x3 (40×35 mm)</title>
+  <desc>DIP-8, résistances DIN0207, condensateurs disque, headers 1x3. Imprimer à l'échelle 100 %.</desc>
+  <defs>
+    <style>
+      .edge { fill:none; stroke:#000; stroke-width:0.2; }
+      .silk { fill:none; stroke:#006; stroke-width:0.2; }
+      .hole { fill:none; stroke:#000; stroke-width:0.15; stroke-dasharray:0.3,0.3; }
+      .dim  { fill:none; stroke:#090; stroke-width:0.15; stroke-dasharray:0.6,0.6; }
+      .txt  { fill:#000; font-size:1.6px; font-family:sans-serif; }
+      .pad  { fill:none; stroke:#a00; stroke-width:0.2; }
+    </style>
+  </defs>
+
+  <!-- Board outline -->
+  <rect x="0.5" y="0.5" width="39" height="34" class="edge"/>
+  <text x="20" y="3.5" class="txt" text-anchor="middle">PCB 40 × 35 mm — LM358 + ADC + Track</text>
+
+  <!-- Mounting holes Ø3.2 at corners (offset 3×3 mm) -->
+  <circle cx="3"  cy="3"  r="1.6" class="hole"/>
+  <circle cx="37" cy="3"  r="1.6" class="hole"/>
+  <circle cx="3"  cy="32" r="1.6" class="hole"/>
+  <circle cx="37" cy="32" r="1.6" class="hole"/>
+
+  <!-- J1: MCU header 1x3 (left) -->
+  <g transform="translate(4,10)">
+    <rect x="-2" y="-3" width="8" height="11" class="silk"/>
+    <text x="2" y="-3.5" class="txt" text-anchor="middle">J1 MCU 1×3</text>
+    <!-- Pads (2.54 mm pitch) -->
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <circle cx="0" cy="2.54" r="0.7" class="pad"/>
+    <circle cx="0" cy="5.08" r="0.7" class="pad"/>
+    <text x="2.5" y="0.5" class="txt">1 3V3</text>
+    <text x="2.5" y="3.04" class="txt">2 ADC</text>
+    <text x="2.5" y="5.58" class="txt">3 GND</text>
+  </g>
+
+  <!-- J2: TRACK header 1x3 (right) -->
+  <g transform="translate(36,10)">
+    <rect x="-6" y="-3" width="8" height="11" class="silk"/>
+    <text x="-2" y="-3.5" class="txt" text-anchor="middle">J2 TRACK 1×3</text>
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <circle cx="0" cy="2.54" r="0.7" class="pad"/>
+    <circle cx="0" cy="5.08" r="0.7" class="pad"/>
+    <text x="-6.2" y="0.5" class="txt">1 TOP</text>
+    <text x="-6.2" y="3.04" class="txt">2 WIPER</text>
+    <text x="-6.2" y="5.58" class="txt">3 BOT</text>
+  </g>
+
+  <!-- U1: LM358 DIP-8 centered -->
+  <g transform="translate(20,20)">
+    <rect x="-6" y="-5.5" width="12" height="11" class="silk"/>
+    <circle cx="-4" cy="-5.5" r="0.8" class="silk"/>
+    <text x="0" y="-6.5" class="txt" text-anchor="middle">U1 LM358 DIP‑8</text>
+    <!-- Pads rows, 2.54 mm pitch, 7.62 mm between rows -->
+    <!-- Left row pins 1..4 (top to bottom) -->
+    <circle cx="-3.81" cy="-3.81" r="0.7" class="pad"/><text x="-5.8" y="-3.3" class="txt">1 OUT A</text>
+    <circle cx="-3.81" cy="-1.27" r="0.7" class="pad"/><text x="-6.1" y="-0.8" class="txt">2 IN– A</text>
+    <circle cx="-3.81" cy="1.27"  r="0.7" class="pad"/><text x="-5.9" y="1.8"  class="txt">3 IN+ A</text>
+    <circle cx="-3.81" cy="3.81"  r="0.7" class="pad"/><text x="-5.3" y="4.3"  class="txt">4 GND</text>
+    <!-- Right row pins 8..5 (top to bottom) -->
+    <circle cx="3.81" cy="-3.81" r="0.7" class="pad"/><text x="5.4" y="-3.3" class="txt">8 VCC</text>
+    <circle cx="3.81" cy="-1.27" r="0.7" class="pad"/><text x="6.0" y="-0.8" class="txt">7 OUT B</text>
+    <circle cx="3.81" cy="1.27"  r="0.7" class="pad"/><text x="6.0" y="1.8"  class="txt">6 IN– B</text>
+    <circle cx="3.81" cy="3.81"  r="0.7" class="pad"/><text x="5.6" y="4.3"  class="txt">5 IN+ B</text>
+  </g>
+
+  <!-- R3/R4: divider near left of U1 -->
+  <g transform="translate(10,22)">
+    <text x="0" y="-2.5" class="txt">R3 10k</text>
+    <line x1="0" y1="0" x2="7.62" y2="0" class="silk"/>
+    <circle cx="0" y="0" r="0.7" class="pad"/>
+    <circle cx="7.62" y="0" r="0.7" class="pad"/>
+    <text x="0" y="2" class="txt">3V3</text>
+    <text x="7.62" y="2" class="txt">VEXC_DIV</text>
+  </g>
+  <g transform="translate(10,27)">
+    <text x="0" y="2.5" class="txt">R4 15k</text>
+    <line x1="0" y1="0" x2="7.62" y2="0" class="silk"/>
+    <circle cx="7.62" y="0" r="0.7" class="pad"/>
+    <circle cx="0" y="0" r="0.7" class="pad"/>
+    <text x="7.62" y="-1.8" class="txt">VEXC_DIV</text>
+    <text x="0" y="-1.8" class="txt">GND</text>
+  </g>
+
+  <!-- C2: 100n to VEXC -->
+  <g transform="translate(27,26)">
+    <text x="0" y="-2" class="txt">C2 100n</text>
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <circle cx="2.5" cy="0" r="0.7" class="pad"/>
+    <text x="-3.5" y="0.6" class="txt">VEXC</text>
+    <text x="3.6" y="0.6" class="txt">GND</text>
+  </g>
+
+  <!-- C3/C4 decoupling near top of U1 -->
+  <g transform="translate(20,7)">
+    <text x="-4" y="-1.5" class="txt">C3 100n</text>
+    <circle cx="-2.5" cy="0" r="0.7" class="pad"/>
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <text x="-3.8" y="1.8" class="txt">3V3</text>
+    <text x="0.8" y="1.8" class="txt">GND</text>
+  </g>
+  <g transform="translate(29,7)">
+    <text x="-3" y="-1.5" class="txt">C4 10µ</text>
+    <circle cx="-2.5" cy="0" r="0.7" class="pad"/>
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <text x="-3.8" y="1.8" class="txt">3V3</text>
+    <text x="0.8" y="1.8" class="txt">GND</text>
+  </g>
+
+  <!-- R1/C1 near right edge for ADC -->
+  <g transform="translate(31,19)">
+    <text x="0" y="-2" class="txt">R1 1k</text>
+    <line x1="0" y1="0" x2="7.62" y2="0" class="silk"/>
+    <circle cx="0" y="0" r="0.7" class="pad"/>
+    <circle cx="7.62" cy="0" r="0.7" class="pad"/>
+    <text x="-2.8" y="0.6" class="txt">OUT B</text>
+    <text x="7.62" y="0.6" class="txt">ADC_IN</text>
+  </g>
+  <g transform="translate(31,23)">
+    <text x="0" y="4" class="txt">C1 100–220n</text>
+    <circle cx="0" cy="0" r="0.7" class="pad"/>
+    <circle cx="2.5" cy="0" r="0.7" class="pad"/>
+    <text x="-3.8" y="0.6" class="txt">ADC_IN</text>
+    <text x="3.6" y="0.6" class="txt">GND</text>
+  </g>
+
+  <!-- Labels helper -->
+  <text x="6" y="30.5" class="txt">Variant 1: relier J2-1 à 3V3, bypasser U1, R3, R4, C2, C3, C4</text>
+  <text x="6" y="32.3" class="txt">Variant 2: VEXC via U1A, buffer wiper via U1B</text>
+
+  <!-- Dimensions (overall) -->
+  <line x1="0.5" y1="34.5" x2="39.5" y2="34.5" class="dim"/>
+  <text x="20" y="34.2" class="txt" text-anchor="middle">40 mm</text>
+  <line x1="39.5" y1="0.5" x2="39.5" y2="34.5" class="dim"/>
+  <text x="39.2" y="17.5" class="txt" transform="rotate(90,39.2,17.5)">35 mm</text>
+</svg>
