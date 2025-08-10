@@ -9,12 +9,12 @@
     <meta name="description" content="Voilà, maintenant que nous avons une bonne piste résistive, il nous faut explorer plus avant les possibilités de son exploitation… deux options s’offrent à nous. Objectif: lire la position 0–100 % d’u">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Encre Résistive DIY (2)">
-<meta property="og:url" content="http://tokipona.today/2025/08/09/encre-r-sistive-diy/index.html">
+<meta property="og:url" content="http://tokipona.today/2025/08/08/encre-r-sistive-diy/index.html">
 <meta property="og:site_name" content="toki pona today!">
 <meta property="og:description" content="Voilà, maintenant que nous avons une bonne piste résistive, il nous faut explorer plus avant les possibilités de son exploitation… deux options s’offrent à nous. Objectif: lire la position 0–100 % d’u">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-08-08T23:47:00.000Z">
-<meta property="article:modified_time" content="2025-08-09T05:52:19.011Z">
+<meta property="article:published_time" content="2025-08-08T21:47:00.000Z">
+<meta property="article:modified_time" content="2025-08-10T05:38:26.845Z">
 <meta property="article:author" content="jan Pitaki">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -181,12 +181,12 @@ p.spoiler {
 <p>Schéma</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">               Rtop 10k</span><br><span class="line">3V3 ──────────/\/\/\───● Vexc_div ──/\/\/\─── GND</span><br><span class="line">                        |           Rbot 15k</span><br><span class="line">                        |  (Vexc_div ≈ 1.98 V)</span><br><span class="line">                        v</span><br><span class="line">                   LM358 (canal A en suiveur)</span><br><span class="line">Vexc = ~1.98 V  ─────────● (sortie canal A)</span><br><span class="line"></span><br><span class="line">Alimentation LM358:</span><br><span class="line">- Pin 8 → 3V3</span><br><span class="line">- Pin 4 → GND</span><br><span class="line">- Découplage: 100 nF + 4.7–10 µF près du boîtier</span><br><span class="line"></span><br><span class="line">Piste:</span><br><span class="line">Vexc (~1.98 V) ──┐</span><br><span class="line">                 │</span><br><span class="line">             [ PISTE ]  ←— wiper</span><br><span class="line">                 │</span><br><span class="line">GND ─────────────┘</span><br><span class="line"></span><br><span class="line">Wiper → LM358 canal B (suiveur):</span><br><span class="line">- Pin 5 (IN+) ← Wiper</span><br><span class="line">- Pin 6 (IN−) ← Pin 7 (OUT B)  (suiveur)</span><br><span class="line">- Sortie canal B (Pin 7) ── Rprot 1k ──●──→ ADC_in</span><br><span class="line">                                       │</span><br><span class="line">                                     C 100–220 nF</span><br><span class="line">                                       │</span><br><span class="line">                                      GND</span><br><span class="line"></span><br><span class="line">Option: Rpull 1 MΩ (Wiper → GND) et/ou clamps ESD au nœud ADC.</span><br></pre></td></tr></table></figure>
 
-<p>Remarques</p>
+<p><em>Remarques</em></p>
 <ul>
 <li>Vexc par 10k/15k donne ~1,98 V; le canal A le bufferise pour une source basse impédance.</li>
 <li>Le canal B peut suivre le wiper jusqu’à ~1,9–2,0 V sans saturer, parfait pour l’ADC si vous réglez sa pleine échelle proche de 2,0–2,2 V (si disponible). Sinon, on corrige par logiciel.</li>
 </ul>
-<p>Calcul position</p>
+<p><em>Calcul position</em></p>
 <ul>
 <li>p (0..1) = Vwiper / Vexc</li>
 <li>Avec ADC référencé à 3,3 V: p = (ADC_count / ADC_full_scale) × (3,3 V / Vexc)<ul>
@@ -195,12 +195,12 @@ p.spoiler {
 </ul>
 </li>
 </ul>
-<p>Avantages</p>
+<p><em>Avantages</em></p>
 <ul>
 <li>Source très basse impédance (meilleure linéarité/rapidité ADC).</li>
 <li>Pleine échelle contrôlée et compatible headroom LM358.</li>
 </ul>
-<p>Note alternative</p>
+<p><em>Note alternative</em></p>
 <ul>
 <li>Si votre ADC offre une pleine échelle ~2,2 V (p. ex. “atténuation 6 dB”), vous pouvez aussi exciter la piste à ~2,1–2,2 V (Rtop:Rbot = 1:2), et lire directement sans correction (p ≈ ADC/FS_2V2).</li>
 </ul>
@@ -258,12 +258,12 @@ p.spoiler {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/08/09/encre-r-sistive-diy/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/08/09/encre-r-sistive-diy/&text=Encre Résistive DIY (2)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/08/09/encre-r-sistive-diy/&title=Encre Résistive DIY (2)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/08/09/encre-r-sistive-diy/&is_video=false&description=Encre Résistive DIY (2)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Encre Résistive DIY (2)&body=Check out this article: http://tokipona.today/2025/08/09/encre-r-sistive-diy/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/08/09/encre-r-sistive-diy/&title=Encre Résistive DIY (2)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://tokipona.today/2025/08/08/encre-r-sistive-diy/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://tokipona.today/2025/08/08/encre-r-sistive-diy/&text=Encre Résistive DIY (2)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://tokipona.today/2025/08/08/encre-r-sistive-diy/&title=Encre Résistive DIY (2)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://tokipona.today/2025/08/08/encre-r-sistive-diy/&is_video=false&description=Encre Résistive DIY (2)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Encre Résistive DIY (2)&body=Check out this article: http://tokipona.today/2025/08/08/encre-r-sistive-diy/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://tokipona.today/2025/08/08/encre-r-sistive-diy/&title=Encre Résistive DIY (2)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
