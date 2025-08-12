@@ -14,8 +14,9 @@
 <meta property="og:description" content="A great project">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-11T15:47:04.757Z">
-<meta property="article:modified_time" content="2025-08-11T17:47:04.766Z">
+<meta property="article:modified_time" content="2025-08-12T06:21:43.878Z">
 <meta property="article:author" content="jan Pitaki">
+<meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
     
     
@@ -138,115 +139,119 @@ p.spoiler {
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/other/" rel="tag">other</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <p>Tu as toujours rêvé de jouer d’un instrument invisible, un peu mystique, un peu geek ? Aujourd’hui, on construit une <strong>thérémine inspirée des sons du Commodore 64</strong>, avec un <strong>ESP32</strong>, une <strong>antenne capacitive</strong>, et une sortie audio en <strong>I²S</strong>. C’est simple, efficace, et ça sonne 8-bit !</p>
+    <p>Ever wanted to wave your hand through the air and summon sweet 8-bit tones like some kind of synth wizard? Well, you’re in luck. This post is all about building a <strong>capacitive theremin</strong>, using an <strong>ESP32</strong>, a simple <strong>audio DAC</strong>, and whatever metal stick you’ve got lying around.</p>
+<p>Inspired by the eerie vibe of the original RCA theremin and the crunchy textures of the <strong>Commodore 64 SID chip</strong>, this little project is compact, cheap, and ridiculously fun.</p>
 <hr>
-<h2 id="✨-Objectif"><a href="#✨-Objectif" class="headerlink" title="✨ Objectif"></a>✨ Objectif</h2><ul>
-<li>Détection de la main via une <strong>antenne capacitive</strong></li>
-<li>Contrôle de la <strong>fréquence d’un oscillateur numérique</strong></li>
-<li>Sortie audio via <strong>ampli I²S (MAX98357A)</strong></li>
-<li>Formes d’onde <strong>carrée</strong>, <strong>sinus</strong>, et plus tard : triangle, bruit, etc.</li>
+<h2 id="What-Are-We-Building"><a href="#What-Are-We-Building" class="headerlink" title="What Are We Building?"></a>What Are We Building?</h2><ul>
+<li>A theremin-like instrument that reacts to your hand</li>
+<li>Pitch controlled by <strong>capacitive antenna</strong> (your hand gets closer → pitch goes lower)</li>
+<li>Audio generated digitally (no analog oscillators here!)</li>
+<li>Output via <strong>I²S DAC/amplifier (MAX98357A)</strong></li>
+<li>Waveform: <strong>square wave</strong>, SID-style. Later we’ll add more.</li>
 </ul>
 <hr>
-<h2 id="🎓-Materiel-requis"><a href="#🎓-Materiel-requis" class="headerlink" title="🎓 Matériel requis"></a>🎓 Matériel requis</h2><table>
+<h2 id="Parts-You’ll-Need"><a href="#Parts-You’ll-Need" class="headerlink" title="Parts You’ll Need"></a>Parts You’ll Need</h2><table>
 <thead>
 <tr>
-<th>Composant</th>
-<th>Rôle</th>
+<th>Part</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>ESP32 (DevKit v1)</td>
-<td>Cerveau du synthé</td>
+<td>ESP32 DevKit</td>
+<td>The brains of the synth</td>
 </tr>
 <tr>
 <td>MAX98357A</td>
-<td>DAC + ampli audio mono I²S</td>
+<td>Audio DAC + amplifier</td>
 </tr>
 <tr>
-<td>Antenne capacitive (voir plus bas)</td>
-<td>Contrôle du pitch</td>
+<td>Copper wire / metal rod / old antenna</td>
+<td>The pitch antenna</td>
 </tr>
 <tr>
-<td>Haut-parleur 3W / 8Ω</td>
-<td>Sortie sonore</td>
+<td>Speaker (3W / 8Ω)</td>
+<td>For the glorious sound</td>
 </tr>
 <tr>
-<td>Fil de cuivre / antenne radio</td>
-<td>Antenne</td>
-</tr>
-<tr>
-<td>Alimentation USB</td>
-<td>Alimentation</td>
+<td>USB power</td>
+<td>Power supply</td>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="🎨-Le-schema-de-cablage"><a href="#🎨-Le-schema-de-cablage" class="headerlink" title="🎨 Le schéma de cablage"></a>🎨 Le schéma de cablage</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[ESP32 DevKit V1]</span><br><span class="line">   GPIO 33  -------------------&gt; Antenne capacitive</span><br><span class="line">   GPIO 22 (I2S DOUT) --------&gt; DIN du MAX98357A</span><br><span class="line">   GPIO 25 (I2S WS) ----------&gt; LRC du MAX98357A</span><br><span class="line">   GPIO 26 (I2S BCLK) --------&gt; BCLK du MAX98357A</span><br><span class="line">                           +---&gt; GND du MAX -&gt; GND ESP32</span><br><span class="line">                           +---&gt; VIN du MAX -&gt; 5V ESP32</span><br></pre></td></tr></table></figure>
+<h2 id="Wiring-It-Up"><a href="#Wiring-It-Up" class="headerlink" title="Wiring It Up"></a>Wiring It Up</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[ESP32 DevKit V1]</span><br><span class="line">   GPIO 33  -------------------&gt; Capacitive antenna</span><br><span class="line">   GPIO 22 (I2S DOUT) --------&gt; DIN of MAX98357A</span><br><span class="line">   GPIO 25 (I2S WS) ----------&gt; LRC of MAX98357A</span><br><span class="line">   GPIO 26 (I2S BCLK) --------&gt; BCLK of MAX98357A</span><br><span class="line">                           +---&gt; GND -&gt; GND</span><br><span class="line">                           +---&gt; VIN -&gt; 5V</span><br></pre></td></tr></table></figure>
 
+<p>Simple. Clean. No magic.</p>
 <hr>
-<h2 id="🔌-Antennes-recommandees-et-testees"><a href="#🔌-Antennes-recommandees-et-testees" class="headerlink" title="🔌 Antennes recommandées (et testées)"></a>🔌 Antennes recommandées (et testées)</h2><table>
+<h2 id="Choosing-Your-Antenna"><a href="#Choosing-Your-Antenna" class="headerlink" title="Choosing Your Antenna"></a>Choosing Your Antenna</h2><table>
 <thead>
 <tr>
 <th>Type</th>
-<th>Avantages</th>
-<th>Inconvénients</th>
+<th>Pros</th>
+<th>Cons</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Tige métallique verticale (30–60 cm)</strong></td>
-<td>Classique, sensible, belle dynamique</td>
-<td>Sensible aux interférences</td>
+<td><strong>Vertical metal rod (30–60 cm)</strong></td>
+<td>Expressive, easy to find</td>
+<td>Can pick up noise</td>
 </tr>
 <tr>
-<td><strong>Spirale verticale</strong></td>
-<td>Compacte, réactive</td>
-<td>Un peu plus complexe à faire</td>
+<td><strong>Old telescopic radio antenna</strong></td>
+<td>Retro, adjustable</td>
+<td>May be rare</td>
 </tr>
 <tr>
-<td><strong>Antenne de radio (vieille)</strong></td>
-<td>Idéale, extensible</td>
-<td>Se trouve en brocante</td>
+<td><strong>Vertical spiral</strong></td>
+<td>Sensitive, compact</td>
+<td>More DIY work</td>
 </tr>
 <tr>
-<td><strong>Plaque en alu ou vieux CD</strong></td>
-<td>Très stable</td>
-<td>Moins expressif</td>
+<td><strong>Metal plate / CD / foil</strong></td>
+<td>Stable signal</td>
+<td>Less theatrical</td>
 </tr>
 <tr>
-<td><strong>Fil gainé (non dénudé)</strong></td>
-<td>Ne marche PAS bien</td>
-<td>❌ Trop isolant</td>
+<td><strong>Insulated wire</strong></td>
+<td>Just don’t.</td>
+<td>Not sensitive enough</td>
 </tr>
 </tbody></table>
 <blockquote>
-<p><strong>Fixation recommandée</strong> : visser une cosse à oeillet sur la plaque ou la tige, connectée à un fil qui va au GPIO capacitif. Pas de soudure sur l’alu !</p>
+<p>Pro tip: Can’t solder to aluminum? Don’t. Use a <strong>ring terminal</strong> and bolt it in. Or use a croc clip.</p>
 </blockquote>
 <hr>
-<h2 id="🎧-Test-de-l’antenne-code-de-base"><a href="#🎧-Test-de-l’antenne-code-de-base" class="headerlink" title="🎧 Test de l’antenne (code de base)"></a>🎧 Test de l’antenne (code de base)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANTENNA_PIN 33</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val = <span class="built_in">touchRead</span>(ANTENNA_PIN);</span><br><span class="line">  Serial.<span class="built_in">println</span>(val);</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Step-1-Read-the-antenna"><a href="#Step-1-Read-the-antenna" class="headerlink" title="Step 1: Read the antenna"></a>Step 1: Read the antenna</h2><p>Let’s test how reactive your antenna is.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANTENNA_PIN 33</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val = <span class="built_in">touchRead</span>(ANTENNA_PIN);</span><br><span class="line">  Serial.<span class="built_in">println</span>(val);</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>Main loin : valeurs hautes (ex: 1500)</li>
-<li>Main proche : valeurs basses (ex: 300)</li>
+<p>You should see the values drop when your hand gets close. If not, your antenna needs more exposure (dédune it, use metal, make it longer, etc.).</p>
+<hr>
+<h2 id="Step-2-Make-it-sing-square-wave-output"><a href="#Step-2-Make-it-sing-square-wave-output" class="headerlink" title="Step 2: Make it sing (square wave output)"></a>Step 2: Make it sing (square wave output)</h2><p>Let’s generate a SID-style square wave, pitch-controlled by your hand.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;driver/i2s_std.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMPLE_RATE 44100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFER_SIZE 256</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANTENNA_PIN 33</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">i2s_chan_handle_t</span> tx_chan;</span><br><span class="line"><span class="keyword">int</span> phase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">float</span> frequency = <span class="number">440</span>;</span><br><span class="line"><span class="keyword">float</span> smoothed = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setupI2S</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">i2s_chan_config_t</span> chan_cfg = <span class="built_in">I2S_CHANNEL_DEFAULT_CONFIG</span>(I2S_NUM_0, I2S_ROLE_MASTER);</span><br><span class="line">  <span class="built_in">i2s_new_channel</span>(&amp;chan_cfg, &amp;tx_chan, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">i2s_std_config_t</span> std_cfg = &#123;</span><br><span class="line">    .clk_cfg = <span class="built_in">I2S_STD_CLK_DEFAULT_CONFIG</span>(SAMPLE_RATE),</span><br><span class="line">    .slot_cfg = <span class="built_in">I2S_STD_MSB_SLOT_DEFAULT_CONFIG</span>(I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),</span><br><span class="line">    .gpio_cfg = &#123;</span><br><span class="line">      .mclk = I2S_GPIO_UNUSED,</span><br><span class="line">      .bclk = <span class="number">26</span>,</span><br><span class="line">      .ws   = <span class="number">25</span>,</span><br><span class="line">      .dout = <span class="number">22</span>,</span><br><span class="line">      .din  = I2S_GPIO_UNUSED</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">i2s_channel_init_std_mode</span>(tx_chan, &amp;std_cfg);</span><br><span class="line">  <span class="built_in">i2s_channel_enable</span>(tx_chan);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);</span><br><span class="line">  <span class="built_in">setupI2S</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> raw = <span class="built_in">touchRead</span>(ANTENNA_PIN);</span><br><span class="line">  smoothed = <span class="number">0.95</span> * smoothed + <span class="number">0.05</span> * raw;</span><br><span class="line">  frequency = <span class="built_in">map</span>(smoothed, <span class="number">300</span>, <span class="number">1500</span>, <span class="number">1200</span>, <span class="number">100</span>);</span><br><span class="line">  frequency = <span class="built_in">constrain</span>(frequency, <span class="number">100</span>, <span class="number">1200</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int16_t</span> buffer[BUFFER_SIZE];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; BUFFER_SIZE; i++) &#123;</span><br><span class="line">    <span class="keyword">float</span> wave = (phase % (SAMPLE_RATE / frequency)) &lt; ((SAMPLE_RATE / frequency) / <span class="number">2</span>) ? <span class="number">1.0</span> : <span class="number">-1.0</span>;</span><br><span class="line">    buffer[i] = (<span class="keyword">int16_t</span>)(wave * <span class="number">32767</span>);</span><br><span class="line">    phase++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">size_t</span> bytes_written;</span><br><span class="line">  <span class="built_in">i2s_channel_write</span>(tx_chan, buffer, <span class="built_in"><span class="keyword">sizeof</span></span>(buffer), &amp;bytes_written, portMAX_DELAY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Where-to-Go-From-Here"><a href="#Where-to-Go-From-Here" class="headerlink" title="Where to Go From Here"></a>Where to Go From Here</h2><ul>
+<li>Add a second antenna (or capacitive pad) for volume or vibrato</li>
+<li>Add an OLED display to show pitch</li>
+<li>Try new waveforms: triangle, noise, whatever feels C64ish</li>
+<li>Add a bitcrusher effect for real lo-fi grit</li>
+<li>Add touch buttons to switch octaves or modes</li>
 </ul>
 <hr>
-<h2 id="🎙️-Ajout-du-son-C64-onde-carree-en-I²S"><a href="#🎙️-Ajout-du-son-C64-onde-carree-en-I²S" class="headerlink" title="🎙️ Ajout du son C64 ! (onde carrée en I²S)"></a>🎙️ Ajout du son C64 ! (onde carrée en I²S)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;driver/i2s_std.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMPLE_RATE 44100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFER_SIZE 256</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANTENNA_PIN 33</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">i2s_chan_handle_t</span> tx_chan;</span><br><span class="line"><span class="keyword">int</span> phase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">float</span> frequency = <span class="number">440</span>;</span><br><span class="line"><span class="keyword">float</span> smoothed = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setupI2S</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">i2s_chan_config_t</span> chan_cfg = <span class="built_in">I2S_CHANNEL_DEFAULT_CONFIG</span>(I2S_NUM_0, I2S_ROLE_MASTER);</span><br><span class="line">  <span class="built_in">i2s_new_channel</span>(&amp;chan_cfg, &amp;tx_chan, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">i2s_std_config_t</span> std_cfg = &#123;</span><br><span class="line">    .clk_cfg = <span class="built_in">I2S_STD_CLK_DEFAULT_CONFIG</span>(SAMPLE_RATE),</span><br><span class="line">    .slot_cfg = <span class="built_in">I2S_STD_MSB_SLOT_DEFAULT_CONFIG</span>(I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),</span><br><span class="line">    .gpio_cfg = &#123;</span><br><span class="line">      .mclk = I2S_GPIO_UNUSED,</span><br><span class="line">      .bclk = <span class="number">26</span>,</span><br><span class="line">      .ws   = <span class="number">25</span>,</span><br><span class="line">      .dout = <span class="number">22</span>,</span><br><span class="line">      .din  = I2S_GPIO_UNUSED</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">i2s_channel_init_std_mode</span>(tx_chan, &amp;std_cfg);</span><br><span class="line">  <span class="built_in">i2s_channel_enable</span>(tx_chan);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);</span><br><span class="line">  <span class="built_in">setupI2S</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> raw = <span class="built_in">touchRead</span>(ANTENNA_PIN);</span><br><span class="line">  smoothed = <span class="number">0.95</span> * smoothed + <span class="number">0.05</span> * raw;</span><br><span class="line">  frequency = <span class="built_in">map</span>(smoothed, <span class="number">300</span>, <span class="number">1500</span>, <span class="number">1200</span>, <span class="number">100</span>); <span class="comment">// inversé pour pitch logique</span></span><br><span class="line">  frequency = <span class="built_in">constrain</span>(frequency, <span class="number">100</span>, <span class="number">1200</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int16_t</span> buffer[BUFFER_SIZE];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; BUFFER_SIZE; i++) &#123;</span><br><span class="line">    <span class="keyword">float</span> wave = (phase % (SAMPLE_RATE / frequency)) &lt; ((SAMPLE_RATE / frequency) / <span class="number">2</span>) ? <span class="number">1.0</span> : <span class="number">-1.0</span>;</span><br><span class="line">    buffer[i] = (<span class="keyword">int16_t</span>)(wave * <span class="number">32767</span>);</span><br><span class="line">    phase++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">size_t</span> bytes_written;</span><br><span class="line">  <span class="built_in">i2s_channel_write</span>(tx_chan, buffer, <span class="built_in"><span class="keyword">sizeof</span></span>(buffer), &amp;bytes_written, portMAX_DELAY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🎡-Pistes-d’evolution"><a href="#🎡-Pistes-d’evolution" class="headerlink" title="🎡 Pistes d’évolution"></a>🎡 Pistes d’évolution</h2><ul>
-<li>Ajout d’une <strong>seconde antenne</strong> pour le volume</li>
-<li>Afficheur OLED pour visualiser la note ou l’effet</li>
-<li>Formes d’onde : triangle, bruit, custom waveform</li>
-<li>Mode Lo-Fi / Bitcrush / Reverb fake</li>
-<li>Menu avec boutons capacitifs pour changer de mode</li>
-</ul>
-<hr>
-<h2 id="🌌-Conclusion"><a href="#🌌-Conclusion" class="headerlink" title="🌌 Conclusion"></a>🌌 Conclusion</h2><p>Ce projet transforme un <strong>ESP32 banal en synthé 8-bit jouable dans l’air</strong>, sans contact, avec un rendu à la <strong>thérémine futuriste et vintage à la fois</strong>. Avec quelques composants et un peu d’imagination, tu peux créer un instrument unique.</p>
-<p>Tu veux une version avec effets, MIDI, ou même polyphonique ? Dis-le en commentaire ou sur Mastodon, on ira plus loin ensemble.</p>
+<h2 id="Final-thoughts"><a href="#Final-thoughts" class="headerlink" title="Final thoughts"></a>Final thoughts</h2><p>This thing is weird, fun, and surprisingly playable. If you like DIY synths, 8-bit aesthetics, or just waving your hand in the air like a techno-sorcerer, it’s absolutely worth it.</p>
+<p>Let me know if you want a version with effects, MIDI out, or SID-style filters. I’m already working on a polyphonic build…</p>
+<p>Stay noisy.</p>
 
   </div>
 </article>
@@ -278,7 +283,7 @@ p.spoiler {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%A8-Objectif"><span class="toc-number">1.</span> <span class="toc-text">✨ Objectif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%93-Materiel-requis"><span class="toc-number">2.</span> <span class="toc-text">🎓 Matériel requis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%A8-Le-schema-de-cablage"><span class="toc-number">3.</span> <span class="toc-text">🎨 Le schéma de cablage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8C-Antennes-recommandees-et-testees"><span class="toc-number">4.</span> <span class="toc-text">🔌 Antennes recommandées (et testées)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%A7-Test-de-l%E2%80%99antenne-code-de-base"><span class="toc-number">5.</span> <span class="toc-text">🎧 Test de l’antenne (code de base)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%99%EF%B8%8F-Ajout-du-son-C64-onde-carree-en-I%C2%B2S"><span class="toc-number">6.</span> <span class="toc-text">🎙️ Ajout du son C64 ! (onde carrée en I²S)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%A1-Pistes-d%E2%80%99evolution"><span class="toc-number">7.</span> <span class="toc-text">🎡 Pistes d’évolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8C-Conclusion"><span class="toc-number">8.</span> <span class="toc-text">🌌 Conclusion</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Are-We-Building"><span class="toc-number">1.</span> <span class="toc-text">What Are We Building?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parts-You%E2%80%99ll-Need"><span class="toc-number">2.</span> <span class="toc-text">Parts You’ll Need</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wiring-It-Up"><span class="toc-number">3.</span> <span class="toc-text">Wiring It Up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choosing-Your-Antenna"><span class="toc-number">4.</span> <span class="toc-text">Choosing Your Antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Read-the-antenna"><span class="toc-number">5.</span> <span class="toc-text">Step 1: Read the antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Make-it-sing-square-wave-output"><span class="toc-number">6.</span> <span class="toc-text">Step 2: Make it sing (square wave output)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-to-Go-From-Here"><span class="toc-number">7.</span> <span class="toc-text">Where to Go From Here</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Final thoughts</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
