@@ -14,7 +14,7 @@
 <meta property="og:description" content="A great project">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-11T15:47:04.757Z">
-<meta property="article:modified_time" content="2025-08-12T06:21:43.878Z">
+<meta property="article:modified_time" content="2025-08-12T08:07:43.740Z">
 <meta property="article:author" content="jan Pitaki">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -150,8 +150,17 @@ p.spoiler {
   
 
   <div class="content" itemprop="articleBody">
-    <p>Ever wanted to wave your hand through the air and summon sweet 8-bit tones like some kind of synth wizard? Well, you’re in luck. This post is all about building a <strong>capacitive theremin</strong>, using an <strong>ESP32</strong>, a simple <strong>audio DAC</strong>, and whatever metal stick you’ve got lying around.</p>
+    <h1 id="Build-Your-Own-C64-Style-Theremin-with-an-ESP32"><a href="#Build-Your-Own-C64-Style-Theremin-with-an-ESP32" class="headerlink" title="Build Your Own C64-Style Theremin with an ESP32"></a>Build Your Own C64-Style Theremin with an ESP32</h1><p>Ever wanted to wave your hand through the air and summon sweet 8-bit tones like some kind of synth wizard? Well, you’re in luck. This post is all about building a <strong>capacitive theremin</strong>, using an <strong>ESP32</strong>, a simple <strong>audio DAC</strong>, and whatever metal stick you’ve got lying around.</p>
 <p>Inspired by the eerie vibe of the original RCA theremin and the crunchy textures of the <strong>Commodore 64 SID chip</strong>, this little project is compact, cheap, and ridiculously fun.</p>
+<hr>
+<h2 id="What’s-a-Theremin-Really"><a href="#What’s-a-Theremin-Really" class="headerlink" title="What’s a Theremin, Really?"></a>What’s a Theremin, Really?</h2><p>The original theremin, invented in 1920 by Léon Theremin, is one of the earliest electronic instruments—and still one of the weirdest. It’s played <strong>without physical contact</strong>: one hand controls <strong>pitch</strong> by varying distance to a vertical antenna, and the other controls <strong>volume</strong> via a horizontal antenna.</p>
+<p>It works by detecting changes in <strong>capacitance</strong>—in essence, how your body influences the surrounding electric field. Classic theremins use analog RF oscillators to do this. But we’ll fake it with digital means:</p>
+<ul>
+<li>An ESP32 will <strong>measure variations in capacitive touch</strong> using a metal antenna.</li>
+<li>It will then <strong>map that to a pitch</strong>, which is rendered as audio using <strong>I²S output</strong>.</li>
+<li>That audio is fed to a simple DAC + amp (MAX98357A) and blasted out to a speaker.</li>
+</ul>
+<p>We’re not trying to be 100% faithful to analog theremins—we’re building a <strong>C64-style digital clone</strong> with some nods to retro tech and chipmusic.</p>
 <hr>
 <h2 id="What-Are-We-Building"><a href="#What-Are-We-Building" class="headerlink" title="What Are We Building?"></a>What Are We Building?</h2><ul>
 <li>A theremin-like instrument that reacts to your hand</li>
@@ -283,7 +292,7 @@ p.spoiler {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Are-We-Building"><span class="toc-number">1.</span> <span class="toc-text">What Are We Building?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parts-You%E2%80%99ll-Need"><span class="toc-number">2.</span> <span class="toc-text">Parts You’ll Need</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wiring-It-Up"><span class="toc-number">3.</span> <span class="toc-text">Wiring It Up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choosing-Your-Antenna"><span class="toc-number">4.</span> <span class="toc-text">Choosing Your Antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Read-the-antenna"><span class="toc-number">5.</span> <span class="toc-text">Step 1: Read the antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Make-it-sing-square-wave-output"><span class="toc-number">6.</span> <span class="toc-text">Step 2: Make it sing (square wave output)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-to-Go-From-Here"><span class="toc-number">7.</span> <span class="toc-text">Where to Go From Here</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Final thoughts</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Build-Your-Own-C64-Style-Theremin-with-an-ESP32"><span class="toc-number">1.</span> <span class="toc-text">Build Your Own C64-Style Theremin with an ESP32</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-a-Theremin-Really"><span class="toc-number">1.1.</span> <span class="toc-text">What’s a Theremin, Really?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Are-We-Building"><span class="toc-number">1.2.</span> <span class="toc-text">What Are We Building?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parts-You%E2%80%99ll-Need"><span class="toc-number">1.3.</span> <span class="toc-text">Parts You’ll Need</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wiring-It-Up"><span class="toc-number">1.4.</span> <span class="toc-text">Wiring It Up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choosing-Your-Antenna"><span class="toc-number">1.5.</span> <span class="toc-text">Choosing Your Antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Read-the-antenna"><span class="toc-number">1.6.</span> <span class="toc-text">Step 1: Read the antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Make-it-sing-square-wave-output"><span class="toc-number">1.7.</span> <span class="toc-text">Step 2: Make it sing (square wave output)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-to-Go-From-Here"><span class="toc-number">1.8.</span> <span class="toc-text">Where to Go From Here</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-thoughts"><span class="toc-number">1.9.</span> <span class="toc-text">Final thoughts</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
